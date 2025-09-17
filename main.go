@@ -1,5 +1,5 @@
-// Go Learning Project - Markdown Parser Web App
-// KISS・YAGNI・DRY の実践例
+// infoHiroki Website Go版 - ピクセルパーフェクト移植
+// 既存のVanilla HTML/CSS/JSサイトをGo + Gin + GORMで完全再現
 
 package main
 
@@ -8,103 +8,133 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/russross/blackfriday/v2"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"infohiroki-go/src/models"
 )
-
-// Post モデル - 必要最小限の構造
-type Post struct {
-	ID        uint      `json:"id" gorm:"primaryKey"`
-	Title     string    `json:"title"`
-	Content   string    `json:"content"`
-	CreatedAt time.Time `json:"created_at"`
-}
-
-// ToMarkdown - DRY: 共通処理を1箇所で定義
-func (p *Post) ToMarkdown() string {
-	return "# " + p.Title + "\n\n" + p.Content
-}
 
 var db *gorm.DB
 
 func main() {
-	// データベース初期化 - KISS: 設定は最小限
+	// データベース接続
 	var err error
-	db, err = gorm.Open(sqlite.Open("posts.db"), &gorm.Config{})
+	db, err = gorm.Open(sqlite.Open("database/infohiroki.db"), &gorm.Config{})
 	if err != nil {
-		panic("データベース接続に失敗しました")
+		panic("データベース接続に失敗しました: " + err.Error())
 	}
-	db.AutoMigrate(&Post{})
 
-	// サンプルデータ作成 - YAGNI: 今必要な分だけ
-	createSampleData()
+	// テーブル自動マイグレーション
+	db.AutoMigrate(&models.Page{}, &models.BlogPost{})
 
-	// Gin ルーター設定 - KISS: 最小構成
+	// マイグレーション実行
+	runMigration()
+
+	// Gin ルーター設定
 	r := gin.Default()
+
+	// 静的ファイルの配信
+	r.Static("/css", "./static/css")
+	r.Static("/js", "./static/js")
+	r.Static("/images", "./static/images")
+
+	// テンプレート読み込み
 	r.LoadHTMLGlob("templates/*")
 
-	// Routes - RESTful設計
-	r.GET("/", listPosts)
-	r.GET("/posts/:id", handlePost)  // 拡張子に応じて処理を分岐
+	// Routes - infoHirokiサイト構造
+	r.GET("/", homePage)
+	r.GET("/blog", blogList)
+	r.GET("/blog/:slug", handleBlogPost)
+	r.GET("/services", servicesPage)
+	r.GET("/products", productsPage)
+	r.GET("/results", resultsPage)
+	r.GET("/about", aboutPage)
+	r.GET("/faq", faqPage)
+	r.GET("/contact", contactPage)
+
+	// API endpoints
+	r.GET("/api/search", searchBlogPosts)
 
 	// サーバー起動
 	r.Run(":8080")
 }
 
-// handlePost - 拡張子に応じて処理を分岐
-func handlePost(c *gin.Context) {
-	id := c.Param("id")
-
-	// 拡張子をチェック
-	if strings.HasSuffix(id, ".md") {
-		// .mdの場合、IDから拡張子を除去
-		idStr := strings.TrimSuffix(id, ".md")
-		c.Params[0].Value = idStr
-		showPostMarkdown(c)
-	} else if strings.HasSuffix(id, ".json") {
-		// .jsonの場合、IDから拡張子を除去
-		idStr := strings.TrimSuffix(id, ".json")
-		c.Params[0].Value = idStr
-		showPostJSON(c)
-	} else {
-		// 拡張子なしの場合、HTMLとして表示
-		showPost(c)
-	}
-}
-
-// KISS: 各関数は1つのことだけを担当
-func listPosts(c *gin.Context) {
-	var posts []Post
-	db.Find(&posts)
-
+// ホームページ
+func homePage(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{
-		"posts": posts,
-		"title": "Go Markdown Parser",
+		"title": "infoHiroki - 福岡の生成AI導入支援専門家",
+		"page":  "home",
 	})
 }
 
-func showPost(c *gin.Context) {
-	post := getPostByID(c)
+// ブログ一覧
+func blogList(c *gin.Context) {
+	var posts []models.BlogPost
+	query := c.Query("q")
+	tag := c.Query("tag")
+
+	dbQuery := db.Where("published = ?", true)
+
+	// 検索機能
+	if query != "" {
+		dbQuery = dbQuery.Where("title LIKE ? OR description LIKE ?", "%"+query+"%", "%"+query+"%")
+	}
+
+	// タグフィルタ
+	if tag != "" {
+		dbQuery = dbQuery.Where("tags LIKE ?", "%"+tag+"%")
+	}
+
+	dbQuery.Order("created_date DESC").Find(&posts)
+
+	c.HTML(http.StatusOK, "blog.html", gin.H{
+		"title": "ブログ | infoHiroki",
+		"page":  "blog",
+		"posts": posts,
+		"query": query,
+		"tag":   tag,
+	})
+}
+
+// ブログ記事詳細（拡張子対応）
+func handleBlogPost(c *gin.Context) {
+	slug := c.Param("slug")
+
+	// 拡張子をチェック
+	if strings.HasSuffix(slug, ".md") {
+		// .mdの場合、Markdown形式で返す
+		slugWithoutExt := strings.TrimSuffix(slug, ".md")
+		showBlogPostMarkdown(c, slugWithoutExt)
+	} else if strings.HasSuffix(slug, ".json") {
+		// .jsonの場合、JSON形式で返す
+		slugWithoutExt := strings.TrimSuffix(slug, ".json")
+		showBlogPostJSON(c, slugWithoutExt)
+	} else {
+		// 拡張子なしの場合、HTML形式で返す
+		showBlogPost(c, slug)
+	}
+}
+
+// ブログ記事詳細（HTML）
+func showBlogPost(c *gin.Context, slug string) {
+	post := getBlogPostBySlug(c, slug)
 	if post == nil {
 		return
 	}
 
-	// マークダウンをHTMLに変換
-	html := blackfriday.Run([]byte(post.Content))
-
-	c.HTML(http.StatusOK, "show.html", gin.H{
-		"post": post,
-		"html": template.HTML(html), // HTMLエスケープを回避
+	// HTMLコンテンツをそのまま表示
+	c.HTML(http.StatusOK, "blog_detail.html", gin.H{
+		"title": post.Title + " | infoHiroki",
+		"page":  "blog",
+		"post":  post,
+		"html":  template.HTML(post.Content), // HTMLエスケープを回避
 	})
 }
 
-// Rails 8.1の .md 機能と同等 - YAGNI: 必要な機能のみ
-func showPostMarkdown(c *gin.Context) {
-	post := getPostByID(c)
+// ブログ記事詳細（Markdown）
+func showBlogPostMarkdown(c *gin.Context, slug string) {
+	post := getBlogPostBySlug(c, slug)
 	if post == nil {
 		return
 	}
@@ -112,149 +142,84 @@ func showPostMarkdown(c *gin.Context) {
 	c.Data(http.StatusOK, "text/markdown; charset=utf-8", []byte(post.ToMarkdown()))
 }
 
-func showPostJSON(c *gin.Context) {
-	post := getPostByID(c)
+// ブログ記事詳細（JSON）
+func showBlogPostJSON(c *gin.Context, slug string) {
+	post := getBlogPostBySlug(c, slug)
 	if post == nil {
 		return
 	}
 	c.JSON(http.StatusOK, post)
 }
 
-// DRY: 共通処理を関数化
-func getPostByID(c *gin.Context) *Post {
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なID"})
-		return nil
-	}
-
-	var post Post
-	if err := db.First(&post, id).Error; err != nil {
+// 共通処理：スラッグでブログ記事を取得
+func getBlogPostBySlug(c *gin.Context, slug string) *models.BlogPost {
+	var post models.BlogPost
+	if err := db.Where("slug = ? AND published = ?", slug, true).First(&post).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "記事が見つかりません"})
 		return nil
 	}
-
 	return &post
 }
 
-// YAGNI: 今必要な最小限のサンプルデータ
-func createSampleData() {
-	var count int64
-	db.Model(&Post{}).Count(&count)
-	if count > 0 {
-		return // 既にデータがあるなら作成しない
+// 固定ページ処理（サービス、製品、実績、等）
+func servicesPage(c *gin.Context) {
+	renderPage(c, "services", "生成AI導入支援サービス | infoHiroki")
+}
+
+func productsPage(c *gin.Context) {
+	renderPage(c, "products", "開発製品 | infoHiroki")
+}
+
+func resultsPage(c *gin.Context) {
+	renderPage(c, "results", "実績 | infoHiroki")
+}
+
+func aboutPage(c *gin.Context) {
+	renderPage(c, "about", "スキルスタック | infoHiroki")
+}
+
+func faqPage(c *gin.Context) {
+	renderPage(c, "faq", "FAQ | infoHiroki")
+}
+
+func contactPage(c *gin.Context) {
+	renderPage(c, "contact", "お問い合わせ | infoHiroki")
+}
+
+// 固定ページ共通処理
+func renderPage(c *gin.Context, slug string, title string) {
+	var page models.Page
+	if err := db.Where("slug = ?", slug).First(&page).Error; err != nil {
+		c.HTML(http.StatusNotFound, "404.html", gin.H{
+			"title": "ページが見つかりません | infoHiroki",
+		})
+		return
 	}
 
-	posts := []Post{
-		{
-			Title: "Go言語とKISS・YAGNI・DRY",
-			Content: `## KISS (Keep It Simple, Stupid)
-
-Goは**シンプルさ**を最重要視した言語設計です。
-
-- キーワードは25個のみ
-- 明確で読みやすい構文
-- 余計な機能は排除
-
-## YAGNI (You Aren't Gonna Need It)
-
-必要になってから実装する：
-
-` + "```go" + `
-// 必要最小限の構造体
-type Post struct {
-    ID      uint   ` + "`json:\"id\"`" + `
-    Title   string ` + "`json:\"title\"`" + `
-    Content string ` + "`json:\"content\"`" + `
+	c.HTML(http.StatusOK, slug+".html", gin.H{
+		"title": title,
+		"page":  slug,
+		"data":  page,
+	})
 }
-` + "```" + `
 
-## DRY (Don't Repeat Yourself)
+// ブログ検索API
+func searchBlogPosts(c *gin.Context) {
+	query := c.Query("q")
+	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "10"))
 
-共通処理は関数化：
+	var posts []models.BlogPost
+	dbQuery := db.Where("published = ?", true)
 
-` + "```go" + `
-func (p *Post) ToMarkdown() string {
-    return "# " + p.Title + "\n\n" + p.Content
-}
-` + "```" + `
-
-**Goはプログラミング哲学が言語に完璧に反映されています！**`,
-		},
-		{
-			Title: "個人開発者にGoが最適な理由",
-			Content: `# 個人開発者こそGoを選ぶべき
-
-## ⚡ 開発速度が速い
-
-` + "```go" + `
-// たった数行でWebサーバー
-r := gin.Default()
-r.GET("/", handler)
-r.Run(":8080")
-` + "```" + `
-
-## 💰 運用コストが安い
-
-- メモリ使用量: 10-50MB
-- CPU使用率: 最小
-- サーバー代: 月額$5のVPSで十分
-
-## 🚀 デプロイが簡単
-
-` + "```bash" + `
-# 1コマンドで完了
-go build -o app main.go
-./app  # 依存関係なし！
-` + "```" + `
-
-## 📈 将来性抜群
-
-- GitHub、Docker、Kubernetesの言語
-- 求人数4倍成長
-- 平均年収700-900万円
-
-**個人開発者なら迷わずGo！**`,
-		},
-		{
-			Title: "実際のGoコード例",
-			Content: `# このアプリ自体がGoの実例
-
-## 150行で完全なWebアプリ
-
-このマークダウンパーサー自体が、Goの威力を証明しています：
-
-` + "```go" + `
-func main() {
-    // データベース初期化
-    db, _ := gorm.Open(sqlite.Open("posts.db"), &gorm.Config{})
-
-    // ルーター設定
-    r := gin.Default()
-    r.GET("/posts/:id.md", showPostMarkdown)
-
-    // サーバー起動
-    r.Run(":8080")
-}
-` + "```" + `
-
-## 特徴
-
-- **KISS**: シンプルで理解しやすい
-- **YAGNI**: 必要な機能のみ
-- **DRY**: 重複コードなし
-
-## パフォーマンス
-
-- 同時接続: 10,000+
-- レスポンス時間: 1ms以下
-- メモリ使用量: 30MB以下
-
-**Rails の1/10のリソースで10倍のパフォーマンス！**`,
-		},
+	if query != "" {
+		dbQuery = dbQuery.Where("title LIKE ? OR description LIKE ?", "%"+query+"%", "%"+query+"%")
 	}
 
-	for _, post := range posts {
-		db.Create(&post)
-	}
+	dbQuery.Order("created_date DESC").Limit(limit).Find(&posts)
+
+	c.JSON(http.StatusOK, gin.H{
+		"posts": posts,
+		"total": len(posts),
+		"query": query,
+	})
 }

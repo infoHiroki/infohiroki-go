@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量子コンピューターとGroverのアルゴリズム</title>
+    <link rel="canonical" href="https://infohiroki.com/html-files/2025-07-05-quantum-grover-algorithm-infographic.html">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            color: #6B46C1;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .source-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #6B46C1;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .source-link:hover {
+            background: #553C9A;
+            transform: translateY(-2px);
+        }
+        
+        .section {
+            background: white;
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #6B46C1;
+        }
+        
+        .section h2 {
+            color: #6B46C1;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .point-card {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .point-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(107, 70, 193, 0.1);
+        }
+        
+        .point-card h3 {
+            color: #6B46C1;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .comparison-table th {
+            background: #6B46C1;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f8fafc;
+        }
+        
+        .algorithm-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border-left: 4px solid #6B46C1;
+        }
+        
+        .step-number {
+            background: #6B46C1;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .visual-demo {
+            text-align: center;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .complexity-visual {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .complexity-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            min-width: 150px;
+        }
+        
+        .complexity-item h4 {
+            color: #6B46C1;
+            margin-bottom: 5px;
+        }
+        
+        .summary {
+            background: linear-gradient(135deg, #6B46C1, #8B5CF6);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .summary h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .summary p {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .icon {
+            font-size: 1.2em;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+                flex-direction: column;
+            }
+            
+            .key-points {
+                grid-template-columns: 1fr;
+            }
+            
+            .complexity-visual {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="article-nav article-nav-top">
+        <a href="../blog.html" class="back-link">← ブログ一覧</a>
+    </nav>
+    
+    <div class="container">
+        <header class="header">
+            <h1>
+                <span class="icon">⚛️</span>
+                量子コンピューターとGroverのアルゴリズム
+                <span class="icon">🔍</span>
+            </h1>
+            <p>量子計算の基礎と検索アルゴリズムの革新</p>
+            <a href="https://www.youtube.com/watch?v=MAz_oROjyEM" class="source-link" target="_blank">
+                📺 動画ソースを見る
+            </a>
+        </header>
+
+        <section class="section">
+            <h2><span class="icon">🎯</span> 核心となる問題</h2>
+            <div class="key-points">
+                <div class="point-card">
+                    <h3><span class="icon">🔢</span> 検索問題</h3>
+                    <p>0からn-1までの数の中から、特定の関数で「真」を返す秘密の数を見つける問題。古典的には平均してn/2回の試行が必要。</p>
+                </div>
+                <div class="point-card">
+                    <h3><span class="icon">⏰</span> 計算複雑度の比較</h3>
+                    <p>古典的コンピューター：O(n)<br>量子コンピューター：O(√n)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><span class="icon">⚖️</span> 古典vs量子コンピューター</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>特徴</th>
+                        <th>古典コンピューター</th>
+                        <th>量子コンピューター</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>データ表現</strong></td>
+                        <td>0と1のビット列</td>
+                        <td>状態ベクトル（確率分布）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>出力</strong></td>
+                        <td>決定論的</td>
+                        <td>確率的（ランダム）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>メモリ状態</strong></td>
+                        <td>直接読み取り可能</td>
+                        <td>測定により状態が変化</td>
+                    </tr>
+                    <tr>
+                        <td><strong>検索効率</strong></td>
+                        <td>線形時間 O(n)</td>
+                        <td>平方根時間 O(√n)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2><span class="icon">🔬</span> 量子ビット（Qubit）の基礎</h2>
+            <div class="key-points">
+                <div class="point-card">
+                    <h3><span class="icon">📐</span> 状態ベクトル</h3>
+                    <p>量子ビットは2次元空間の単位ベクトルで表現。x座標の2乗が「0」を測定する確率、y座標の2乗が「1」を測定する確率。</p>
+                </div>
+                <div class="point-card">
+                    <h3><span class="icon">🎲</span> ボルンの規則</h3>
+                    <p>状態ベクトルの各成分の絶対値の2乗が、対応する測定結果の確率を与える。これが量子力学の基本原理。</p>
+                </div>
+                <div class="point-card">
+                    <h3><span class="icon">🔄</span> 状態の変化</h3>
+                    <p>測定後、状態ベクトルは測定された値に対応する方向に収縮する。その後の測定では同じ結果が得られる。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><span class="icon">🔧</span> Groverのアルゴリズム</h2>
+            <div class="algorithm-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <strong>初期化</strong><br>
+                        全ての可能な結果に対して確率が均等になるよう状態ベクトルを初期化
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <strong>符号反転</strong><br>
+                        秘密の鍵に対応する成分の符号を反転させる（確率は変わらないが状態は変化）
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <strong>平均に関する反転</strong><br>
+                        均等な状態ベクトルを中心とした反転操作を実行
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <strong>反復</strong><br>
+                        2と3の操作を約π/4 × √n回繰り返し、秘密の鍵の確率を最大化
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><span class="icon">📊</span> 計算複雑度の比較</h2>
+            <div class="complexity-visual">
+                <div class="complexity-item">
+                    <h4>古典的検索</h4>
+                    <div class="icon">🐌</div>
+                    <p>O(n)</p>
+                    <small>線形時間</small>
+                </div>
+                <div class="complexity-item">
+                    <h4>Groverアルゴリズム</h4>
+                    <div class="icon">🚀</div>
+                    <p>O(√n)</p>
+                    <small>平方根時間</small>
+                </div>
+                <div class="complexity-item">
+                    <h4>例：100万件</h4>
+                    <div class="icon">📈</div>
+                    <p>約804ステップ</p>
+                    <small>vs 50万ステップ</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><span class="icon">🔑</span> 重要なポイント</h2>
+            <div class="key-points">
+                <div class="point-card">
+                    <h3><span class="icon">🎯</span> NP問題への適用</h3>
+                    <p>解の検証は容易だが発見が困難な問題（暗号解読、パズル解決など）に適用可能</p>
+                </div>
+                <div class="point-card">
+                    <h3><span class="icon">🌊</span> 複素数の重要性</h3>
+                    <p>実際の量子状態は複素数で表現され、位相情報が重要な役割を果たす</p>
+                </div>
+                <div class="point-card">
+                    <h3><span class="icon">📐</span> 幾何学的解釈</h3>
+                    <p>2つの反転操作の組み合わせは回転と等価で、状態ベクトルを目標方向に向ける</p>
+                </div>
+                <div class="point-card">
+                    <h3><span class="icon">⚡</span> 高速化の本質</h3>
+                    <p>並列処理ではなく、高次元状態空間での「斜め移動」による最適化</p>
+                </div>
+                <div class="point-card">
+                    <h3><span class="icon">🎰</span> 確率的性質</h3>
+                    <p>100%の成功保証はなく、検証と再実行が必要な場合がある</p>
+                </div>
+                <div class="point-card">
+                    <h3><span class="icon">🔄</span> 実行時間の計算</h3>
+                    <p>最適な反復回数：π/4 × √n（πが現れる数学的美しさ）</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="visual-demo">
+            <h3><span class="icon">📈</span> 効率性の視覚的比較</h3>
+            <p>100万個の選択肢から検索する場合：</p>
+            <div style="display: flex; justify-content: center; gap: 50px; margin-top: 20px; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="background: #ef4444; color: white; padding: 10px; border-radius: 5px;">
+                        古典的：約500,000ステップ
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="background: #6B46C1; color: white; padding: 10px; border-radius: 5px;">
+                        量子：約804ステップ
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="summary">
+            <h2><span class="icon">📝</span> 総括</h2>
+            <p>
+                Groverのアルゴリズムは、量子コンピューターが古典コンピューターに対して二次の高速化（O(√n)）を実現する代表例です。
+                これは「重ね合わせによる並列処理」という一般的な誤解とは異なり、高次元状態空間における幾何学的な最適化によって達成されます。
+                アルゴリズムは状態ベクトルを巧妙に操作し、目標の解に対応する確率を段階的に増幅させます。
+                実用的には、暗号解読やデータベース検索など、解の検証は容易だが発見が困難なNP問題全般に適用可能で、
+                量子コンピューターの実用的価値を示す重要な成果です。
+                ただし、確率的性質により100%の成功は保証されず、結果の検証と必要に応じた再実行が重要となります。
+                この平方根の高速化は、量子力学の本質的な性質を活用した計算の新しいパラダイムを示しています。
+            </p>
+        </section>
+    </div>
+    
+    <nav class="article-nav article-nav-bottom">
+        <a href="../blog.html" class="back-to-list">他の記事を読む</a>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlotlyとDashでダッシュボード作成ガイド</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 30px 0;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .header a {
+            color: #fbbf24;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #3b82f6;
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
+            padding-left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .feature {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            transition: border-color 0.3s ease;
+        }
+        
+        .feature:hover {
+            border-color: #3b82f6;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .lib-comparison {
+            background: #f1f5f9;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .lib-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .code-section {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .install-command {
+            background: #10b981;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        
+        .workflow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .workflow-step {
+            background: #3b82f6;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            position: relative;
+        }
+        
+        .workflow-step::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #3b82f6;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .workflow-step:last-child::after {
+            display: none;
+        }
+        
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .chart-item {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .chart-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .component-list {
+            background: #eff6ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .component-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .component-list li {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .component-list strong {
+            color: #3b82f6;
+        }
+        
+        .layout-demo {
+            background: #f1f5f9;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .layout-structure {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 2px dashed #3b82f6;
+            text-align: center;
+            font-family: monospace;
+        }
+        
+        .key-points {
+            background: #ecfdf5;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 1px solid #10b981;
+        }
+        
+        .key-points ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .key-points li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .key-points li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+        
+        .summary {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+        
+        .summary h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .workflow {
+                flex-direction: column;
+            }
+            
+            .workflow-step::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 PlotlyとDashでダッシュボード作成</h1>
+            <p>Pythonでインタラクティブなダッシュボードを作る完全ガイド</p>
+            <p>📹 <a href="https://www.youtube.com/watch?v=L6S0ivlgq7g" target="_blank">元動画を見る（YouTube）</a></p>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">
+                🎯 PlotlyとDashの概要
+            </h2>
+            <div class="two-column">
+                <div class="lib-box">
+                    <h3>📈 Plotly</h3>
+                    <p><strong>グラフ描画ライブラリ</strong></p>
+                    <ul>
+                        <li>インタラクティブなグラフ作成</li>
+                        <li>matplotlibの進化版</li>
+                        <li>ユーザー操作で表示変更可能</li>
+                        <li>Webベースの可視化</li>
+                    </ul>
+                </div>
+                <div class="lib-box">
+                    <h3>🌐 Dash</h3>
+                    <p><strong>ダッシュボード作成フレームワーク</strong></p>
+                    <ul>
+                        <li>Webブラウザで操作可能</li>
+                        <li>Flaskベースの構造</li>
+                        <li>BIツール・分析ツール作成</li>
+                        <li>リアルタイム更新対応</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">
+                ⚙️ 環境準備とインストール
+            </h2>
+            <div class="code-section">
+                <div class="install-command">pip install dash</div>
+                <p>※ Dashインストール時にPlotlyも自動インストール</p>
+                <div class="install-command">pip install pandas</div>
+                <p>※ データ操作用（オプション）</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">
+                🔄 開発ワークフロー
+            </h2>
+            <div class="workflow">
+                <div class="workflow-step">
+                    <div>📊</div>
+                    <div>データ準備</div>
+                </div>
+                <div class="workflow-step">
+                    <div>📈</div>
+                    <div>Plotlyでグラフ作成</div>
+                </div>
+                <div class="workflow-step">
+                    <div>🌐</div>
+                    <div>Dashでレイアウト</div>
+                </div>
+                <div class="workflow-step">
+                    <div>🔗</div>
+                    <div>コールバック設定</div>
+                </div>
+                <div class="workflow-step">
+                    <div>🚀</div>
+                    <div>アプリ起動</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">
+                📊 Plotlyで作成可能なグラフ種類
+            </h2>
+            <div class="chart-grid">
+                <div class="chart-item">
+                    <div class="chart-icon">📊</div>
+                    <h4>棒グラフ</h4>
+                    <p><code>px.bar()</code></p>
+                </div>
+                <div class="chart-item">
+                    <div class="chart-icon">📈</div>
+                    <h4>折れ線グラフ</h4>
+                    <p><code>px.line()</code></p>
+                </div>
+                <div class="chart-item">
+                    <div class="chart-icon">🔴</div>
+                    <h4>散布図</h4>
+                    <p><code>px.scatter()</code></p>
+                </div>
+                <div class="chart-item">
+                    <div class="chart-icon">📊</div>
+                    <h4>ヒストグラム</h4>
+                    <p><code>px.histogram()</code></p>
+                </div>
+                <div class="chart-item">
+                    <div class="chart-icon">📦</div>
+                    <h4>箱ひげ図</h4>
+                    <p><code>px.box()</code></p>
+                </div>
+                <div class="chart-item">
+                    <div class="chart-icon">🥧</div>
+                    <h4>円グラフ</h4>
+                    <p><code>px.pie()</code></p>
+                </div>
+                <div class="chart-item">
+                    <div class="chart-icon">🗺️</div>
+                    <h4>地図散布図</h4>
+                    <p><code>px.scatter_map()</code></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">
+                🎛️ Dashの入力コンポーネント
+            </h2>
+            <div class="component-list">
+                <ul>
+                    <li>
+                        <strong>ラジオボタン:</strong> dcc.RadioItems() - 単一選択
+                    </li>
+                    <li>
+                        <strong>プルダウンメニュー:</strong> dcc.Dropdown() - 選択肢から選択
+                    </li>
+                    <li>
+                        <strong>チェックボックス:</strong> dcc.Checklist() - 複数選択
+                    </li>
+                    <li>
+                        <strong>スライダー:</strong> dcc.Slider() - 数値範囲選択
+                    </li>
+                    <li>
+                        <strong>日付選択（単日）:</strong> dcc.DatePickerSingle() - 1日選択
+                    </li>
+                    <li>
+                        <strong>日付選択（期間）:</strong> dcc.DatePickerRange() - 期間選択
+                    </li>
+                    <li>
+                        <strong>データテーブル:</strong> dash_table.DataTable() - 表形式表示
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">
+                🔗 コールバック機能
+            </h2>
+            <div class="lib-comparison">
+                <h4>インタラクティブ機能の実装</h4>
+                <div class="code-section">
+@callback(<br>
+&nbsp;&nbsp;Output('graph-id', 'figure'),<br>
+&nbsp;&nbsp;Input('input-id', 'value')<br>
+)<br>
+def update_graph(input_value):<br>
+&nbsp;&nbsp;# グラフ更新ロジック<br>
+&nbsp;&nbsp;return figure
+                </div>
+                <p><strong>Input:</strong> ユーザー操作を検知<br>
+                <strong>Output:</strong> 更新先を指定<br>
+                <strong>関数:</strong> 更新処理を定義</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">
+                🎨 レイアウト設計
+            </h2>
+            <div class="layout-demo">
+                <h4>Dash Bootstrap Componentsを使用</h4>
+                <div class="install-command">pip install dash-bootstrap-components</div>
+                
+                <div class="layout-structure">
+                    dbc.Container（全体コンテナ）<br>
+                    └── dbc.Row（行）<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;├── dbc.Col（列1, md=6）<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;└── dbc.Col（列2, md=6）
+                </div>
+                <p><strong>レスポンシブ対応:</strong> md値の合計を12にする<br>
+                <strong>画面幅:</strong> 760px以上でミディアム設定適用</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">
+                📋 実装の重要ポイント
+            </h2>
+            <div class="key-points">
+                <ul>
+                    <li><strong>データソース:</strong> PlotlyのGitHubデータセットを活用</li>
+                    <li><strong>自動リロード:</strong> 開発中のコード変更で自動更新</li>
+                    <li><strong>ID管理:</strong> 各コンポーネントに一意なIDを設定</li>
+                    <li><strong>デバッグモード:</strong> app.run(debug=True)で開発効率向上</li>
+                    <li><strong>HTMLサポート:</strong> html.H1等でHTML要素追加可能</li>
+                    <li><strong>CSSスタイル:</strong> style引数でCSS適用可能</li>
+                    <li><strong>マルチ入力:</strong> 複数の入力を1つの関数で処理可能</li>
+                    <li><strong>データ変換:</strong> DataFrame.to_dict("records")で変換</li>
+                    <li><strong>ページング:</strong> DataTableのpage_sizeで行数制御</li>
+                    <li><strong>地図操作:</strong> ドラッグ・ズーム・角度変更が可能</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">
+                🌟 実践例：GDPダッシュボード
+            </h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>データ表示</h3>
+                    <p>CSVデータをテーブル形式で表示</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📈</div>
+                    <h3>棒グラフ生成</h3>
+                    <p>国別GDPの上位10カ国を可視化</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h3>並び替え機能</h3>
+                    <p>ラジオボタンで昇順・降順切替</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎨</div>
+                    <h3>カスタマイズ</h3>
+                    <p>タイトル・スタイル・レイアウト調整</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary">
+            <h3>📝 要約</h3>
+            <p>
+                PlotlyとDashを使用することで、Pythonで強力なWebベースのインタラクティブダッシュボードを作成できる。Plotlyはmatplotlibの進化版として、ユーザー操作に応じて表示が変わるインタラクティブなグラフを描画し、DashはFlaskベースのフレームワークでWebブラウザ上で操作可能なダッシュボードを構築する。開発プロセスは、pipでのライブラリインストール、データ準備、Plotlyでのグラフ作成、Dashでのレイアウト設計、コールバック関数による操作連携の順で進める。7種類のグラフ（棒・折れ線・散布図・ヒストグラム・箱ひげ図・円・地図散布図）と6種類の入力コンポーネント（ラジオ・プルダウン・チェック・スライダー・日付選択）を組み合わせ、Dash Bootstrap Componentsでレスポンシブなレイアウトを実現。自動リロード機能により開発効率が高く、データ分析やBIツール作成に最適。
+            </p>
+        </div>
+    </div>
+</body>
+</html>

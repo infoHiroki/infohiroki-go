@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【AI駆動開発】YouTube字幕コピペ拡張機能で、リサーチと学習がマジで爆速になるって話。</title>
+    <link rel="canonical" href="https://infohiroki.com/html-files/2025-01-21-youtube-transcript-copier-ai-development.html">
+    <link rel="stylesheet" href="../css/style.css">
+    <meta name="description" content="AI駆動開発でYouTube字幕コピー拡張機能を作る完全ガイド。Chrome拡張機能開発を通してAI活用の実践的手法を学ぶ、リサーチと学習の効率化ツール開発記。">
+    <meta name="keywords" content="AI駆動開発, Chrome拡張機能, YouTube字幕, コピー機能, リサーチツール, AI活用, 開発効率化, JavaScript, プログラミング">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+        .subtitle {
+            margin: 15px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .intro {
+            background: linear-gradient(135deg, #f8f9ff, #e8eeff);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #667eea;
+            border-bottom: 2px solid #e8eeff;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature-card {
+            background: #f8f9ff;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #e8eeff;
+            border-left: 4px solid #764ba2;
+        }
+        .code-section {
+            background: #f0f2ff;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 1px solid #e8eeff;
+        }
+        .code-block {
+            background: #1a1a1a;
+            color: #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        .development-flow {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .benefits {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .setup-steps {
+            background: linear-gradient(135deg, #e8f4fd, #d1ecf1);
+            border-left: 4px solid #17a2b8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .file-structure {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .meta {
+            background: linear-gradient(135deg, #f0f2ff, #e0e7ff);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .meta h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            white-space: nowrap;
+        }
+        .date {
+            color: #666;
+            font-size: 0.95em;
+        }
+        footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            header, .content {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .features {
+                grid-template-columns: 1fr;
+            }
+            .tags {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="article-nav article-nav-top">
+        <a href="../blog.html" class="back-link">← ブログ一覧</a>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>🚀 【AI駆動開発】YouTube字幕コピペ拡張機能で、リサーチと学習がマジで爆速になるって話。</h1>
+            <p class="subtitle">AI活用で効率的な開発プロセスを体験する実践ガイド</p>
+        </header>
+
+        <div class="content">
+            <div class="intro">
+                <p><strong>「AI駆動開発」</strong>って言葉、最近ちょいちょい聞くけど、実際どうなの？ って思ってる人、けっこういらっしゃるかと思います。</p>
+                <p>なんか難しそうだし、本当にそんなにちゃんと作れんの？ って感じですね。</p>
+                <p>今回は、その「AI駆動開発」を、実際に体験できる拡張機能の開発を通して、そのヤバさをみんなにお伝えしたいです。</p>
+            </div>
+
+            <h2>🎯 今回作る拡張機能：YouTube Transcript Copier</h2>
+            
+            <p>手前味噌ですが、これ、マジで便利です。YouTubeを見ていて、「あ、この字幕使いたい！」って時、秒でコピーできます。</p>
+
+            <p>しかも、コピーした字幕の冒頭には、LLM（大規模言語モデル）用の要約プロンプトが自動でくっつくから、そのままAIに投げれば、要約させたり、分析させたり、リサーチや学習がマジで爆速になるんですよ。</p>
+
+            <div class="benefits">
+                <h3>🔧 なぜ自作するのか？</h3>
+                <p>実はそんな拡張機能はすでにあります。ただし、LLMのアップデートが来ると動かなくなったり、YouTubeのアップデートで動かなくなったり......その度に開発者の方が頑張って修正してくれているのはわかるんですが、イタチごっこが終わらない。</p>
+                <p>そこで、自分で手元で作ってしまえば、即、修正可能です。さらにこれがAI駆動開発にピッタリな題材なんです。</p>
+            </div>
+
+            <h2>💡 なぜ拡張機能開発が「AI駆動開発」の入門にピッタリなのか？</h2>
+            
+            <p>「え、いきなり拡張機能開発？ 無理ゲーじゃね？」</p>
+            <p>そう思った方、いらっしゃるかもしれません。ご安心ください。拡張機能開発は、実は「AI駆動開発」を体験するのに、非常に向いているんです。</p>
+
+            <div class="features">
+                <div class="feature-card">
+                    <h4>📝 コードが少なくて済む</h4>
+                    <p>Webサイトのように、サーバーやデータベースなど、面倒な構築は不要です。</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🤖 AIによるコード生成が超使える</h4>
+                    <p>定型的な処理が多く、AIが得意な部分をガンガン活用できます。</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🌐 ブラウザがあれば、誰でもできる</h4>
+                    <p>特別な開発環境は必要ありません。</p>
+                </div>
+            </div>
+
+            <h2>📁 ディレクトリ構造</h2>
+            
+            <p>それでは、実際に開発を始める前に、必要なファイルの構成（ディレクトリ構造）を確認していきましょう。</p>
+
+            <div class="file-structure">
+                <h3>完全版の構成</h3>
+                <div class="code-block">youtube-transcript-copier.zip
+├── style.css
+├── README.md
+├── privacy-policy.html
+├── popup.js
+├── popup.html
+├── manifest.json
+├── LICENSE
+├── iconsフォルダ
+└── _localesフォルダ</div>
+            </div>
+
+            <div class="setup-steps">
+                <h3>🚀 個人で使うなら、最低限これだけでOK！</h3>
+                <p>もし、あなたが個人的に使うだけであれば、この3つのファイルがあれば、とりあえず動くものが作れてしまいます。</p>
+                <div class="code-block">popup.js
+popup.html
+manifest.json</div>
+                <p>「え、マジ？ これだけ？」と思われたでしょうか？ そうなんです、本当にこれだけなんです。</p>
+                <p>しかも、この3つのファイルは、AIに「〇〇のような拡張機能を作りたいのですが、コードを生成してください」とお願いすれば、ある程度自動で生成してくれるのです。</p>
+            </div>
+
+            <h2>🛠️ ローカル環境で動かす方法</h2>
+            
+            <p>さて、ここからは、いよいよ本題です。popup.js、popup.html、manifest.json の３つのファイルを使って、実際にローカル環境で拡張機能を動かす方法を解説します。</p>
+
+            <div class="development-flow">
+                <h3>1. ファイルの準備</h3>
+                <p>まずは、以下の内容で3つのファイルを作成してください。</p>
+                <ul>
+                    <li><strong>popup.html</strong>: ポップアップ画面の構造を定義するHTMLファイル</li>
+                    <li><strong>popup.js</strong>: ポップアップ画面の動作を定義するJavaScriptファイル</li>
+                    <li><strong>manifest.json</strong>: 拡張機能の基本情報を定義するJSONファイル</li>
+                </ul>
+                <p>これらのファイルは、同じフォルダ内に保存してください。フォルダの名前は任意ですが、例えば「youtube-copier」とかにすると分かりやすいでしょう。</p>
+            </div>
+
+            <div class="development-flow">
+                <h3>2. Chromeに拡張機能を読み込む</h3>
+                <p>次に、作成した拡張機能をChromeに読み込みます。</p>
+                <ol>
+                    <li><strong>Chromeブラウザを開き、アドレスバーに chrome://extensions と入力して、拡張機能管理ページを開きます。</strong></li>
+                    <li><strong>右上の「デベロッパーモード」をオンにします。</strong></li>
+                    <li><strong>左上の「パッケージ化されていない拡張機能を読み込む」ボタンをクリックします。</strong></li>
+                    <li><strong>先ほど作成した youtube-transcript-copier フォルダを選択します。</strong></li>
+                </ol>
+                <p>これで、拡張機能がChromeに読み込まれました。<br>えっマジで簡単すぎる。個人開発時代到来してるじゃん、と思ってもらえたら幸いです。</p>
+            </div>
+
+            <div class="development-flow">
+                <h3>3. 拡張機能を試す</h3>
+                <p>Chromeのツールバーに、拡張機能のアイコンが表示されているはずです。このアイコンをクリックすると、ポップアップ画面が表示されます。</p>
+                <p>YouTubeの動画ページを開き、拡張機能のポップアップ画面で「COPY TEXT」ボタンをクリックしてみてください。<br>字幕がコピーされれば成功です！</p>
+            </div>
+
+            <h2>🤖 AIプロンプトの活用例</h2>
+            
+            <div class="code-section">
+                <h3>具体的なプロンプト例</h3>
+                <p>ここまでで、拡張機能開発のイメージが湧いてきたでしょうか？具体的なコードの前にプロンプトを載せておきます。ポイントは適当でもしっかりやりたいこと伝える。例はこんな感じです。</p>
+                
+                <div class="code-block">あなたはChrome拡張機能の開発者です。以下の要件を満たす、シンプルなChrome拡張機能のコードを生成してください。
+
+**機能要件:**
+
+1. **拡張機能名:** 「YouTube-Copier」とする。
+2. **ポップアップ表示:** YouTubeの動画ページで、拡張機能のアイコンをクリックすると、ポップアップが表示される。
+3. **UI要素:**
+   * プロンプトを入力するためのテキストエリア
+   * 字幕をコピーするための「COPY TEXT」ボタン
+   * コピー完了時やエラー発生時に表示するアラートメッセージ領域
+4. **コピー機能:**
+   * 「COPY TEXT」ボタンをクリックすると、以下を実行する。
+     1. 現在アクティブなYouTubeタブの情報を取得する。
+     2. YouTube動画の字幕を取得するスクリプトを実行する。
+     3. 取得した字幕をテキストエリアに入力されたプロンプトの後に結合して、クリップボードにコピーする。
+     4. コピーが完了したら、「COPY THAT!!」というアラートメッセージを表示し、ポップアップを閉じる。
+     5. エラーが発生した場合は、「ERROR: エラーメッセージ」というアラートメッセージを表示する。
+     6. アラートメッセージは、数秒後に自動で消えるようにする。
+5. **UI:**
+   * テキストエリアとコピーボタンのみのシンプルなUIとする。
+   * `style.css` ファイルは不要とし、HTMLとJavaScriptのみで実装する。
+6. **ファイルの構成:**
+   * 必要なファイルは、`popup.html`、`popup.js`、`manifest.json` の3つのみとする。
+   * アイコン画像や他のファイルは不要とする。
+7. **その他:**
+   * デバッグ用のログを適宜出力する。
+   * ローカルストレージは使用しない。
+
+**コード生成の制約:**
+
+* `style.css` ファイルは使用しない。
+* アイコン画像は不要とする。
+* `default_locale` は使用しない。
+* ローカルで動かす最小構成で、リリースを目的としない。</div>
+            </div>
+
+            <div class="benefits">
+                <h3>🎯 AI駆動開発の真価</h3>
+                <p>まさにコピペ開発！ これこそ「AI駆動開発」の真骨頂ではないでしょうか？</p>
+                <p>この記事では、そんな拡張機能開発を、AIの力を借りながら、いかに効率よく進めていくか、その具体的なステップを解説していきます。そして、出来上がった右上の小さなアイコンを見て、達成感と満足感を得ましょう。</p>
+            </div>
+
+            <h2>🚀 実用性とメリット</h2>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h4>📊 リサーチ効率化</h4>
+                    <p>YouTube動画から瞬時に字幕を抽出し、AIでの分析が可能</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📚 学習支援</h4>
+                    <p>プロンプト付きでコピーされるため、要約や質問生成が簡単</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🛠️ カスタマイズ性</h4>
+                    <p>自作のため、必要に応じて機能追加や修正が即座に可能</p>
+                </div>
+            </div>
+
+            <p>でも、実はそんな拡張機能はすでにあります。ただし、LLMのアップデートが来ると動かなくなったり、YouTubeのアップデートで動かなくなったり......その度に開発者の方が頑張って修正してくれているのはわかるんですが、イタチごっこが終わらない。その間に面倒になって、使わなくなってツールが定着しなくなるんですよね。しかも、そもそも有料だったりします。</p>
+
+            <h2>📈 まとめ</h2>
+            
+            <p>これは変え難いことですよ。ハッカーと画家って本がありますが、開発と絵を描くのはほとんどおんなじ作業だって言ってる人もいます。</p>
+            
+            <p>AI駆動開発を通じて、従来は敷居が高いと思われていた拡張機能開発が、実はこんなにも簡単に、そして効率的に行えることを実感していただけたでしょうか。</p>
+
+            <div class="meta">
+                <h3>記事情報</h3>
+                <div class="date">公開日: 2025年1月21日</div>
+                <div class="tags">
+                    <span class="tag">note</span>
+                    <span class="tag">AI駆動開発</span>
+                    <span class="tag">Chrome拡張機能</span>
+                    <span class="tag">YouTube字幕</span>
+                    <span class="tag">リサーチツール</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">AI活用</span>
+                    <span class="tag">開発効率化</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            note記事アーカイブ - infohiroki.com
+        </footer>
+    </div>
+
+    <nav class="article-nav article-nav-bottom">
+        <a href="../blog.html" class="back-to-list">他の記事を読む</a>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,1505 @@
+{
+  "files": [
+    {
+      "id": "vim-cheat-sheet",
+      "path": "2025-08-26-vim-cheat-sheet.html",
+      "title": "📝 Vim Cheat Sheet - 基本コマンド完全ガイド",
+      "description": "Vimエディタの基本コマンドとショートカットを網羅的に解説。保存・終了、モード切り替え、カーソル移動、編集操作、検索・置換を分かりやすく図表でまとめたクイックリファレンス。",
+      "icon": "https://skillicons.dev/icons?i=vim",
+      "tags": [
+        "Vim",
+        "エディタ",
+        "CLI",
+        "開発ツール",
+        "チートシート",
+        "コマンド",
+        "ショートカット"
+      ],
+      "created": "2025-08-26"
+    },
+    {
+      "id": "notion-database-creation-guide",
+      "path": "2024-06-06-notion-database-creation-guide.html",
+      "title": "Notionでデータベースをつくろうよ📖_04",
+      "description": "Notionのデータベース作成方法を分かりやすく解説。インラインとフルページの違い、リンクドビューの活用法まで実践的なガイド。",
+      "icon": "https://skillicons.dev/icons?i=notion",
+      "tags": [
+        "note",
+        "Notion",
+        "データベース",
+        "チュートリアル",
+        "生産性",
+        "DB",
+        "インライン",
+        "フルページ"
+      ],
+      "created": "2024-06-06"
+    },
+    {
+      "id": "chrome-extensions-practical-3-selections",
+      "path": "2025-01-26-chrome-extensions-practical-3-selections.html",
+      "title": "実務に生き残った【Chrome拡張機能】3選",
+      "description": "実務で本当に役立つChrome拡張機能を厳選。Save to Notion、OneTab、GoFullPageなど、生産性を向上させる必須ツールを紹介。",
+      "icon": "./images/Google Chrome icon.png",
+      "tags": [
+        "note",
+        "Chrome拡張機能",
+        "生産性",
+        "Save to Notion",
+        "OneTab",
+        "実務ツール",
+        "スクリーンショット"
+      ],
+      "created": "2025-01-26"
+    },
+    {
+      "id": "cursor-1-0-new-features",
+      "path": "2025-06-06-cursor-1-0-new-features.html",
+      "title": "🎉 Cursor 1.0 の主要新機能",
+      "description": "Cursor 1.0の新機能を詳しく解説。BugBot、Background Agent、Jupyter Notebook対応、Memories機能、MCP統合など開発者向けの革新的アップデート。",
+      "icon": "https://skillicons.dev/icons?i=vscode",
+      "tags": [
+        "note",
+        "Cursor",
+        "1.0",
+        "新機能",
+        "BugBot",
+        "AI Code Editor",
+        "開発ツール",
+        "コードレビュー"
+      ],
+      "created": "2025-06-06"
+    },
+    {
+      "id": "git-github-complete-cheatsheet",
+      "path": "2025-06-07-git-github-complete-cheatsheet.html",
+      "title": "Git & GitHub 完全チートシート",
+      "description": "Git・GitHubの完全チートシート。基本コマンドからブランチ操作、トラブルシューティング、GitHub特有機能まで7000文字超の包括的リファレンス。",
+      "icon": "https://skillicons.dev/icons?i=git",
+      "tags": [
+        "note",
+        "Git",
+        "GitHub",
+        "チートシート",
+        "バージョン管理",
+        "コマンド",
+        "リファレンス",
+        "開発ツール"
+      ],
+      "created": "2025-06-07"
+    },
+    {
+      "id": "gemini-cli-vs-claude-code-review",
+      "path": "2025-06-26-gemini-cli-vs-claude-code-review.html",
+      "title": "「Gemini CLI」がきた。Claude CodeをMaxプランで毎日使ってる人の感想",
+      "description": "GoogleのGemini CLIとClaude Codeを実際に比較レビュー。Claude Maxプランユーザーの視点から両ツールの特徴、速度、使いやすさを詳しく解説します。",
+      "icon": "./images/Gemini.png",
+      "tags": [
+        "note",
+        "Gemini CLI",
+        "Claude Code",
+        "AI開発ツール",
+        "比較レビュー",
+        "Google",
+        "Anthropic",
+        "開発環境"
+      ],
+      "created": "2025-06-26"
+    },
+    {
+      "id": "ai-notion-tasker-chrome-extension",
+      "path": "2024-10-14-ai-notion-tasker-chrome-extension.html",
+      "title": "AIでNotionTaskerというChrome拡張機能を作ってみた話。",
+      "description": "Cursor ProとClaude 3.5 Sonnetを使ってNotionTaskerというChrome拡張機能を開発した実体験。Alt+NでNotionに簡単にページを追加できるツールの開発プロセスを詳しく解説。",
+      "icon": "./images/Google Chrome icon.png",
+      "tags": [
+        "note",
+        "Chrome拡張機能",
+        "AI開発",
+        "Cursor",
+        "Claude",
+        "Notion",
+        "プログラミング",
+        "開発ツール"
+      ],
+      "created": "2024-10-14"
+    },
+    {
+      "id": "ollama-cline-local-llm",
+      "path": "2025-06-05-ollama-cline-local-llm.html",
+      "title": "OllamaとClineを使用したローカルLLM開発環境の完全ガイド",
+      "description": "OllamaとClineを使用したローカルLLM開発環境の完全ガイドについて詳しく解説。実践的な活用方法やコツを紹介します。",
+      "icon": "🤖",
+      "tags": [
+        "note",
+        "Ollama",
+        "Cline",
+        "ローカルLLM",
+        "開発環境",
+        "AI"
+      ],
+      "created": "2025-06-05"
+    },
+    {
+      "id": "chatgpt-notion-series-0",
+      "path": "2024-06-03-note-chatgpt-notion-series-0.html",
+      "title": "ChatGPTとNotionシリーズ_0",
+      "description": "ChatGPTとNotionシリーズ_0の詳細記事です。実践的な知見と具体的な手法について解説します。",
+      "icon": "./images/ChatGPT icon.webp",
+      "tags": [
+        "note"
+      ],
+      "created": "2024-06-03"
+    },
+    {
+      "id": "cody-ai-chrome-extension-development",
+      "path": "2025-01-09-cody-ai-chrome-extension-development.html",
+      "title": "【Cody】AI駆動開発でChrome拡張機能をつくった話。【YoutubeTranscriptCopier】",
+      "description": "AI駆動開発ツールCodyを使ってChrome拡張機能（YoutubeTranscriptCopier）を開発した実体験レポート。Codyの使い方、開発プロセス、メリット・デメリットを詳しく解説します。",
+      "icon": "🤖",
+      "tags": [
+        "note",
+        "Cody",
+        "AI駆動開発",
+        "Chrome拡張機能",
+        "開発ツール",
+        "AI",
+        "プログラミング"
+      ],
+      "created": "2025-01-09"
+    },
+    {
+      "id": "ai-driven-development-summary",
+      "path": "2024-12-09-ai-driven-development-summary.html",
+      "title": "AI駆動開発と呼ぶらしい、開発スタイルまとめてみた",
+      "description": "AI駆動開発（AI-Driven Development）の概念と実践方法を詳しく解説。従来の開発スタイルとの違い、具体的なツールやワークフローについてまとめます。",
+      "icon": "🤖",
+      "tags": [
+        "note",
+        "AI駆動開発",
+        "開発手法",
+        "AI",
+        "プログラミング",
+        "生産性向上"
+      ],
+      "created": "2024-12-09"
+    },
+    {
+      "id": "prompt-storage-problem",
+      "path": "2025-02-20-prompt-storage-problem.html",
+      "title": "結局、プロンプトの置き場をどこにするかって話。",
+      "description": "プロンプト管理の最適解を探る。GPTs、Claude Projects、Gemini Gemsから専用ツール、Difyまで、プロンプト置き場戦略の実践的考察。",
+      "icon": "🤖",
+      "tags": [
+        "note",
+        "プロンプト管理",
+        "GPTs",
+        "Claude Projects",
+        "Notion",
+        "Dify",
+        "AI活用",
+        "効率化"
+      ],
+      "created": "2025-02-20"
+    },
+    {
+      "id": "youtube-summary-tools",
+      "path": "2024-07-30-note-youtube-summary-tools.html",
+      "title": "YouTube要約ツールの決定版 - 効率的な動画要約の方法",
+      "description": "YouTubeの要約に最適なAIツール「Video Summarizer」の使い方を詳しく解説。無料版でも使える高精度要約方法から文字起こし活用まで、動画学習を効率化するテクニックを紹介します。",
+      "icon": "./images/Youtube Color icon.png",
+      "tags": [
+        "note",
+        "AI活用",
+        "YouTube",
+        "要約",
+        "Video Summarizer",
+        "ChatGPT",
+        "文字起こし",
+        "学習効率化"
+      ],
+      "created": "2024-07-30"
+    },
+    {
+      "id": "mac-text-input-shortcuts",
+      "path": "2024-09-01-note-mac-text-input-shortcuts.html",
+      "title": "Macのテキスト入力ショートカット完全ガイド - 作業効率化の必須テクニック",
+      "description": "Macでのテキスト入力を劇的に効率化するショートカットキーの完全ガイド。カーソル移動、テキスト選択、編集操作など、実用的なキーボードショートカットを体系的に解説します。",
+      "icon": "https://skillicons.dev/icons?i=vscode",
+      "tags": [
+        "note",
+        "Mac",
+        "ショートカット",
+        "キーボード",
+        "テキスト入力",
+        "効率化",
+        "作業効率",
+        "macOS"
+      ],
+      "created": "2024-09-01"
+    },
+    {
+      "id": "ai-reflection-experience",
+      "icon": "🤖",
+      "path": "2024-07-11-note-ai-reflection-experience.html",
+      "title": "現時点での生成AIを振り返ってみる - 個人的体験と考察",
+      "description": "ChatGPT登場から現在までの生成AI体験を個人的に振り返る。インターネット以来の衝撃、学習方針の転換、Notionとの組み合わせ、そして日本語と英語の特性について考察します。",
+      "tags": [
+        "note",
+        "生成AI",
+        "ChatGPT",
+        "AI体験",
+        "振り返り",
+        "Notion",
+        "個人的考察",
+        "言語文化"
+      ],
+      "created": "2024-07-11"
+    },
+    {
+      "id": "language-context-theory",
+      "path": "2024-07-08-note-language-context-theory.html",
+      "title": "英語はローコンテキスト、日本語はハイコンテキスト - 抽象概念への特化戦略",
+      "description": "英語のローコンテキスト文化と日本語のハイコンテキスト文化の違いを分析。日本語の抽象概念処理に長けた特性を活かす戦略について考察します。",
+      "icon": "💬",
+      "tags": [
+        "note",
+        "ローコンテキスト",
+        "ハイコンテキスト",
+        "英語",
+        "日本語",
+        "言語文化",
+        "抽象概念",
+        "コミュニケーション"
+      ],
+      "created": "2024-07-08"
+    },
+    {
+      "id": "book-reflection-technique-memo",
+      "path": "2024-05-17-book-reflection-technique-memo.html",
+      "title": "本『リフレクション(REFLECTION) 自分とチームの成長を加速させる内省の技術』メモ",
+      "description": "熊平美香著『リフレクション』の読書メモ。意見・経験・感情・価値観のフレームワークを使った内省技術で自己とチームの成長を加速させる方法を解説します。メタ認知力向上と客観的思考の実践的アプローチ。",
+      "icon": "📚",
+      "tags": [
+        "note",
+        "読書",
+        "リフレクション",
+        "内省",
+        "メタ認知",
+        "自己成長",
+        "チーム成長",
+        "熊平美香"
+      ],
+      "created": "2024-05-17"
+    },
+    {
+      "id": "book-manana-principle-memo",
+      "path": "2024-06-15-book-manana-principle-memo.html",
+      "title": "本「仕事に追われない仕事術 マニャーナの法則 完全版」メモ",
+      "description": "マーク・フォースター著『マニャーナの法則』の読書メモ。翌日に回すことで優先順位を見直す技術、クローズリストとオープンリストの使い分け、真の仕事と忙しいだけの仕事の区別など、効率的な時間管理術を解説。",
+      "icon": "📚",
+      "tags": [
+        "note",
+        "読書",
+        "マニャーナの法則",
+        "時間管理",
+        "仕事術",
+        "生産性",
+        "タスク管理",
+        "効率化"
+      ],
+      "created": "2024-06-15"
+    },
+    {
+      "id": "chatgpt-notion-history-extension",
+      "icon": "./images/Google Chrome icon.png",
+      "path": "2024-06-13-chatgpt-notion-history-extension.html",
+      "title": "ChatGPTの履歴をNotionに送れる！拡張機能🚀",
+      "description": "ChatGPTとの会話を直接Notionに保存できるChrome拡張機能の使い方を詳しく解説。数秒で完全なChatGPTの会話を保存し、ナレッジベースとして活用する方法をご紹介します。",
+      "tags": [
+        "note",
+        "ChatGPT",
+        "Notion",
+        "Chrome拡張機能",
+        "AI",
+        "会話履歴",
+        "自動保存",
+        "ナレッジベース"
+      ],
+      "created": "2024-06-13"
+    },
+    {
+      "id": "book-world-class-engineer-thinking-memo",
+      "path": "2024-05-17-book-world-class-engineer-thinking-memo.html",
+      "title": "本『世界一流エンジニアの思考法』メモ",
+      "description": "牛尾剛著『世界一流エンジニアの思考法』の書評とメモ。サーバントリーダーシップ、効率的な働き方、チームビルディングなど、エンジニアの生産性向上に関する実践的な知見をまとめました。",
+      "icon": "📚",
+      "tags": [
+        "note",
+        "読書",
+        "エンジニア",
+        "思考法",
+        "技術"
+      ],
+      "created": "2024-05-17"
+    },
+    {
+      "id": "gas-terminology-collection",
+      "path": "2024-05-20-gas-terminology-collection.html",
+      "title": "楽しいGAS用語集",
+      "description": "Google Apps Script（GAS）の用語を楽しく覚えられる用語集です。GAS開発に役立つ基本用語をまとめています。",
+      "icon": "📜",
+      "tags": [
+        "note",
+        "GAS",
+        "Google Apps Script",
+        "用語集",
+        "自動化"
+      ],
+      "created": "2024-05-20"
+    },
+    {
+      "id": "programming-terminology-collection",
+      "path": "2024-05-20-programming-terminology-collection.html",
+      "title": "楽しいプログラミング用語集",
+      "description": "プログラミングの基本用語を楽しく覚えられる用語集です。初心者から中級者まで役立つ技術用語をまとめています。",
+      "icon": "📜",
+      "tags": [
+        "note",
+        "プログラミング",
+        "用語集",
+        "教育"
+      ],
+      "created": "2024-05-20"
+    },
+    {
+      "id": "book-output-reading-technique-memo",
+      "path": "2024-04-08-book-output-reading-technique-memo.html",
+      "title": "本『自己肯定感を上げる OUTPUT読書術』のメモ",
+      "description": "アバタロー著『自己肯定感を上げる OUTPUT読書術』の読書メモ。効果的な読書方法と要約・発信までの具体的な流れを解説します。",
+      "icon": "📚",
+      "tags": [
+        "note",
+        "読書",
+        "読書術",
+        "自己啓発",
+        "OUTPUT"
+      ],
+      "created": "2024-04-08"
+    },
+    {
+      "id": "vscode-github-copilot",
+      "path": "2025-06-27-tech-vscode-github-copilot.html",
+      "title": "VSコード講座まとめ",
+      "description": "GitHubコパイロットと連携したVSコードの基本機能",
+      "icon": "https://skillicons.dev/icons?i=vscode",
+      "tags": [
+        "VSCode",
+        "GitHub Copilot",
+        "IDE",
+        "エディター",
+        "開発環境"
+      ],
+      "created": "2025-06-27"
+    },
+    {
+      "id": "genspark-ai",
+      "path": "2025-06-27-edu-genspark-ai.html",
+      "title": "GenSpark AIスライド資料作成ワークフロー",
+      "description": "GenSparkは全AIスライドサービス中で最高クラスのビジュアル品質を提供する...",
+      "icon": "🤖",
+      "tags": [
+        "AI",
+        "スライド作成",
+        "GenSpark",
+        "プレゼンテーション",
+        "ワークフロー"
+      ],
+      "created": "2025-06-27"
+    },
+    {
+      "id": "go-tutorial",
+      "path": "2025-06-26-tech-go-tutorial.html",
+      "title": "Go言語入門チュートリアル",
+      "description": "Go言語の基礎から実践までを学ぶ総合的なチュートリアル",
+      "icon": "https://skillicons.dev/icons?i=go",
+      "tags": [
+        "Go",
+        "プログラミング",
+        "チュートリアル",
+        "入門",
+        "言語学習"
+      ],
+      "created": "2025-06-26"
+    },
+    {
+      "id": "education-ai-summary",
+      "icon": "🤖",
+      "path": "2025-06-26-edu-ai-summary.html",
+      "title": "教育AI要約",
+      "description": "教育分野におけるAI活用の要約情報",
+      "tags": [
+        "AI",
+        "教育",
+        "要約",
+        "テクノロジー"
+      ],
+      "created": "2025-06-26"
+    },
+    {
+      "id": "education-training",
+      "icon": "🎓",
+      "path": "2025-06-26-system-education-training.html",
+      "title": "専門実践教育訓練給付制度",
+      "description": "プログラミング学習で最大80％の費用が戻ってくる国の制度",
+      "tags": [
+        "給付金",
+        "教育訓練",
+        "補助金",
+        "プログラミング学習",
+        "厚生労働省"
+      ],
+      "created": "2025-06-26"
+    },
+    {
+      "id": "llmo-checklist",
+      "icon": "✅",
+      "path": "2025-06-26-tech-llmo-checklist.html",
+      "title": "LLMOの対策チェックリスト",
+      "description": "LLMOアプリケーション開発における重要な対策事項のチェックリスト",
+      "tags": [
+        "LLMO",
+        "チェックリスト",
+        "開発",
+        "対策",
+        "セキュリティ"
+      ],
+      "created": "2025-06-26"
+    },
+    {
+      "id": "claude-code",
+      "icon": "🤖",
+      "path": "2025-06-26-tech-claude-code.html",
+      "title": "Claude Codeがエンジニアの働き方を変える",
+      "description": "AIペアプログラミングツールClaude Codeによる開発効率化の解説",
+      "icon": "./images/Claude AI icon.webp",
+      "tags": [
+        "Claude Code",
+        "AI",
+        "プログラミング",
+        "開発効率化",
+        "ペアプログラミング"
+      ],
+      "created": "2025-06-26"
+    },
+    {
+      "id": "claude-code-features-summary",
+      "icon": "🤖",
+      "path": "2025-06-22-tech-claude-code-features-summary.html",
+      "title": "Claude Code 機能まとめ",
+      "description": "Claude Codeの機能をまとめたインフォグラフィック",
+      "icon": "./images/Claude AI icon.webp",
+      "tags": [
+        "Claude Code",
+        "機能",
+        "まとめ",
+        "インフォグラフィック",
+        "AI"
+      ],
+      "created": "2025-06-22"
+    },
+    {
+      "id": "github-actions-cicd-guide",
+      "path": "2025-06-21-tech-github-actions-cicd-guide.html",
+      "title": "GitHub Actions CI/CD ガイド",
+      "description": "GitHub Actions CI/CDの完全解説",
+      "icon": "https://skillicons.dev/icons?i=github",
+      "tags": [
+        "GitHub Actions",
+        "CI/CD",
+        "自動化",
+        "DevOps",
+        "Git"
+      ],
+      "created": "2025-06-21"
+    },
+    {
+      "id": "software-design-patterns-guide",
+      "icon": "📝",
+      "path": "2025-06-21-tech-software-design-patterns-guide.html",
+      "title": "ソフトウェアデザインパターンガイド",
+      "description": "ソフトウェアデザインパターン解説（初心者向け・10パターン）",
+      "tags": [
+        "デザインパターン",
+        "ソフトウェア設計",
+        "プログラミング",
+        "アーキテクチャ",
+        "初心者"
+      ],
+      "created": "2025-06-21"
+    },
+    {
+      "id": "ai-practical7",
+      "icon": "🤖",
+      "path": "2025-06-18-edu-ai-practical7.html",
+      "title": "AIツール活用術 - 実践で学んだ7つのコツ",
+      "description": "実践で学んだ7つのコツ",
+      "tags": [
+        "AI",
+        "ツール",
+        "活用術",
+        "プレゼンテーション",
+        "実践"
+      ],
+      "created": "2025-06-18"
+    },
+    {
+      "id": "devops-mastering-roadmap-2025",
+      "icon": "https://skillicons.dev/icons?i=docker",
+      "path": "2025-06-10-tech-devops-mastering-roadmap-2025.html",
+      "title": "DevOps マスタリングロードマップ 2025",
+      "description": "DevOps学習のための4段階ロードマップ",
+      "tags": [
+        "DevOps",
+        "ロードマップ",
+        "学習",
+        "インフラ",
+        "自動化"
+      ],
+      "created": "2025-06-10"
+    },
+    {
+      "id": "uv-python-package-manager-completeguide",
+      "path": "2025-06-09-tech-uv-python-package-manager-comp.html",
+      "title": "UV - 超高速Python Package Manager 完全ガイド",
+      "description": "Rust製超高速Python Package Manager",
+      "icon": "https://skillicons.dev/icons?i=python",
+      "tags": [
+        "Python",
+        "UV",
+        "パッケージマネージャー",
+        "Rust",
+        "開発ツール"
+      ],
+      "created": "2025-06-09"
+    },
+    {
+      "id": "docker-virtualization-complete-guide",
+      "path": "2025-06-09-tech-docker-virtualization-complete-guide.html",
+      "title": "Docker 仮想化完全ガイド",
+      "description": "Docker・仮想化技術の包括的解説",
+      "icon": "https://skillicons.dev/icons?i=docker",
+      "tags": [
+        "Docker",
+        "仮想化",
+        "コンテナ",
+        "DevOps",
+        "インフラ"
+      ],
+      "created": "2025-06-09"
+    },
+    {
+      "id": "claude-code-comprehensive-guide",
+      "path": "2025-06-05-tech-claude-code-comprehensive-guide.html",
+      "title": "Claude Code 包括ガイド",
+      "description": "Claude Code解説インフォグラフィック",
+      "icon": "./images/Claude AI icon.webp",
+      "tags": [
+        "Claude Code",
+        "AI",
+        "開発ツール",
+        "インフォグラフィック",
+        "ガイド"
+      ],
+      "created": "2025-06-05"
+    },
+    {
+      "id": "claude-code-30min-masterclass",
+      "path": "2025-05-24-tech-claude-code-30min-masterclass.html",
+      "title": "Claude Code 30分マスタークラス",
+      "description": "Claude Codeプレゼンテーション概要（Boris Cherny講演）",
+      "icon": "./images/Claude AI icon.webp",
+      "tags": [
+        "Claude Code",
+        "AI",
+        "プレゼンテーション",
+        "開発ツール",
+        "マスタークラス"
+      ],
+      "created": "2025-05-24"
+    },
+    {
+      "id": "firebase-explanation-summary",
+      "path": "2025-05-24-tech-firebase-explanation.html",
+      "title": "Firebase 解説動画 要約",
+      "description": "アプリ開発とインフラ管理のための包括的プラットフォーム",
+      "icon": "https://skillicons.dev/icons?i=firebase",
+      "tags": [
+        "Firebase",
+        "クラウド",
+        "バックエンド",
+        "Google",
+        "モバイル開発"
+      ],
+      "created": "2025-05-24"
+    },
+    {
+      "id": "serverside-programming-languages-guide",
+      "path": "2025-05-24-tech-serverside-programming-languages-guide.html",
+      "title": "サーバーサイドプログラミング言語ガイド",
+      "description": "サーバーサイドプログラミング言語12言語の完全ガイド",
+      "icon": "https://skillicons.dev/icons?i=vscode",
+      "tags": [
+        "サーバーサイド",
+        "プログラミング言語",
+        "バックエンド",
+        "言語比較",
+        "開発"
+      ],
+      "created": "2025-05-24"
+    },
+    {
+      "id": "ai",
+      "path": "2025-05-19-edu-ai.html",
+      "title": "生成AI基礎用語集",
+      "description": "本資料では、生成AIに関する基本的な用語を50パターン紹介します。これか...",
+      "icon": "🤖",
+      "tags": [
+        "AI",
+        "用語集",
+        "機械学習",
+        "深層学習",
+        "生成AI"
+      ],
+      "created": "2025-05-19"
+    },
+    {
+      "id": "apscheduler",
+      "path": "2025-05-16-tech-apscheduler.html",
+      "title": "APScheduler概要",
+      "description": "APSchedulerはPythonで定期的にジョブを実行できるライブラリで、PCの電源が入...",
+      "icon": "https://skillicons.dev/icons?i=python",
+      "tags": [
+        "Python",
+        "APScheduler",
+        "定期実行",
+        "自動化",
+        "スケジュール"
+      ],
+      "created": "2025-05-16"
+    },
+    {
+      "id": "figma-responsive-web-guide",
+      "path": "2025-05-16-design-figma-to-responsive-web-guide.html",
+      "title": "Figma レスポンシブウェブガイド",
+      "description": "Figmaからレスポンシブウェブサイトを作成する最簡単方法",
+      "icon": "https://skillicons.dev/icons?i=figma",
+      "tags": [
+        "Figma",
+        "レスポンシブ",
+        "ウェブサイト",
+        "デザイン",
+        "フロントエンド"
+      ],
+      "created": "2025-05-16"
+    },
+    {
+      "id": "aseprite-reference-image-guide",
+      "path": "2025-05-15-design-aseprite-reference-image-guide.html",
+      "title": "Aseprite 参照画像ガイド",
+      "description": "Asepriteで下絵・参照画像を使用する方法",
+      "icon": "🎨",
+      "tags": [
+        "Aseprite",
+        "参照画像",
+        "下絵",
+        "ワークフロー",
+        "デザイン"
+      ],
+      "created": "2025-05-15"
+    },
+    {
+      "id": "lazygit-cheatsheet",
+      "path": "2025-05-15-tech-lazygit-cheatsheet.html",
+      "title": "LazyGit チートシート",
+      "description": "LazyGitの基本操作とショートカット集",
+      "icon": "https://skillicons.dev/icons?i=git",
+      "tags": [
+        "LazyGit",
+        "Git",
+        "チートシート",
+        "ショートカット",
+        "バージョン管理"
+      ],
+      "created": "2025-05-15"
+    },
+    {
+      "id": "aseprite-pixel-art-guide",
+      "path": "2025-05-15-design-aseprite-pixel-art-guide.html",
+      "title": "Aseprite ピクセルアートガイド",
+      "description": "Asepriteでのピクセルアート作成特化ガイド",
+      "icon": "🎨",
+      "tags": [
+        "Aseprite",
+        "ピクセルアート",
+        "ドット絵",
+        "アート",
+        "クリエイティブ"
+      ],
+      "created": "2025-05-15"
+    },
+    {
+      "id": "aseprite-basic-manual",
+      "path": "2025-05-15-design-aseprite-basic-manual.html",
+      "title": "Aseprite 基本マニュアル",
+      "description": "Asepriteを使ったピクセルアート作成の基本マニュアル",
+      "icon": "🎨",
+      "tags": [
+        "Aseprite",
+        "ピクセルアート",
+        "ドット絵",
+        "デザイン",
+        "アニメーション"
+      ],
+      "created": "2025-05-15"
+    },
+    {
+      "id": "framer-figma-guide",
+      "path": "2025-05-14-design-figma-to-framer-guide.html",
+      "title": "Figma to Framer ガイド",
+      "description": "FigmaデザインをFramerにインポートするための実践ガイド",
+      "icon": "https://skillicons.dev/icons?i=figma",
+      "tags": [
+        "Figma",
+        "Framer",
+        "デザイン",
+        "プロトタイピング",
+        "UI/UX"
+      ],
+      "created": "2025-05-14"
+    },
+    {
+      "id": "framer-html-extension-guide",
+      "path": "2025-05-14-design-framer-html-extension-guide.html",
+      "title": "Framer HTML拡張ガイド",
+      "description": "FramerのHTML取り込み拡張機能の使い方",
+      "icon": "🎨",
+      "tags": [
+        "Framer",
+        "HTML",
+        "拡張機能",
+        "コンポーネント",
+        "デザイン"
+      ],
+      "created": "2025-05-14"
+    },
+    {
+      "id": "framer-practical-manual",
+      "path": "2025-05-14-design-framer-practical-manual.html",
+      "title": "Framer 実践マニュアル",
+      "description": "Framerの実践的な操作方法とショートカット集",
+      "icon": "🎨",
+      "tags": [
+        "Framer",
+        "マニュアル",
+        "操作方法",
+        "ショートカット",
+        "デザインツール"
+      ],
+      "created": "2025-05-14"
+    },
+    {
+      "id": "whisper-ai-guide",
+      "path": "2025-05-13-tech-whisper-ai-guide.html",
+      "title": "Whisper AI 実装ガイド",
+      "description": "Pythonを使った音声認識AIの導入と活用方法",
+      "icon": "🤖",
+      "tags": [
+        "AI",
+        "Whisper",
+        "音声認識",
+        "Python",
+        "機械学習"
+      ],
+      "created": "2025-05-13"
+    },
+    {
+      "id": "ai-seo-strategy",
+      "path": "2025-06-28-tech-ai-seo-strategy.html",
+      "title": "AI時代のSEO戦略",
+      "description": "AI技術の進化に対応したSEO戦略とその実践方法",
+      "icon": "🤖",
+      "tags": [
+        "SEO",
+        "AI",
+        "マーケティング",
+        "検索エンジン最適化",
+        "戦略"
+      ],
+      "created": "2025-06-28"
+    },
+    {
+      "id": "obsidian",
+      "path": "2025-05-06-tech-obsidian.html",
+      "title": "Obsidian ディレクトリ構造の例",
+      "description": "動画内で紹介されていた考え方（数字プレフィックス、階層化、indexフォ��...",
+      "icon": "https://skillicons.dev/icons?i=obsidian",
+      "tags": [
+        "Obsidian",
+        "ディレクトリ構造",
+        "情報整理",
+        "ノートテイキング"
+      ],
+      "created": "2025-05-06"
+    },
+    {
+      "id": "python",
+      "path": "2025-04-23-tech-python.html",
+      "title": "Python フレームワークと便利なツール",
+      "description": "Python フレームワークと便利なツール\n            \n        \n\n        Python エコシス...",
+      "icon": "https://skillicons.dev/icons?i=python",
+      "tags": [
+        "Python",
+        "フレームワーク",
+        "Django",
+        "Flask",
+        "開発ツール"
+      ],
+      "created": "2025-04-23"
+    },
+    {
+      "id": "fastapibasicexplanation",
+      "path": "2025-04-22-tech-fastapibasicexplanation.html",
+      "title": "FastAPI基本解説",
+      "description": "URLのパスの一部を変数として使用",
+      "icon": "https://skillicons.dev/icons?i=fastapi",
+      "tags": [
+        "Python",
+        "FastAPI",
+        "WebAPI",
+        "バックエンド",
+        "REST"
+      ],
+      "created": "2025-04-22"
+    },
+    {
+      "id": "notion-save-to-notion-extension",
+      "path": "2024-03-27-notion-save-to-notion-extension.html",
+      "title": "Notion Web ClipperよりSave to Notionの方がおすすめだよ〜",
+      "description": "Chrome拡張機能「Save to Notion」の紹介記事です。",
+      "icon": "./images/Google Chrome icon.png",
+      "tags": [
+        "note",
+        "Notion",
+        "ツール",
+        "Chrome拡張"
+      ],
+      "created": "2024-03-27"
+    },
+    {
+      "id": "react",
+      "path": "2025-04-19-tech-react.html",
+      "title": "React ライブラリ・ツール インフォグラフィック",
+      "description": "ウェブサイトのナビゲーションを制御し、URLをカスタマイズするライブラ�...",
+      "icon": "https://skillicons.dev/icons?i=react",
+      "tags": [
+        "React",
+        "ライブラリ",
+        "フロントエンド",
+        "JavaScript",
+        "開発ツール"
+      ],
+      "created": "2025-04-19"
+    },
+    {
+      "id": "habit-small-start-principle",
+      "path": "2025-03-30-habit-small-start-principle.html",
+      "title": "効果的な習慣形成には小さく始めることが基本原則である",
+      "description": "習慣形成の最も基本的かつ効果的な原則である「小さく始める」ことの重要性を解説",
+      "icon": "🎯",
+      "tags": [
+        "習慣形成",
+        "心理学",
+        "戦略",
+        "小さな習慣"
+      ],
+      "created": "2025-03-30"
+    },
+    {
+      "id": "habit-environment-design",
+      "path": "2025-03-30-habit-environment-design.html",
+      "title": "環境設計が習慣の定着度を決定する",
+      "description": "習慣形成における環境設計の決定的な影響力と実践的な環境デザイン戦略",
+      "icon": "🎯",
+      "tags": [
+        "習慣形成",
+        "環境デザイン",
+        "心理学",
+        "行動変容"
+      ],
+      "created": "2025-03-30"
+    },
+    {
+      "id": "habit-bj-fogg-behavior-model",
+      "path": "2025-03-30-habit-bj-fogg-behavior-model.html",
+      "title": "習慣のはじまりを説明する行動モデルBJ Fogg",
+      "description": "BJ Foggの行動モデル（B=MAP）による習慣形成の「起動段階」の力学解説",
+      "icon": "🎯",
+      "tags": [
+        "習慣形成",
+        "心理学",
+        "行動モデル",
+        "BJ Fogg"
+      ],
+      "created": "2025-03-30"
+    },
+    {
+      "id": "habit-small-is-key",
+      "path": "2025-03-30-habit-small-is-key.html",
+      "title": "習慣の小ささが定着の鍵である",
+      "description": "微小な行動から始めることが長期的定着の決定的要因となる原理の詳細解説",
+      "icon": "🎯",
+      "tags": [
+        "習慣形成",
+        "戦略",
+        "タイニーハビット",
+        "持続性"
+      ],
+      "created": "2025-03-30"
+    },
+    {
+      "id": "habit-systems-thinking",
+      "path": "2025-03-30-habit-systems-thinking.html",
+      "title": "習慣の集合体（システム思考）が目標達成よりも習慣形成に効果的である",
+      "description": "目標設定よりもシステム（習慣の集合体）構築に焦点を当てるアプローチの効果性",
+      "icon": "🎯",
+      "tags": [
+        "習慣形成",
+        "システム思考",
+        "心理学",
+        "目標設定"
+      ],
+      "created": "2025-03-30"
+    },
+    {
+      "id": "habit-identity-based",
+      "path": "2025-03-30-habit-identity-based.html",
+      "title": "アイデンティティベースの習慣形成が最も持続可能である",
+      "description": "自己概念（アイデンティティ）の変容に基づく最も強力で持続可能な習慣形成方法",
+      "icon": "🎯",
+      "tags": [
+        "習慣形成",
+        "アイデンティティ",
+        "心理学",
+        "持続性"
+      ],
+      "created": "2025-03-30"
+    },
+    {
+      "id": "habit-loop-structure",
+      "path": "2025-03-30-habit-loop-structure.html",
+      "title": "習慣ループの構造が行動変容の基盤である",
+      "description": "Charles Duhiggの習慣ループ「キュー→ルーティン→報酬」による行動変容の基盤理論",
+      "icon": "🎯",
+      "tags": [
+        "習慣形成",
+        "心理学",
+        "習慣ループ",
+        "Charles Duhigg"
+      ],
+      "created": "2025-03-30"
+    },
+    {
+      "id": "habit-four-laws-james-clear",
+      "path": "2025-03-30-habit-four-laws-james-clear.html",
+      "title": "James Clearの習慣形成4法則はループ理論を発展させた",
+      "description": "習慣ループ理論を実践的に発展させたJames Clearの4法則フレームワーク",
+      "icon": "🎯",
+      "tags": [
+        "習慣形成",
+        "行動モデル",
+        "James Clear",
+        "Atomic Habits"
+      ],
+      "created": "2025-03-30"
+    },
+    {
+      "id": "chatgpt-reskilling-guide",
+      "path": "2024-03-29-chatgpt-reskilling-guide.html",
+      "title": "ChatGPTでリスキリング",
+      "description": "現代はリスキリングが必須な時代です。ChatGPTを活用して効果的なリスキリングを実現し、キャリア形成や戦略を立てる方法を詳しく解説します。",
+      "icon": "./images/ChatGPT icon.webp",
+      "tags": [
+        "note",
+        "ChatGPT",
+        "AI",
+        "リスキリング",
+        "キャリア"
+      ],
+      "created": "2024-03-29"
+    },
+    {
+      "id": "habit-environment-design-essence",
+      "path": "2025-03-29-habit-environment-design-essence.html",
+      "title": "習慣形成の本質は環境デザインにある",
+      "description": "意志力や動機付けより環境をデザインすることが習慣形成の本質である理由と実践方法",
+      "icon": "🎯",
+      "tags": [
+        "習慣形成",
+        "環境デザイン",
+        "行動変容",
+        "システム設計"
+      ],
+      "created": "2025-03-29"
+    },
+    {
+      "id": "chatgpt-ai-tools-4selection",
+      "path": "2024-11-20-chatgpt-ai-tools-4selection.html",
+      "title": "ChatGPTから2年以上。実務に生き残ったAIツール4選",
+      "description": "ChatGPT登場から2年経過後も実務で活用し続けているAIツール4選：Claude、Genspark、Midjourney、gammaの特徴と使い分けを解説。",
+      "icon": "./images/ChatGPT icon.webp",
+      "tags": [
+        "note",
+        "AI",
+        "ChatGPT",
+        "Claude",
+        "Genspark",
+        "Midjourney",
+        "gamma",
+        "実務活用",
+        "生産性向上"
+      ],
+      "created": "2024-11-20"
+    },
+    {
+      "id": "notion-explanation-basic",
+      "path": "2024-06-04-notion-explanation-basic.html",
+      "title": "Notionってなんだ？_02",
+      "description": "Notionの基本概要と機能を分かりやすく解説。ドキュメント、データベース、ウェブサイト、ナレッジベース、プロジェクト管理など、オールインワンツールNotionの活用方法を紹介します。",
+      "icon": "https://skillicons.dev/icons?i=notion",
+      "tags": [
+        "note",
+        "Notion",
+        "基本",
+        "オールインワン",
+        "ドキュメント",
+        "データベース",
+        "プロジェクト管理",
+        "ナレッジベース"
+      ],
+      "created": "2024-06-04"
+    },
+    {
+      "id": "notion-shortcuts-guide",
+      "path": "2024-06-05-notion-shortcuts-guide.html",
+      "title": "Notionまずはショートカット🚀_03",
+      "description": "Notionの効率的なショートカット操作ガイド。スラッシュコマンド、Ctrl+Shiftパターン、マークダウン記法など、作業効率を大幅アップする必須ショートカットを完全解説。",
+      "icon": "https://skillicons.dev/icons?i=notion",
+      "tags": [
+        "note",
+        "Notion",
+        "ショートカット",
+        "効率化",
+        "スラッシュコマンド",
+        "マークダウン",
+        "キーボード操作",
+        "作業効率"
+      ],
+      "created": "2024-06-05"
+    },
+    {
+      "id": "gemini-cli-report",
+      "path": "2025-07-01-gemini-cli-report.html",
+      "title": "Google Gemini CLI 詳細レポート",
+      "description": "Google Gemini CLIの詳細分析レポート。オープンソースで無料のAIコーディングツールの特徴、競合比較、技術評価を含む包括的な解説。",
+      "icon": "./images/Gemini.png",
+      "tags": [
+        "AI",
+        "Gemini",
+        "CLI",
+        "コーディングツール",
+        "オープンソース",
+        "Google"
+      ],
+      "created": "2025-07-01"
+    },
+    {
+      "id": "youtube-transcript-copier-ai-development",
+      "path": "2025-01-21-youtube-transcript-copier-ai-development.html",
+      "title": "【AI駆動開発】YouTube字幕コピペ拡張機能で、リサーチと学習がマジで爆速になるって話。",
+      "description": "AI駆動開発でYouTube字幕コピー拡張機能を作る完全ガイド。Chrome拡張機能開発を通してAI活用の実践的手法を学ぶ、リサーチと学習の効率化ツール開発記。",
+      "icon": "./images/Google Chrome icon.png",
+      "tags": [
+        "note",
+        "AI駆動開発",
+        "Chrome拡張機能",
+        "YouTube字幕",
+        "リサーチツール",
+        "JavaScript",
+        "AI活用",
+        "開発効率化"
+      ],
+      "created": "2025-01-21"
+    },
+    {
+      "id": "chatgpt-survived-ai-tools-4-selections-2025",
+      "path": "2025-02-20-chatgpt-survived-ai-tools-4-selections-2025.html",
+      "title": "ChatGPTから2年以上。実務に生き残ったAIツール4選？ 2025/02/20ver",
+      "description": "ChatGPT登場から2年以上経過した2025年版、実務で本当に生き残ったAIツール4選。Google AI Studio、Gemini DeepResearch、NotebookLM、AI駆動開発ツールを実体験ベースで詳細比較。",
+      "icon": "./images/ChatGPT icon.webp",
+      "tags": [
+        "note",
+        "ChatGPT",
+        "AIツール",
+        "Google AI Studio",
+        "Gemini DeepResearch",
+        "NotebookLM",
+        "AI駆動開発",
+        "実務活用",
+        "2025年"
+      ],
+      "created": "2025-02-20"
+    },
+    {
+      "id": "ai-notion-casual-talk",
+      "path": "2024-06-25-ai-notion-casual-talk.html",
+      "title": "AIとかNotionのだらだら話す",
+      "description": "ChatGPTとNotionを活用したリスキリングと生産性向上の実践ガイド。AI時代に必要な情報管理術とワークフロー最適化の考察を詳しく解説。",
+      "icon": "🤖",
+      "tags": [
+        "note",
+        "ChatGPT",
+        "Notion",
+        "リスキリング",
+        "AI活用",
+        "情報管理",
+        "生産性向上",
+        "ワークフロー",
+        "ナレッジベース"
+      ],
+      "created": "2024-06-25"
+    },
+    {
+      "id": "ai-prompt-design-guide",
+      "path": "2024-05-19-ai-prompt-design-guide.html",
+      "title": "プロンプトデザインまとめ。たまに見るといい。",
+      "description": "効果的なプロンプトデザインの8つの技術を重要度順に体系的に解説。ChatGPTやAIツールを使う際に参考になる実践的なガイドです。",
+      "icon": "🤖",
+      "tags": [
+        "note",
+        "プロンプトデザイン",
+        "ChatGPT",
+        "AI",
+        "ゼロショット",
+        "フューショット",
+        "プロンプト技術",
+        "人工知能"
+      ],
+      "created": "2024-05-19"
+    },
+    {
+      "id": "ai-notion-workflow",
+      "path": "2024-06-03-ai-notion-workflow.html",
+      "title": "🤖📚AIとNotionはセットでつかう？_01",
+      "description": "ChatGPTとNotionを組み合わせた効率的なワークフロー構築の必要性とメリットを解説。AI時代の情報管理術を学ぼう。",
+      "icon": "🤖",
+      "tags": [
+        "note",
+        "ChatGPT",
+        "Notion",
+        "AI",
+        "ワークフロー",
+        "情報管理",
+        "生産性向上",
+        "NotionAI"
+      ],
+      "created": "2024-06-03"
+    },
+    {
+      "id": "team-development-guide",
+      "path": "2025-07-03-team-development-guide.html",
+      "title": "チーム開発の実践ガイド",
+      "description": "6ステップで理解するチーム開発の体系的な方法論。役割分担、キックオフ、要件定義から振り返りまで、成功に必要な全てを解説。",
+      "icon": "👥",
+      "tags": [
+        "チーム開発",
+        "プロジェクト管理",
+        "エンジニア",
+        "Git",
+        "アジャイル",
+        "KPT",
+        "レビュー",
+        "実践ガイド"
+      ],
+      "created": "2025-07-03"
+    },
+    {
+      "id": "quantum-grover-algorithm-infographic",
+      "path": "2025-07-05-quantum-grover-algorithm-infographic.html",
+      "title": "量子コンピューターとGroverのアルゴリズム",
+      "description": "量子コンピューターの検索アルゴリズム「Grover」の詳細解説インフォグラフィック。古典vs量子の比較、状態ベクトル、計算複雑度O(√n)の実現原理を視覚的に解説。",
+      "icon": "⚛️",
+      "tags": [
+        "量子コンピューター",
+        "Groverアルゴリズム",
+        "計算複雑度",
+        "量子ビット",
+        "検索アルゴリズム",
+        "状態ベクトル",
+        "インフォグラフィック",
+        "技術解説"
+      ],
+      "created": "2025-07-05"
+    },
+    {
+      "id": "openai-podcast-comprehensive-summary",
+      "path": "2025-07-05-openai-podcast-comprehensive-summary.html",
+      "title": "OpenAIポッドキャスト - ChatGPTの初期バイラル時代とAIの未来",
+      "description": "OpenAI中核メンバーが語るChatGPT誕生秘話と未来展望。命名の偶然、4日間でのバイラル化、技術的課題への対応、ImageGen革新、O3モデルの科学研究応用まで包括的解説。",
+      "icon": "🎙️",
+      "tags": [
+        "OpenAI",
+        "ChatGPT",
+        "ポッドキャスト",
+        "AI技術",
+        "ImageGen",
+        "誕生秘話",
+        "バイラル化",
+        "技術革新",
+        "未来展望"
+      ],
+      "created": "2025-07-05"
+    },
+    {
+      "id": "plotly-dash-dashboard-guide",
+      "path": "2025-07-06-plotly-dash-dashboard-guide.html",
+      "title": "PlotlyとDashでダッシュボード作成ガイド",
+      "description": "Pythonでインタラクティブなダッシュボードを作る完全ガイド。Plotly（グラフ描画）とDash（Webフレームワーク）の基礎から実装まで実践的に解説。",
+      "icon": "https://skillicons.dev/icons?i=python",
+      "tags": [
+        "Python",
+        "Plotly",
+        "Dash",
+        "ダッシュボード",
+        "データ可視化",
+        "インタラクティブ",
+        "Webアプリ",
+        "チュートリアル"
+      ],
+      "created": "2025-07-06"
+    },
+    {
+      "id": "ai-agent-tools-infographic",
+      "path": "2025-07-07-ai-agent-tools-infographic.html",
+      "title": "AIエージェントツール完全比較ガイド",
+      "description": "最新のAIエージェント型プログラミングツールの特徴と使い分けを徹底解説。Claude Code、Gemini CLI、OpenAI CodeCLIの比較分析。",
+      "icon": "🤖",
+      "tags": [
+        "AI",
+        "エージェントツール",
+        "Claude Code",
+        "Gemini CLI",
+        "OpenAI CodeCLI",
+        "比較分析",
+        "開発ツール",
+        "プログラミング"
+      ],
+      "created": "2025-07-07"
+    },
+    {
+      "id": "ai-dev-infographic",
+      "path": "2025-07-07-ai-dev-infographic.html",
+      "title": "AI時代の受託開発業界の変化",
+      "description": "AI技術により受託開発業界に起きている3つの大きな変化と生き残り戦略。開発効率向上、価格競争激化、新しいビジネスモデルへの対応方法を解説。",
+      "icon": "🤖",
+      "tags": [
+        "AI",
+        "受託開発",
+        "業界変化",
+        "価格競争",
+        "ビジネスモデル",
+        "開発効率",
+        "生き残り戦略",
+        "技術革新"
+      ],
+      "created": "2025-07-07"
+    },
+    {
+      "id": "chatgpt-agent-mode-guide",
+      "path": "2025-07-19-chatgpt-agent-mode-guide.html",
+      "title": "ChatGPTエージェントモード完全ガイド",
+      "description": "ChatGPTエージェントモードの機能、制限事項、他サービスとの比較を詳しく解説。ブラウザ自動操作やアプリ開発の実演例も紹介。",
+      "icon": "./images/ChatGPT icon.webp",
+      "tags": [
+        "ChatGPT",
+        "AIエージェント",
+        "自動化",
+        "ブラウザ操作",
+        "アプリ開発",
+        "AI活用",
+        "生産性向上"
+      ],
+      "created": "2025-07-19"
+    },
+    {
+      "id": "nextjs-hosting-comparison",
+      "path": "2025-07-19-nextjs-hosting-comparison.html",
+      "title": "Next.js App Router ホスティング比較",
+      "description": "Next.js App Routerに対応したホスティングサービスの料金、機能、パフォーマンスを徹底比較。Vercel、Netlify、Cloudflareなど主要サービスを詳細分析。",
+      "icon": "https://skillicons.dev/icons?i=nextjs",
+      "tags": [
+        "Next.js",
+        "App Router",
+        "ホスティング",
+        "Vercel",
+        "Netlify",
+        "Cloudflare",
+        "比較検討",
+        "Webサービス"
+      ],
+      "created": "2025-07-19"
+    },
+    {
+      "id": "gemini-cli-guide",
+      "path": "2025-07-19-gemini-cli-guide.html",
+      "title": "Gemini CLI活用ガイド",
+      "description": "GoogleのAIコーディング支援ツールGemini CLIの使い方を徹底解説。セットアップ手順、主要コマンド、Claude Codeとの比較まで実践的ガイド。",
+      "icon": "./images/Gemini.png",
+      "tags": [
+        "Gemini CLI",
+        "Google",
+        "AI開発",
+        "コーディング支援",
+        "CLI",
+        "プログラミング",
+        "開発ツール",
+        "無料ツール"
+      ],
+      "created": "2025-07-19"
+    },
+    {
+      "id": "tech-stack-comparison",
+      "path": "2025-07-19-tech-stack-comparison.html",
+      "title": "2025年最新技術スタック比較",
+      "description": "2025年注目の技術スタックを徹底比較。フロントエンド、バックエンド、インフラまで最新動向と選択指標を詳しく解説。",
+      "icon": "⚡",
+      "tags": [
+        "技術スタック",
+        "2025年",
+        "フロントエンド",
+        "バックエンド",
+        "インフラ",
+        "技術選定",
+        "比較検討",
+        "最新技術"
+      ],
+      "created": "2025-07-19"
+    },
+    {
+      "id": "vibe-coding-guide",
+      "path": "2025-08-04-vibe-coding-guide.html",
+      "title": "Vibe Coding in Production - 詳細インフォグラフィック",
+      "description": "プロダクション環境でのVibe Coding完全ガイド。AIを活用した責任ある開発手法、リーフノード戦略、22,000行変更の実証事例を解説。",
+      "icon": "🚀",
+      "tags": [
+        "AI開発",
+        "Vibe Coding",
+        "Claude",
+        "プロダクション",
+        "開発手法",
+        "生産性",
+        "エンジニアリング",
+        "将来展望"
+      ],
+      "created": "2025-08-04"
+    },
+    {
+      "id": "claude-agents-guide",
+      "path": "2025-08-04-claude-agents-guide.html",
+      "title": "Amazon BedrockでのClaude AIエージェント構築ガイド",
+      "description": "AWS Strand Agent SDKを使ったClaude AIエージェント開発の完全ガイド。MCP統合、本番運用対応まで詳しく解説。",
+      "icon": "./images/Claude AI icon.webp",
+      "tags": [
+        "AWS",
+        "Claude",
+        "AI Agent",
+        "Bedrock",
+        "Strand SDK",
+        "MCP",
+        "エンタープライズ",
+        "本番運用"
+      ],
+      "created": "2025-08-04"
+    },
+    {
+      "id": "gpt-oss-local-guide",
+      "path": "2025-08-09-gpt-oss-local-guide.html",
+      "title": "GPT-OSS ローカル実行ガイド",
+      "description": "OpenAIが公開したGPT-OSSをローカルPCで動かす方法。LMStudioでの導入手順や性能ベンチマークを詳しく解説。",
+      "icon": "🤖",
+      "tags": [
+        "GPT-OSS",
+        "AI",
+        "ローカルAI",
+        "LMStudio",
+        "オープンソース",
+        "Python",
+        "チュートリアル"
+      ],
+      "created": "2025-08-09"
+    },
+    {
+      "id": "python-uv-package-manager",
+      "path": "2025-08-11-python-uv-package-manager.html",
+      "title": "Pythonの超高速パッケージ管理ツール「uv」入門",
+      "description": "Rust製の高速パッケージ管理ツール「uv」の基本的な使い方と特徴を解説。従来のツールより圧倒的に速く、オールインワン管理が可能。",
+      "icon": "https://skillicons.dev/icons?i=python",
+      "tags": [
+        "Python",
+        "パッケージ管理",
+        "uv",
+        "開発環境",
+        "Rust",
+        "高速化",
+        "仮想環境",
+        "開発効率"
+      ],
+      "created": "2025-08-11"
+    },
+    {
+      "id": "davinci-resolve-install-guide",
+      "path": "2025-08-15-davinci-resolve-install-guide.html",
+      "title": "DaVinci Resolveインストール＆初期設定ガイド",
+      "description": "認定トレーナーが教える完全マニュアル。インストールから初期設定まで初心者向けに詳しく解説。解像度、フレームレート設定も網羅。",
+      "icon": "🎬",
+      "tags": [
+        "DaVinci Resolve",
+        "動画編集",
+        "インストール",
+        "初期設定",
+        "チュートリアル",
+        "初心者向け",
+        "プロジェクト設定"
+      ],
+      "created": "2025-08-15"
+    },
+    {
+      "id": "google-deep-research-diffusion",
+      "path": "2025-08-25-google-deep-research-diffusion.html",
+      "title": "Google Deep Research - Test-Time Diffusion解説",
+      "description": "GoogleのTest-Time Diffusion技術による次世代AI調査システムの包括的解説。従来手法との比較、性能評価、技術的インサイトまで詳しく紹介。",
+      "icon": "🔍",
+      "tags": [
+        "AI",
+        "Google",
+        "Deep Research",
+        "Test-Time Diffusion",
+        "調査システム",
+        "OpenAI比較",
+        "技術解説",
+        "Self-Evolution"
+      ],
+      "created": "2025-08-25"
+    }
+  ]
+}

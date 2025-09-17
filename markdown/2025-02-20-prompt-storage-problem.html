@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>結局、プロンプトの置き場をどこにするかって話。</title>
+    <link rel="canonical" href="https://infohiroki.com/html-files/2025-02-20-prompt-storage-problem.html">
+    <link rel="stylesheet" href="../css/style.css">
+    <meta name="description" content="プロンプト管理の最適解を探る。GPTs、Claude Projects、Gemini Gemsから専用ツール、Difyまで、プロンプト置き場戦略の実践的考察。">
+    <meta name="keywords" content="プロンプト管理, GPTs, Claude Projects, Notion, Dify, AI活用, プロンプトエンジニアリング, 効率化">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+        .subtitle {
+            margin: 15px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .intro {
+            background: linear-gradient(135deg, #f8f9ff, #e8eeff);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        h2 {
+            color: #667eea;
+            border-bottom: 2px solid #e8eeff;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+        }
+        .platforms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .platform {
+            background: #f8f9ff;
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid #e8eeff;
+            text-align: center;
+        }
+        .core-insight {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .problem-solution {
+            background: #f0f2ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .solution-steps {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .advanced-path {
+            background: linear-gradient(135deg, #e8f4fd, #d1ecf1);
+            border-left: 4px solid #17a2b8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .key-concept {
+            background: linear-gradient(135deg, #f8d7da, #f1b0b7);
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        .meta {
+            background: linear-gradient(135deg, #f0f2ff, #e0e7ff);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .meta h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            white-space: nowrap;
+        }
+        .date {
+            color: #666;
+            font-size: 0.95em;
+        }
+        footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            header, .content {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .platforms {
+                grid-template-columns: 1fr;
+            }
+            .tags {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="article-nav article-nav-top">
+        <a href="../blog.html" class="back-link">← ブログ一覧</a>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>💭 結局、プロンプトの置き場をどこにするかって話。</h1>
+            <p class="subtitle">AI時代のプロンプト管理戦略を考える</p>
+        </header>
+
+        <div class="content">
+            <div class="intro">
+                <p>GPTs、Claude Projects、Gemini Gemsなど、各AIプラットフォームに専用機能が登場する中で、プロンプトをどこに保存・管理するのが最適なのでしょうか。効率的なプロンプト管理戦略について考察します。</p>
+            </div>
+
+            <h2>🤖 GPTs（ChatGPT）とかProjects（Claude）Gem（Gemini）とか</h2>
+            <p>なんか、専用に動いてくれるLLMってありますよね。<br>最近はそれぞれのLLM、AIチャットにそういう機能を作れるようになってます。</p>
+
+            <div class="platforms">
+                <div class="platform">
+                    <h4>ChatGPT GPTs</h4>
+                    <p>専用機能ボット</p>
+                </div>
+                <div class="platform">
+                    <h4>Claude Projects</h4>
+                    <p>コンテキスト管理</p>
+                </div>
+                <div class="platform">
+                    <h4>Gemini Gems</h4>
+                    <p>カスタマイズAI</p>
+                </div>
+            </div>
+
+            <p>画像生成のプロンプト作ってくれるAIチャットくん、とか。<br>トレードの質問に答えてくれるくん、とか。<br>あいつらってどういう仕組みかって想像すると、裏側にプログラムがあるんだろうなって思うと思います。</p>
+
+            <div class="problem-solution">
+                <p>もちろんプログラムがある時もあります。<br>PythonとかJavascriptとかが入ってたり。</p>
+
+                <p>でもシンプルに作ると、プロンプトが仕込まれているだけだったりします。<br>プラス、背景情報として、データを持っていたりします。<br>RAGって感じですね。</p>
+
+                <p><strong>つまり、</strong><br>・プロンプト<br>・何らかのファイル<br>で構成されています。</p>
+            </div>
+
+            <p>何らかのファイルの方には .txt .csvとか色々あると思います。<br>で、そこにプログラムを置くこともできます。<br>厳密にはプログラムというかただのCodeですね。<br>テキストでPythonコード置いておけばそこを参照してLLMが動くって感じでブレが少なくなります。</p>
+
+            <p>で、何らかのファイル、を使わないパターンで言うとプロンプトがあるだけです。<br>もっと言うと、普通にAIチャットに何らかのファイルをアップロードして、プロンプトも入力すれば、「なになにしてくれる君」は必要ない訳です。</p>
+
+            <div class="core-insight">
+                <p>しかしですね、<strong>専用機っていうのは使いやすいもの</strong>です。<br>用途が限定されていることの価値というものがありますね。<br>さらに毎回アップロードして、プロンプトコピペするのは面倒です。</p>
+            </div>
+
+            <h2>💡 この記事の核心</h2>
+            <p>つまり、何が言いたいかというと、<strong>プロンプトの保存場所が重要だ</strong>ということなんですよね。<br>テキストの保存場所として優れているのはNotionだと思います。<br>しかし、実際にみんながみんなNotionを使うの現実的じゃない。<br>プロンプト保存サイトにいく？<br>その都度、検索？</p>
+
+            <div class="solution-steps">
+                <h3>🏗️ どこでもいいからプロンプト置き場をつくろう</h3>
+                <p>とにかくシンプルに倉庫を作ろうという話です。<br>どこでもいいと思います。<br>それをベースにGPTsとかGem (Gemini)とかつくればいいと思います。</p>
+            </div>
+
+            <div class="advanced-path">
+                <h3>⚙️ さらにいろいろ設定したくなったら……</h3>
+                <p>専用AIチャットボットを作れたら、いろいろ制限があることに気がつくと思います。<br>そんな時にさらに踏み込んで勉強したくなったら、<strong>Dify</strong>とかが選択肢に上がってきます。<br>もしくはReplitで作るとか。<br>AI駆動開発という範疇に入ってきます。</p>
+
+                <p>Difyについてはコードはほとんど書かずに構築可能ですが、実際には<strong>プログラミングの知識は必要</strong>です。<br>「IF文」で何ができるかぐらいは知らないと、やっぱりすぐ詰まってしまいます。</p>
+            </div>
+
+            <div class="key-concept">
+                <p>Excelをよく使っていますという方で、プログラムなんかできないよっていう方よくいらっしゃいます。</p>
+
+                <p>逆もあってプログラム書けるからってExcel分かる訳じゃないって話ですね。</p>
+
+                <p><strong>では、何が必要なのかというとプログラムを書くということの根本的な理解です。</strong><br>どういう順番に物事が処理されていったら問題が解決するのか。<br>これはガリガリコードを書くのも、Difyでブロックを繋げるのも、紙にペンで動作を書くのも一緒です。</p>
+            </div>
+
+            <div class="meta">
+                <h3>記事情報</h3>
+                <div class="date">公開日: 2025年2月20日</div>
+                <div class="tags">
+                    <span class="tag">note</span>
+                    <span class="tag">プロンプト管理</span>
+                    <span class="tag">GPTs</span>
+                    <span class="tag">Claude Projects</span>
+                    <span class="tag">Notion</span>
+                    <span class="tag">Dify</span>
+                    <span class="tag">AI活用</span>
+                    <span class="tag">効率化</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            note記事アーカイブ - infohiroki.com
+        </footer>
+    </div>
+
+    <nav class="article-nav article-nav-bottom">
+        <a href="../blog.html" class="back-to-list">他の記事を読む</a>
+    </nav>
+</body>
+</html>

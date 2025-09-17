@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rust製の高速パッケージ管理ツール「uv」の基本的な使い方と特徴を解説。従来のツールより圧倒的に速く、オールインワン管理が可能。">
+    <meta property="og:title" content="Pythonの超高速パッケージ管理ツール「uv」入門">
+    <meta property="og:description" content="Rust製の高速パッケージ管理ツール「uv」の基本的な使い方と特徴を解説。従来のツールより圧倒的に速く、オールインワン管理が可能。">
+    <meta property="og:type" content="article">
+    <title>Pythonの超高速パッケージ管理ツール「uv」入門</title>
+    <link rel="canonical" href="https://infohiroki.com/html-files/2025-08-11-python-uv-package-manager.html">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        :root {
+            --accent-color: #306998;
+            --accent-secondary: #FFD43B;
+        }
+        body {
+            background: linear-gradient(135deg, #306998, #FFD43B);
+            background-attachment: fixed;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(48, 105, 152, 0.3);
+            margin: 20px auto;
+            max-width: 900px;
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #306998, #4080C7);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+        }
+        .header a {
+            color: #FFD43B;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .header a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            padding: 40px;
+            line-height: 1.7;
+        }
+        h2 {
+            color: var(--accent-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            margin-top: 35px;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(48, 105, 152, 0.1), rgba(255, 212, 59, 0.1));
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        code {
+            background: #f8f9fa;
+            color: var(--accent-color);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .meta {
+            background: #f8f9fa;
+            padding: 20px;
+            border-top: 3px solid var(--accent-color);
+            text-align: center;
+            color: #666;
+        }
+        .tags {
+            margin-top: 10px;
+        }
+        .tag {
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="article-nav article-nav-top">
+        <a href="../blog.html" class="back-link">← ブログ一覧</a>
+    </nav>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Pythonの超高速パッケージ管理ツール「uv」入門</h1>
+            <p>解説：Python VTuber サプーさん</p>
+            <p><strong><a href="https://www.youtube.com/watch?v=0kFp6G6_pTE" target="_blank">📺 ソース動画はこちら</a></strong></p>
+        </div>
+
+        <div class="content">
+            <h2>uvとは？ 🧩</h2>
+            <p>
+                <code>uv</code>は、Pythonの仮想環境構築とパッケージ管理を一つで行える、<strong>Rust製</strong>の非常に高速なツールです。従来のツールの長所を取り入れ、弱点を克服した次世代のパッケージ管理ツールとして注目されています。
+            </p>
+            <ul>
+                <li><strong>仮想環境とは？</strong> 💻
+                    <ul>
+                        <li>プロジェクトごとに独立したPython実行環境を作成する仕組みです。</li>
+                        <li>これにより、プロジェクト間でライブラリのバージョンが衝突するのを防ぎます。（例: プロジェクトAはDjango 3.0、プロジェクトBはDjango 4.0を使用）</li>
+                    </ul>
+                </li>
+                <li><strong>パッケージの依存関係とは？</strong> 🔗
+                    <ul>
+                        <li>あるパッケージを利用するために、別のパッケージが必要になる関係性のことです。（例: <code>Django</code>を使うには<code>sqlparse</code>が必要）</li>
+                        <li>パッケージ管理ツールは、これらの複雑な依存関係とバージョンを自動で解決してインストールしてくれます。</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h2>uvの3大特徴 ✨</h2>
+            <ul>
+                <li><strong>🚀 圧倒的な高速性</strong>
+                    <ul>
+                        <li>Rustで開発されており、処理が非常に速いです。</li>
+                        <li>パッケージのダウンロードや依存関係の解決を並列処理することで高速化を実現しています。</li>
+                    </ul>
+                </li>
+                <li><strong>🧩 オールインワン管理</strong>
+                    <ul>
+                        <li>Python本体のバージョン管理、仮想環境の構築、パッケージ管理を<code>uv</code>一つで完結できます。</li>
+                        <li><code>pyenv</code> + <code>venv</code> + <code>pip</code> や <code>Poetry</code> のように複数のツールを組み合わせる必要がありません。</li>
+                    </ul>
+                </li>
+                <li><strong>🔄 高い再現性</strong>
+                    <ul>
+                        <li><code>pyproject.toml</code>と<code>uv.lock</code>ファイルを使って環境を定義します。</li>
+                        <li>これにより、チーム開発などで他のメンバーが<code>uv sync</code>コマンド一つで全く同じ環境を素早く再現できます。</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="highlight-box">
+                <p>⚠️ <strong>注意点:</strong> 動画撮影時点（最新バージョン0.8）では、まだメジャーバージョンが1に達していません。今後、破壊的な仕様変更が行われる可能性がある点を理解して使用する必要があります。</p>
+            </div>
+
+            <h2>基本コマンド一覧 🛠️</h2>
+            <ul>
+                <li><strong>プロジェクト初期化</strong>
+                    <ul>
+                        <li><code>uv init &lt;プロジェクト名&gt;</code>: 新規プロジェクトを作成し、設定ファイル（<code>pyproject.toml</code>など）を生成します。</li>
+                    </ul>
+                </li>
+                <li><strong>仮想環境の作成</strong>
+                    <ul>
+                        <li><code>uv venv</code>: プロジェクト内に仮想環境（<code>.venv</code>フォルダ）を作成します。</li>
+                    </ul>
+                </li>
+                <li><strong>パッケージ管理</strong>
+                    <ul>
+                        <li><code>uv add &lt;パッケージ名&gt;</code>: パッケージを仮想環境にインストールし、<code>pyproject.toml</code>と<code>uv.lock</code>を更新します。</li>
+                        <li><code>uv add --dev &lt;パッケージ名&gt;</code>: 開発時のみ使用するパッケージ（例: <code>black</code>, <code>pytest</code>）をインストールします。</li>
+                        <li><code>uv remove &lt;パッケージ名&gt;</code>: パッケージをアンインストールします。</li>
+                    </ul>
+                </li>
+                 <li><strong>環境の同期・再現</strong>
+                    <ul>
+                        <li><code>uv sync</code>: <code>uv.lock</code>ファイルに基づいて、環境に必要なパッケージをインストール・同期します。</li>
+                         <li><code>uv sync --upgrade</code>: <code>pyproject.toml</code>で指定されたバージョン範囲内でパッケージを最新版に更新します。</li>
+                    </ul>
+                </li>
+                <li><strong>コマンド実行</strong>
+                    <ul>
+                        <li><code>uv run &lt;コマンド&gt;</code>: 仮想環境内でコマンド（例: <code>python main.py</code>, <code>pytest</code>）を実行します。</li>
+                        <li><code>uvx &lt;パッケージ名&gt; &lt;引数&gt;</code>: 仮想環境を汚さずに、一時的にパッケージをインストールしてコマンドを実行します。</li>
+                    </ul>
+                </li>
+                <li><strong>pip互換コマンド</strong>
+                    <ul>
+                        <li><code>uv pip list</code>: インストール済みパッケージの一覧を表示します。</li>
+                        <li><code>uv pip install -r requirements.txt</code>: <code>requirements.txt</code>からパッケージをインストールします。（※この方法は<code>pyproject.toml</code>等を更新しないため注意）</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h2>まとめ</h2>
+            <div class="highlight-box">
+                <p>
+                    Pythonのパッケージ管理ツール「uv」は、Rust製で非常に高速な動作が特徴です。従来のツールが担っていた仮想環境の構築、パッケージのインストール、依存関係の解決、さらにはPython本体のバージョン管理までを一つのツールで完結させることができます。
+                </p>
+                <p>
+                    プロジェクトの設定は<code>pyproject.toml</code>ファイルに記述し、依存関係を含む全パッケージの正確なバージョン情報は<code>uv.lock</code>ファイルに記録されます。これにより、チーム開発時に<code>uv sync</code>コマンド一つで誰でも同じ開発環境を素早く再現でき、高い生産性を実現します。<code>uvx</code>を使えば仮想環境を汚さずにツールを一時実行することも可能です。高速性と利便性を両立した、注目の次世代ツールです。
+                </p>
+            </div>
+        </div>
+        
+        <div class="meta">
+            <div>公開日: 2025-08-11</div>
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">パッケージ管理</span>
+                <span class="tag">uv</span>
+                <span class="tag">開発環境</span>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="article-nav article-nav-bottom">
+        <a href="../blog.html" class="back-to-list">他の記事を読む</a>
+    </nav>
+</body>
+</html>

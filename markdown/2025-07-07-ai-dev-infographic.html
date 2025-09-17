@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI時代の受託開発業界の変化</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .source-link {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+            transition: background 0.3s;
+        }
+        
+        .source-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #2c5aa0;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #2c5aa0;
+        }
+        
+        .section-title .icon {
+            font-size: 1.2em;
+            margin-right: 15px;
+            background: #2c5aa0;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #2c5aa0;
+            box-shadow: 0 5px 15px rgba(44, 90, 160, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(44, 90, 160, 0.15);
+        }
+        
+        .card h3 {
+            color: #2c5aa0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h3::before {
+            content: '🔹';
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3d6f 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .highlight-box h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .highlight-box p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.1em;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            gap: 20px;
+        }
+        
+        .stat {
+            text-align: center;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            min-width: 150px;
+            flex: 1;
+            border-top: 4px solid #2c5aa0;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2c5aa0;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .advice-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .advice-list li {
+            background: white;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #2c5aa0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .advice-list li::before {
+            content: counter(advice-counter);
+            counter-increment: advice-counter;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #2c5aa0;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .advice-list {
+            counter-reset: advice-counter;
+        }
+        
+        .summary {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8f0ff 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+            border: 2px solid #2c5aa0;
+            position: relative;
+        }
+        
+        .summary::before {
+            content: '📝';
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: #2c5aa0;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 1.2em;
+        }
+        
+        .summary h2 {
+            color: #2c5aa0;
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                flex-direction: column;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI時代の受託開発業界の変化</h1>
+            <p>開発現場のリアルな変化と今後の対策</p>
+            <a href="https://www.youtube.com/watch?v=AxPBfSTAMf4" class="source-link" target="_blank">
+                📹 元動画を見る (YouTube)
+            </a>
+        </div>
+        
+        <div class="content">
+            <!-- 現状の変化 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="icon">⚡</span>
+                    AI導入による開発現場の変化
+                </h2>
+                
+                <div class="highlight-box">
+                    <h3>🚀 開発効率の劇的な向上</h3>
+                    <p>エンジニアが4日かかっていた作業が15分で完了。コード自動生成、バグ検出、テスト自動化、ドキュメント作成まで全てAIが対応。</p>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">1/10</span>
+                        <div class="stat-label">開発時間の短縮</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">激減</span>
+                        <div class="stat-label">単価の下落</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">加速</span>
+                        <div class="stat-label">価格競争</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 3つの主要変化 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="icon">🔄</span>
+                    業界に起きている3つの大きな変化
+                </h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>競合の変化</h3>
+                        <p><span class="emoji">🏢</span><strong>自社開発の増加</strong><br>企業が内製開発に移行</p>
+                        <p><span class="emoji">☁️</span><strong>SaaSサービス</strong><br>既存ソリューションの活用</p>
+                        <p><span class="emoji">🌏</span><strong>オフショア開発</strong><br>海外（ベトナム等）のAI活用</p>
+                        <p><span class="emoji">🛠️</span><strong>ノーコード・ローコード</strong><br>プログラミング不要のツール</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>クライアントニーズの変化</h3>
+                        <p><span class="emoji">⚡</span><strong>高速開発の要求</strong><br>1年待てない、すぐに結果が欲しい</p>
+                        <p><span class="emoji">🤖</span><strong>AI導入への期待</strong><br>最新技術を取り入れたシステム</p>
+                        <p><span class="emoji">📊</span><strong>ROI重視</strong><br>費用対効果をシビアに評価</p>
+                        <p><span class="emoji">🧠</span><strong>AIリテラシー向上</strong><br>適正価格を見抜く目を持つ</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>価格モデルの変化</h3>
+                        <p><span class="emoji">💸</span><strong>人月単価の崩壊</strong><br>従来の価格設定が通用しない</p>
+                        <p><span class="emoji">💰</span><strong>価値ベース課金</strong><br>成果物の価値に基づく料金設定</p>
+                        <p><span class="emoji">📦</span><strong>パッケージ化</strong><br>開発+コンサル+運用のセット販売</p>
+                        <p><span class="emoji">📅</span><strong>月額・サブスク型</strong><br>ラボ型・継続型の契約モデル</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI時代を生き残るアドバイス -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="icon">💡</span>
+                    AI時代を生き残る4つのアドバイス
+                </h2>
+                
+                <ul class="advice-list">
+                    <li>
+                        <h3>🤖 AIを使う側に回る</h3>
+                        <p>AIを拒否せず、積極的に活用して開発効率を向上させる。AIリテラシーを身につけ、お客様により良い価値を提供する。</p>
+                    </li>
+                    
+                    <li>
+                        <h3>🎯 人にしかできない強みを伸ばす</h3>
+                        <p>要件定義、コミュニケーション、クリエイティブな問題解決など、AIでは代替できない人間ならではの価値を強化する。</p>
+                    </li>
+                    
+                    <li>
+                        <h3>🚀 下請け根性からの脱却</h3>
+                        <p>言われたものをただ作るのではなく、「それを作らない方がいい」と提案できる存在になる。ビジネス観点から課題を見つけ、解決策を提案する。</p>
+                    </li>
+                    
+                    <li>
+                        <h3>📚 継続的な学習</h3>
+                        <p>単純なコード書きはなくなる。プロダクトエンジニア、SREなど新しいキャリアパスを柔軟に検討し、学習し続ける。</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 重要なポイント -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="icon">🎯</span>
+                    重要なポイント一覧
+                </h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3>技術的な変化</h3>
+                        <ul>
+                            <li>AIによるコード自動生成</li>
+                            <li>バグ検出の自動化</li>
+                            <li>テスト自動化</li>
+                            <li>ドキュメント作成の効率化</li>
+                            <li>開発時間の大幅短縮（1/10）</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>市場の変化</h3>
+                        <ul>
+                            <li>受託開発案件の総量減少</li>
+                            <li>価格競争の激化</li>
+                            <li>人月単価モデルの崩壊</li>
+                            <li>内製開発への移行</li>
+                            <li>オフショア開発の台頭</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>求められるスキル</h3>
+                        <ul>
+                            <li>AIツールの活用能力</li>
+                            <li>ビジネス課題の理解</li>
+                            <li>コミュニケーション能力</li>
+                            <li>継続的学習意欲</li>
+                            <li>クリエイティブな問題解決</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>新しいビジネスモデル</h3>
+                        <ul>
+                            <li>価値ベース課金</li>
+                            <li>成果物ベース料金</li>
+                            <li>月額・ラボ型契約</li>
+                            <li>コンサル+開発+運用のパッケージ</li>
+                            <li>AI開発チームの提供</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 300字要約 -->
+            <div class="summary">
+                <h2>📝 要約（300字）</h2>
+                <p>
+                    AI技術の普及により受託開発業界は激変している。コード自動生成やバグ検出により開発効率が1/10に向上し、従来4日かかった作業が15分で完了する。これにより人月単価モデルが崩壊し、価格競争が激化。企業の内製開発移行、SaaSサービス活用、オフショア開発の台頭で受託案件は減少している。クライアントはAI導入と高速開発を求め、ROIをシビアに評価する。生き残るには①AI活用スキル習得②人間ならではの価値（要件定義・コミュニケーション）強化③下請け脱却（提案型への転換）④継続学習が必要。単純なコード書きは消失し、エンジニアは課題発見・解決型の価値提供者への転換が求められる時代となった。
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

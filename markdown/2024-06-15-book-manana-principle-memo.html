@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本「仕事に追われない仕事術 マニャーナの法則 完全版」メモ | info.HirokiTakamura</title>
+    <meta name="description" content="マーク・フォースター著『マニャーナの法則』の読書メモ。翌日に回すことで優先順位を見直す技術、クローズリストとオープンリストの使い分け、真の仕事と忙しいだけの仕事の区別など、効率的な時間管理術を解説。">
+    <meta name="keywords" content="マニャーナの法則, 時間管理, 仕事術, 生産性, タスク管理, 効率化, マーク・フォースター, 読書メモ">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://infohiroki.com/html-files/2024-06-15-book-manana-principle-memo.html">
+    <meta property="og:title" content="本「仕事に追われない仕事術 マニャーナの法則 完全版」メモ">
+    <meta property="og:description" content="マーク・フォースター著『マニャーナの法則』の読書メモ。翌日に回すことで優先順位を見直す技術、効率的な時間管理術を解説。">
+    <meta property="og:image" content="https://infohiroki.com/images/note/manana-principle-cover.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://infohiroki.com/html-files/2024-06-15-book-manana-principle-memo.html">
+    <meta property="twitter:title" content="本「仕事に追われない仕事術 マニャーナの法則 完全版」メモ">
+    <meta property="twitter:description" content="マーク・フォースター著『マニャーナの法則』の読書メモ。翌日に回すことで優先順位を見直す技術、効率的な時間管理術を解説。">
+    <meta property="twitter:image" content="https://infohiroki.com/images/note/manana-principle-cover.png">
+    
+    <link rel="canonical" href="https://infohiroki.com/html-files/2024-06-15-book-manana-principle-memo.html">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+        :root {
+            --accent-color: #27ae60;
+            --accent-light: rgba(39, 174, 96, 0.1);
+            --accent-shadow: rgba(39, 174, 96, 0.3);
+        }
+        
+        .article-header {
+            background: linear-gradient(135deg, var(--accent-light) 0%, rgba(255, 255, 255, 0.8) 100%);
+            border: 2px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .article-header h1 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.9rem;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        .emoji-intro {
+            background: var(--accent-light);
+            border: 1px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        .glossary-section {
+            background: white;
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .glossary-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+        
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .glossary-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .glossary-item strong {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+        
+        .key-concept {
+            background: var(--accent-light);
+            border: 1px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .key-concept h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .principle-section {
+            background: #fff8e1;
+            border: 2px solid #ffa000;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .principle-section h3 {
+            color: #e65100;
+            margin-bottom: 1rem;
+        }
+        
+        .vs-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .vs-item {
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .vs-good {
+            background: #e8f5e8;
+            border: 2px solid var(--accent-color);
+        }
+        
+        .vs-bad {
+            background: #ffeaea;
+            border: 2px solid #e74c3c;
+        }
+        
+        .vs-good h4 {
+            color: var(--accent-color);
+        }
+        
+        .vs-bad h4 {
+            color: #e74c3c;
+        }
+        
+        .system-tips {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .system-tips h3 {
+            color: #1976d2;
+            margin-bottom: 1rem;
+        }
+        
+        .related-articles {
+            background: var(--accent-light);
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .related-articles h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .related-links {
+            display: grid;
+            gap: 15px;
+        }
+
+        .related-link {
+            display: block;
+            padding: 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .related-link:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px var(--accent-shadow);
+            transform: translateY(-2px);
+        }
+
+        .related-link h4 {
+            color: var(--accent-color);
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+        }
+
+        .related-link p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 768px) {
+            .vs-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .glossary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="article-nav article-nav-top">
+        <a href="../blog.html" class="back-link">← ブログ一覧</a>
+    </nav>
+
+    <main class="container">
+        <article>
+            <div class="article-header">
+                <h1>本「仕事に追われない仕事術 マニャーナの法則 完全版」メモ</h1>
+                <div class="article-meta">
+                    <time datetime="2024-06-15">2024年6月15日</time> | 
+                    <span class="category">読書</span> | 
+                    <span class="category">時間管理</span> | 
+                    <span class="author">マーク・フォースター (著)</span>
+                </div>
+                <p>マーク・フォースター著『マニャーナの法則』の読書メモ。翌日に回すことで優先順位を見直す技術と効率的な時間管理術を解説します。</p>
+            </div>
+
+            <div class="emoji-intro">
+                <p>✨自分の状況に合っているところだけまとめるよ🐳🐘🐙🌱✨</p>
+                <p>全体を知りたいという方は要約じゃなくて、全文読むことをおすすめ📚</p>
+                <p>価値のある本だよ👍</p>
+            </div>
+
+            <section>
+                <p>自分は業務効率化とかシステムを組んだり、社員教育？セルフコーチングの共有みたいなことをしているよ👨‍💼💡</p>
+                
+                <p>そこで収斂されたNotionのページ構成とこの本の内容はかなり近いものだったから、最初からこれを読みたかったと思うな📖✨</p>
+                
+                <p>まあ、その頃読んでもわからないんだろうけどね😅</p>
+                
+                <p>とはいえ全体の流れは必要なので、用語集的なの置いとくよ📚👇</p>
+            </section>
+
+            <div class="glossary-section">
+                <h3>用語集📖</h3>
+                
+                <div class="glossary-grid">
+                    <div class="glossary-item">
+                        <strong>クローズ・リスト</strong>: 追加できない制限付きのリスト🔒
+                    </div>
+                    <div class="glossary-item">
+                        <strong>オープン・リスト</strong>: 項目を追加できる無制限のリスト🔓
+                    </div>
+                    <div class="glossary-item">
+                        <strong>チェック・リスト</strong>: 手順や作業の順序を並べたリスト✅
+                    </div>
+                    <div class="glossary-item">
+                        <strong>コミットメント</strong>: 自分や周囲に宣言することで実行する仕事📢
+                    </div>
+                    <div class="glossary-item">
+                        <strong>本当の仕事</strong>: 事業において利益や成果を生み出す仕事💼
+                    </div>
+                    <div class="glossary-item">
+                        <strong>忙しいだけの仕事</strong>: 作業的で生産性の低い仕事📋
+                    </div>
+                    <div class="glossary-item">
+                        <strong>バッファー・ゾーン</strong>: 余裕を持たせるための時間や空間⏳
+                    </div>
+                    <div class="glossary-item">
+                        <strong>マニャーナの法則</strong>: 翌日に回すことで優先順位を見直す技術📅
+                    </div>
+                    <div class="glossary-item">
+                        <strong>タスク</strong>: 仕事の単位、細かく分解して管理📝
+                    </div>
+                    <div class="glossary-item">
+                        <strong>プロジェクト</strong>: 複数のタスクの集合体、特定の目標を持つ📊
+                    </div>
+                    <div class="glossary-item">
+                        <strong>タスク・ダイアリー</strong>: 毎日のタスクを日記形式で管理📔
+                    </div>
+                    <div class="glossary-item">
+                        <strong>デイリー・タスク</strong>: 毎日発生する仕事や頻出する仕事📆
+                    </div>
+                    <div class="glossary-item">
+                        <strong>ファースト・タスク</strong>: 定期的に発生する長期的な仕事🔄
+                    </div>
+                    <div class="glossary-item">
+                        <strong>TODOリスト</strong>: すべき仕事をリスト化、すぐに拡張可能📋
+                    </div>
+                    <div class="glossary-item">
+                        <strong>WILL DOリスト</strong>: 具体的な仕事を含む、将来やるべきリスト🗂️
+                    </div>
+                    <div class="glossary-item">
+                        <strong>ダッシュ法</strong>: 短時間集中して仕事を進める方法💨
+                    </div>
+                    <div class="glossary-item">
+                        <strong>期限の効果</strong>: 締め切りを設けて仕事の効率を高める⏰
+                    </div>
+                    <div class="glossary-item">
+                        <strong>ラベリング</strong>: 思考やアイデアに名前をつけて管理🏷️
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-concept">
+                <h3>マニャーナの法則の核心</h3>
+                <p>「今すぐやる」のではなく「明日やる」ことで、真の優先順位を見極める時間管理技術です。緊急性に惑わされず、重要性を基準に仕事を選択できるようになります。</p>
+            </div>
+
+            <div class="principle-section">
+                <h3>仕事の分類：本当の仕事 vs 忙しいだけの仕事</h3>
+                
+                <div class="vs-comparison">
+                    <div class="vs-item vs-good">
+                        <h4>本当の仕事💼</h4>
+                        <ul style="text-align: left;">
+                            <li>事業に利益をもたらす</li>
+                            <li>長期的価値を創造</li>
+                            <li>創造性や判断力が必要</li>
+                            <li>成長や改善につながる</li>
+                        </ul>
+                    </div>
+                    <div class="vs-item vs-bad">
+                        <h4>忙しいだけの仕事📋</h4>
+                        <ul style="text-align: left;">
+                            <li>作業的で単純</li>
+                            <li>緊急だが重要でない</li>
+                            <li>時間を消費するだけ</li>
+                            <li>付加価値を生まない</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="system-tips">
+                <h3>システム設計の重要性🛠️</h3>
+                <p><strong>大事なのはシステムを作り直し続けること</strong></p>
+                
+                <h4>効果的なシステム運用のポイント：</h4>
+                <ul>
+                    <li><strong>定期的な見直し：</strong> システムが現状に合っているか定期チェック</li>
+                    <li><strong>柔軟性の確保：</strong> 状況に応じてルールを調整</li>
+                    <li><strong>シンプルな構造：</strong> 複雑すぎるシステムは続かない</li>
+                    <li><strong>習慣化の重視：</strong> 無意識でもできるレベルまで落とし込む</li>
+                    <li><strong>継続的改善：</strong> 小さな改善を積み重ねる</li>
+                </ul>
+            </div>
+
+            <section>
+                <h2>実践的な活用方法</h2>
+                
+                <h3>1. クローズリストの活用</h3>
+                <p>その日にやることを制限し、新しいタスクは翌日以降に回す。これにより集中力を維持し、完了感を得られます。</p>
+                
+                <h3>2. バッファーゾーンの設置</h3>
+                <p>予定の間に余裕時間を設けることで、突発的な業務や遅延に対応できます。</p>
+                
+                <h3>3. ダッシュ法の実践</h3>
+                <p>短時間集中して一つのタスクに取り組み、途中で他の仕事に気を取られないようにします。</p>
+            </section>
+
+            <section>
+                <h2>Notionとの親和性</h2>
+                <p>著者が実践していた業務効率化とNotionのページ構成には共通点が多く、以下の要素で実装できます：</p>
+                
+                <ul>
+                    <li><strong>データベース活用：</strong> タスクとプロジェクトの関係性を管理</li>
+                    <li><strong>ビュー機能：</strong> 日別、優先度別、プロジェクト別の表示切り替え</li>
+                    <li><strong>テンプレート：</strong> 定型的なタスクやプロジェクトの雛形作成</li>
+                    <li><strong>自動化：</strong> 繰り返しタスクの自動生成</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>まとめ</h2>
+                <p>『マニャーナの法則』は、現代のタスク管理ツールとの親和性も高く、実践的な時間管理術を提供してくれる価値ある一冊です。特に「システムを作り直し続ける」という考え方は、変化の激しい現代の仕事環境において重要な指針となります。</p>
+            </section>
+
+            <div class="related-articles">
+                <h3>関連記事</h3>
+                <div class="related-links">
+                    <a href="2024-03-28-notion-subscription-management-template.html" class="related-link">
+                        <h4>Notion「かんたんサブスク管理」無料配布！</h4>
+                        <p>Notionを使ったシンプルで効果的なサブスク管理テンプレートの活用方法</p>
+                    </a>
+                    <a href="2024-05-17-book-reflection-technique-memo.html" class="related-link">
+                        <h4>本『リフレクション(REFLECTION)』メモ</h4>
+                        <p>意見・経験・感情・価値観のフレームワークを使った内省技術で自己成長を加速</p>
+                    </a>
+                    <a href="2024-06-05-notion-shortcuts-guide.html" class="related-link">
+                        <h4>Notionまずはショートカット🚀</h4>
+                        <p>Notionの効率的なショートカット操作で作業効率を大幅アップ</p>
+                    </a>
+                    <a href="2025-03-30-habit-systems-thinking.html" class="related-link">
+                        <h4>習慣の集合体（システム思考）が目標達成よりも習慣形成に効果的である</h4>
+                        <p>システム思考による習慣形成アプローチの効果性と実践方法</p>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <nav class="article-nav article-nav-bottom">
+        <a href="../blog.html" class="back-to-list">他の記事を読む</a>
+    </nav>
+</body>
+</html>
