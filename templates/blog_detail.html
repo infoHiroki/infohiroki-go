@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{.post.Description}}">
+    <title>{{.title}}</title>
+
+    <!-- OGPタグ -->
+    <meta property="og:title" content="{{.post.Title}} | infoHiroki">
+    <meta property="og:description" content="{{.post.Description}}">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="infoHiroki">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitterカード -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{.post.Title}} | infoHiroki">
+    <meta name="twitter:description" content="{{.post.Description}}">
+
+    <!-- ファビコン -->
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        /* ブログ詳細固有のスタイル */
+        .blog-detail-header {
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .blog-detail-title {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text);
+        }
+
+        .blog-detail-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            color: var(--color-text-light);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .blog-detail-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .blog-detail-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .blog-detail-action {
+            padding: var(--spacing-xs) var(--spacing-md);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--color-text);
+            font-size: var(--font-size-sm);
+            transition: var(--transition);
+        }
+
+        .blog-detail-action:hover {
+            background-color: var(--color-accent);
+            color: var(--color-background);
+            border-color: var(--color-accent);
+        }
+
+        .blog-detail-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--color-background);
+            padding: var(--spacing-xl);
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+        }
+
+        /* 既存HTMLコンテンツのスタイル調整 */
+        .blog-detail-content h1,
+        .blog-detail-content h2,
+        .blog-detail-content h3,
+        .blog-detail-content h4,
+        .blog-detail-content h5,
+        .blog-detail-content h6 {
+            color: var(--color-text);
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .blog-detail-content h1 { font-size: var(--font-size-2xl); }
+        .blog-detail-content h2 { font-size: var(--font-size-xl); }
+        .blog-detail-content h3 { font-size: var(--font-size-lg); }
+
+        .blog-detail-content p {
+            line-height: var(--line-height-base);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .blog-detail-content ul,
+        .blog-detail-content ol {
+            margin-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .blog-detail-content li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .blog-detail-content pre {
+            background-color: #f6f8fa;
+            padding: var(--spacing-md);
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .blog-detail-content code {
+            background-color: rgba(27,31,35,0.05);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 85%;
+        }
+
+        .blog-detail-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .blog-detail-content blockquote {
+            border-left: 4px solid var(--color-border);
+            padding-left: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            color: var(--color-text-light);
+        }
+
+        .blog-detail-content img {
+            max-width: 100%;
+            height: auto;
+            margin: var(--spacing-md) 0;
+            border-radius: 6px;
+        }
+
+        .blog-detail-content a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .blog-detail-content a:hover {
+            text-decoration: underline;
+        }
+
+        .blog-detail-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .blog-detail-nav-button {
+            padding: var(--spacing-md) var(--spacing-lg);
+            background-color: var(--color-accent);
+            color: var(--color-background);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .blog-detail-nav-button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .blog-detail-content {
+                padding: var(--spacing-lg);
+                margin: 0 var(--spacing-md);
+            }
+
+            .blog-detail-title {
+                font-size: var(--font-size-2xl);
+            }
+
+            .blog-detail-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-sm);
+            }
+
+            .blog-detail-actions {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-layout">
+        <!-- モバイル用ヘッダー -->
+        <header class="mobile-header">
+            <div class="mobile-header-content">
+                <a href="/" class="mobile-logo">
+                    <img src="/images/logo.svg" alt="infoHiroki Logo" width="36" height="36">
+                    <span class="mobile-title">infoHiroki</span>
+                </a>
+                <button class="hamburger-button" aria-label="メニューを開く">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- デスクトップ用サイドバー / モバイル用オーバーレイメニュー -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="site-title">
+                    <div class="logo">
+                        <img src="/images/logo.svg" alt="infoHiroki Logo" width="36" height="36">
+                    </div>
+                    <div class="title-text">
+                        <span class="company-name">infoHiroki</span>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item {{if eq .page "home"}}active{{end}}">
+                        <a href="/" class="nav-link">ホーム</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "blog"}}active{{end}}">
+                        <a href="/blog" class="nav-link">ブログ</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "services"}}active{{end}}">
+                        <a href="/services" class="nav-link">サービス</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "products"}}active{{end}}">
+                        <a href="/products" class="nav-link">開発製品</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "results"}}active{{end}}">
+                        <a href="/results" class="nav-link">実績</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "about"}}active{{end}}">
+                        <a href="/about" class="nav-link">スキルスタック</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "faq"}}active{{end}}">
+                        <a href="/faq" class="nav-link">FAQ</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "contact"}}active{{end}}">
+                        <a href="/contact" class="nav-link">お問い合わせ</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- モバイル用オーバーレイ -->
+        <div class="mobile-overlay"></div>
+
+        <div class="main-wrapper">
+            <main class="site-main">
+                <div class="container">
+                    <!-- ブログ記事ヘッダー -->
+                    <div class="blog-detail-header">
+                        <h1 class="blog-detail-title">{{.post.Title}}</h1>
+                        <div class="blog-detail-meta">
+                            {{if .post.Icon}}
+                            <img src="{{.post.Icon}}" alt="{{.post.Title}}" class="blog-detail-icon">
+                            {{end}}
+                            <span>{{.post.CreatedDate.Format "2006年01月02日"}}</span>
+                            <span>ID: {{.post.ID}}</span>
+                        </div>
+                        <div class="blog-detail-actions">
+                            <a href="/blog" class="blog-detail-action">🏠 一覧に戻る</a>
+                            <a href="/blog/{{.post.Slug}}.md" class="blog-detail-action">📝 Markdown</a>
+                            <a href="/blog/{{.post.Slug}}.json" class="blog-detail-action">🔗 JSON</a>
+                        </div>
+                    </div>
+
+                    <!-- ブログ記事コンテンツ -->
+                    <article class="blog-detail-content">
+                        {{.html}}
+                    </article>
+
+                    <!-- ナビゲーション -->
+                    <div class="blog-detail-nav">
+                        <a href="/blog" class="blog-detail-nav-button">← ブログ一覧に戻る</a>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="minimal-footer">
+                <div class="container">
+                    <p>© 2022 infoHiroki. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="infoHirokiのブログ - 技術記事とアーカイブ">
+    <title>{{.title}}</title>
+
+    <!-- OGPタグ -->
+    <meta property="og:title" content="ブログ | infoHiroki">
+    <meta property="og:description" content="infoHirokiのブログ - 技術記事とアーカイブ">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="infoHiroki">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitterカード -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="ブログ | infoHiroki">
+    <meta name="twitter:description" content="infoHirokiのブログ - 技術記事とアーカイブ">
+
+    <!-- ファビコン -->
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        /* ブログ固有のスタイル - infoHirokiデザインシステムに統一 */
+        .search-section {
+            background-color: var(--color-background);
+            padding: var(--spacing-xl) 0;
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            align-items: center;
+        }
+
+        .search-input-wrapper {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            background-color: var(--color-background);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: none;
+            font-size: var(--font-size-base);
+            background: transparent;
+        }
+
+        .search-input:focus {
+            outline: none;
+        }
+
+        .clear-button {
+            background: none;
+            border: none;
+            padding: var(--spacing-sm);
+            cursor: pointer;
+            color: var(--color-text-light);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            padding: var(--spacing-xl) 0;
+        }
+
+        .blog-card {
+            background-color: var(--color-background);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            padding: var(--spacing-lg);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .blog-card-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .blog-card-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .blog-card-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin: 0;
+            color: var(--color-text);
+        }
+
+        .blog-card-description {
+            color: var(--color-text-light);
+            font-size: var(--font-size-sm);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .blog-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: var(--font-size-xs);
+            color: var(--color-text-light);
+        }
+
+        .blog-card-tags {
+            display: flex;
+            gap: var(--spacing-xs);
+            flex-wrap: wrap;
+        }
+
+        .blog-tag {
+            background-color: var(--color-border);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: var(--font-size-xs);
+        }
+
+        .blog-card-date {
+            white-space: nowrap;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: var(--spacing-xxl);
+            color: var(--color-text-light);
+        }
+
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+
+            .search-container {
+                padding: 0 var(--spacing-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-layout">
+        <!-- モバイル用ヘッダー -->
+        <header class="mobile-header">
+            <div class="mobile-header-content">
+                <a href="/" class="mobile-logo">
+                    <img src="/images/logo.svg" alt="infoHiroki Logo" width="36" height="36">
+                    <span class="mobile-title">infoHiroki</span>
+                </a>
+                <button class="hamburger-button" aria-label="メニューを開く">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- デスクトップ用サイドバー / モバイル用オーバーレイメニュー -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="site-title">
+                    <div class="logo">
+                        <img src="/images/logo.svg" alt="infoHiroki Logo" width="36" height="36">
+                    </div>
+                    <div class="title-text">
+                        <span class="company-name">infoHiroki</span>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item {{if eq .page "home"}}active{{end}}">
+                        <a href="/" class="nav-link">ホーム</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "blog"}}active{{end}}">
+                        <a href="/blog" class="nav-link">ブログ</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "services"}}active{{end}}">
+                        <a href="/services" class="nav-link">サービス</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "products"}}active{{end}}">
+                        <a href="/products" class="nav-link">開発製品</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "results"}}active{{end}}">
+                        <a href="/results" class="nav-link">実績</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "about"}}active{{end}}">
+                        <a href="/about" class="nav-link">スキルスタック</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "faq"}}active{{end}}">
+                        <a href="/faq" class="nav-link">FAQ</a>
+                    </li>
+                    <li class="nav-item {{if eq .page "contact"}}active{{end}}">
+                        <a href="/contact" class="nav-link">お問い合わせ</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- モバイル用オーバーレイ -->
+        <div class="mobile-overlay"></div>
+
+        <div class="main-wrapper">
+            <main class="site-main">
+                <!-- 検索セクション -->
+                <section class="search-section">
+                    <div class="search-container">
+                        <h1>ブログ記事検索</h1>
+                        <div class="search-input-wrapper">
+                            <input
+                                type="text"
+                                class="search-input"
+                                id="searchInput"
+                                placeholder="記事を検索..."
+                                value="{{.query}}"
+                            >
+                            <button class="clear-button" id="clearButton" type="button">✕</button>
+                        </div>
+                        <p>技術記事やアーカイブを検索できます</p>
+                    </div>
+                </section>
+
+                <!-- ブログ記事一覧 -->
+                <section class="blog-content">
+                    <div class="container">
+                        {{if .posts}}
+                        <div class="blog-grid" id="blogGrid">
+                            {{range .posts}}
+                            <article class="blog-card" onclick="window.location.href='/blog/{{.Slug}}'">
+                                <div class="blog-card-header">
+                                    {{if .Icon}}
+                                    <img src="{{.Icon}}" alt="{{.Title}}" class="blog-card-icon">
+                                    {{end}}
+                                    <h2 class="blog-card-title">{{.Title}}</h2>
+                                </div>
+                                <p class="blog-card-description">{{.Description}}</p>
+                                <div class="blog-card-meta">
+                                    <div class="blog-card-tags">
+                                        <!-- タグ表示は後で実装 -->
+                                    </div>
+                                    <span class="blog-card-date">{{.CreatedDate.Format "2006-01-02"}}</span>
+                                </div>
+                            </article>
+                            {{end}}
+                        </div>
+                        {{else}}
+                        <div class="no-results">
+                            <h3>記事が見つかりませんでした</h3>
+                            <p>検索条件を変更してお試しください。</p>
+                        </div>
+                        {{end}}
+                    </div>
+                </section>
+            </main>
+
+            <footer class="minimal-footer">
+                <div class="container">
+                    <p>© 2022 infoHiroki. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script>
+        // ブログ検索機能
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const clearButton = document.getElementById('clearButton');
+
+            // 検索機能
+            let searchTimeout;
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    const query = this.value.trim();
+                    if (query.length > 0) {
+                        window.location.href = `/blog?q=${encodeURIComponent(query)}`;
+                    } else {
+                        window.location.href = '/blog';
+                    }
+                }, 500);
+            });
+
+            // クリアボタン
+            clearButton.addEventListener('click', function() {
+                searchInput.value = '';
+                window.location.href = '/blog';
+            });
+
+            // Enterキーで検索
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    clearTimeout(searchTimeout);
+                    const query = this.value.trim();
+                    if (query.length > 0) {
+                        window.location.href = `/blog?q=${encodeURIComponent(query)}`;
+                    } else {
+                        window.location.href = '/blog';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

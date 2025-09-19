@@ -4,10 +4,17 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"html/template"
+	"io/ioutil"
+	"log"
 	"net/http"
+	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/sqlite"
@@ -16,6 +23,20 @@ import (
 )
 
 var db *gorm.DB
+
+type FileMetadata struct {
+	ID          string   `json:"id"`
+	Path        string   `json:"path"`
+	Title       string   `json:"title"`
+	Description string   `json:"description"`
+	Icon        string   `json:"icon"`
+	Tags        []string `json:"tags"`
+	Created     string   `json:"created"`
+}
+
+type FilesJSON struct {
+	Files []FileMetadata `json:"files"`
+}
 
 func main() {
 	// データベース接続
@@ -40,7 +61,7 @@ func main() {
 	r.Static("/images", "./static/images")
 
 	// テンプレート読み込み
-	r.LoadHTMLGlob("templates/*")
+	r.LoadHTMLGlob("templates/*.html")
 
 	// Routes - infoHirokiサイト構造
 	r.GET("/", homePage)
@@ -52,6 +73,12 @@ func main() {
 	r.GET("/about", aboutPage)
 	r.GET("/faq", faqPage)
 	r.GET("/contact", contactPage)
+
+	// 管理画面
+	r.GET("/admin", adminDashboard)
+	r.GET("/admin/posts", adminPostList)
+	r.GET("/admin/posts/new", adminNewPost)
+	r.POST("/admin/posts", adminCreatePost)
 
 	// API endpoints
 	r.GET("/api/search", searchBlogPosts)
@@ -222,4 +249,220 @@ func searchBlogPosts(c *gin.Context) {
 		"total": len(posts),
 		"query": query,
 	})
+}
+
+// データベース初期化・マイグレーション機能
+func runMigration() {
+	fmt.Println("🔄 データベース初期化中...")
+
+	// 固定ページデータ投入
+	seedPages()
+
+	// ブログ記事データ投入
+	seedBlogPosts()
+
+	fmt.Println("✅ データベース初期化完了！")
+}
+
+func seedPages() {
+	pages := []models.Page{
+		{
+			Slug:            "home",
+			Title:           "infoHiroki - 福岡の生成AI導入支援専門家",
+			Content:         "ホームページコンテンツ",
+			Template:        "home",
+			MetaDescription: "福岡・九州の企業向け生成AI導入支援 - ChatGPT・Claude・Whisperで業務効率化を実現",
+		},
+		{
+			Slug:            "services",
+			Title:           "生成AI導入支援サービス",
+			Content:         "サービスページコンテンツ",
+			Template:        "services",
+			MetaDescription: "福岡・九州企業向け生成AI導入支援サービス - ChatGPT・Claude・Whisper活用で業務効率化",
+		},
+		{
+			Slug:            "products",
+			Title:           "開発製品",
+			Content:         "開発製品ページコンテンツ",
+			Template:        "products",
+			MetaDescription: "infoHirokiが開発した製品・ツール・アプリケーション一覧",
+		},
+		{
+			Slug:            "results",
+			Title:           "実績",
+			Content:         "実績ページコンテンツ",
+			Template:        "results",
+			MetaDescription: "infoHirokiの開発実績・導入事例・お客様の声",
+		},
+		{
+			Slug:            "about",
+			Title:           "スキルスタック",
+			Content:         "スキルスタックページコンテンツ",
+			Template:        "about",
+			MetaDescription: "infoHirokiの技術スタック・経歴・スキル",
+		},
+		{
+			Slug:            "faq",
+			Title:           "FAQ",
+			Content:         "FAQページコンテンツ",
+			Template:        "faq",
+			MetaDescription: "よくある質問と回答 - infoHirokiサービスについて",
+		},
+		{
+			Slug:            "contact",
+			Title:           "お問い合わせ",
+			Content:         "お問い合わせページコンテンツ",
+			Template:        "contact",
+			MetaDescription: "infoHirokiへのお問い合わせ・ご相談はこちら",
+		},
+	}
+
+	for _, page := range pages {
+		var existingPage models.Page
+		if err := db.Where("slug = ?", page.Slug).First(&existingPage).Error; err != nil {
+			if err := db.Create(&page).Error; err != nil {
+				log.Printf("ページ作成エラー %s: %v", page.Slug, err)
+			} else {
+				fmt.Printf("✅ ページ作成: %s\n", page.Title)
+			}
+		}
+	}
+}
+
+func seedBlogPosts() {
+	// files.jsonを読み込み
+	jsonData, err := ioutil.ReadFile("files.json")
+	if err != nil {
+		log.Printf("files.json読み込みエラー: %v", err)
+		return
+	}
+
+	var filesData FilesJSON
+	if err := json.Unmarshal(jsonData, &filesData); err != nil {
+		log.Printf("JSON解析エラー: %v", err)
+		return
+	}
+
+	fmt.Printf("📚 %d件のブログ記事を処理中...\n", len(filesData.Files))
+
+	count := 0
+	for _, file := range filesData.Files {
+		// 全記事を処理（制限を削除）
+
+		// HTMLファイルパス
+		htmlPath := filepath.Join("markdown", file.Path)
+
+		// HTMLファイルを読み込み
+		htmlContent, err := ioutil.ReadFile(htmlPath)
+		if err != nil {
+			log.Printf("HTMLファイル読み込みエラー %s: %v", file.Path, err)
+			continue
+		}
+
+		// HTMLからコンテンツを簡単に抽出
+		content := extractContentFromHTML(string(htmlContent))
+
+		// 作成日をパース
+		createdDate, err := time.Parse("2006-01-02", file.Created)
+		if err != nil {
+			createdDate = time.Now()
+		}
+
+		// タグをJSON文字列に変換
+		tagsJSON, _ := json.Marshal(file.Tags)
+
+		// スラッグ生成
+		slug := strings.TrimSuffix(file.Path, ".html")
+
+		blogPost := models.BlogPost{
+			Slug:        slug,
+			Title:       file.Title,
+			Content:     content,
+			Description: file.Description,
+			Tags:        string(tagsJSON),
+			Icon:        file.Icon,
+			CreatedDate: createdDate,
+			Published:   true,
+		}
+
+		// 既存記事チェック
+		var existingPost models.BlogPost
+		if err := db.Where("slug = ?", blogPost.Slug).First(&existingPost).Error; err != nil {
+			if err := db.Create(&blogPost).Error; err != nil {
+				log.Printf("記事作成エラー %s: %v", blogPost.Slug, err)
+			} else {
+				fmt.Printf("✅ 記事作成: %s\n", blogPost.Title)
+				count++
+			}
+		}
+	}
+}
+
+// HTMLからコンテンツを簡単に抽出
+func extractContentFromHTML(html string) string {
+	// <body>タグ内のコンテンツを取得
+	bodyRegex := regexp.MustCompile(`<body[^>]*>(.*?)</body>`)
+	matches := bodyRegex.FindStringSubmatch(html)
+	if len(matches) > 1 {
+		return matches[1]
+	}
+	return html
+}
+
+// 管理画面ダッシュボード
+func adminDashboard(c *gin.Context) {
+	var postCount int64
+	db.Model(&models.BlogPost{}).Count(&postCount)
+
+	c.HTML(http.StatusOK, "admin_dashboard.html", gin.H{
+		"title": "管理画面 | infoHiroki",
+		"postCount": postCount,
+	})
+}
+
+// 管理画面 - 投稿一覧
+func adminPostList(c *gin.Context) {
+	var posts []models.BlogPost
+	db.Order("created_date DESC").Find(&posts)
+
+	c.HTML(http.StatusOK, "admin_posts.html", gin.H{
+		"title": "投稿管理 | infoHiroki",
+		"posts": posts,
+	})
+}
+
+// 管理画面 - 新規投稿画面
+func adminNewPost(c *gin.Context) {
+	c.HTML(http.StatusOK, "admin_new_post.html", gin.H{
+		"title": "新規投稿 | infoHiroki",
+	})
+}
+
+// 管理画面 - 投稿作成
+func adminCreatePost(c *gin.Context) {
+	title := c.PostForm("title")
+	content := c.PostForm("content")
+	description := c.PostForm("description")
+	tags := c.PostForm("tags")
+
+	// スラッグ生成（日付 + タイトル）
+	now := time.Now()
+	slug := fmt.Sprintf("%s-%s", now.Format("2006-01-02"), strings.ToLower(strings.ReplaceAll(title, " ", "-")))
+
+	post := models.BlogPost{
+		Slug:        slug,
+		Title:       title,
+		Content:     content,
+		Description: description,
+		Tags:        tags,
+		CreatedDate: now,
+		Published:   true,
+	}
+
+	if err := db.Create(&post).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.Redirect(http.StatusFound, "/admin/posts")
 }
