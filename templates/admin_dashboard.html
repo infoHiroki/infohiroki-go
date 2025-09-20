@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{.title}}</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <style>
+{{template "base" .}}
+
+{{define "head_extra"}}
+<style>
         .admin-container {
             max-width: 800px;
             margin: 2rem auto;
@@ -47,9 +43,10 @@
             font-weight: bold;
             color: #007bff;
         }
-    </style>
-</head>
-<body>
+</style>
+{{end}}
+
+{{define "content"}}
     <div class="admin-container">
         <h1>管理画面</h1>
 
@@ -80,5 +77,4 @@
             <a href="/blog" style="background: #17a2b8; color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 4px;">ブログを見る</a>
         </div>
     </div>
-</body>
-</html>
+{{end}}

@@ -3,30 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="infoHirokiの開発実績・導入事例・お客様の声">
+    <meta name="description" content="infohirokiの生成AI導入実績 - 桜十字病院のWhisper活用事例など福岡・九州企業での成果">
     <title>{{.title}}</title>
-
+    
     <!-- OGPタグ -->
-    <meta property="og:title" content="実績 | infoHiroki">
-    <meta property="og:description" content="infoHirokiの開発実績・導入事例・お客様の声">
+    <meta property="og:title" content="生成AI導入実績 | infohiroki">
+    <meta property="og:description" content="infohirokiの生成AI導入実績 - 桜十字病院のWhisper活用事例など福岡・九州企業での成果">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="infoHiroki">
+    <meta property="og:site_name" content="infohiroki">
     <meta property="og:locale" content="ja_JP">
-
+    
     <!-- Twitterカード -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="サービス | infoHiroki">
-    <meta name="twitter:description" content="良い業務習慣をIT技術で定着させ、継続的な成果を実現します">
-
+    <meta name="twitter:title" content="実績 | infohiroki">
+    <meta name="twitter:description" content="infohirokiの導入実績をご紹介します">
+    
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
-
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
-
+    
     <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- 構造化データ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "実績",
+      "description": "infohirokiの導入実績をご紹介します",
+      "author": {
+        "@type": "Organization",
+        "name": "infohiroki"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "infohiroki",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "/images/logo.svg"
+        }
+      }
+    }
+    </script>
 </head>
 <body>
     <div class="site-layout">
@@ -57,31 +79,31 @@
                     </div>
                 </a>
             </div>
-
+            
             <nav class="sidebar-nav">
                 <ul class="nav-menu">
-                    <li class="nav-item {{if eq .page "home"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/" class="nav-link">ホーム</a>
                     </li>
-                    <li class="nav-item {{if eq .page "blog"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/blog" class="nav-link">ブログ</a>
                     </li>
-                    <li class="nav-item {{if eq .page "services"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/services" class="nav-link">サービス</a>
                     </li>
-                    <li class="nav-item {{if eq .page "products"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/products" class="nav-link">開発製品</a>
                     </li>
-                    <li class="nav-item {{if eq .page "results"}}active{{end}}">
+                    <li class="nav-item{{if eq .page "results"}} active{{end}}">
                         <a href="/results" class="nav-link">実績</a>
                     </li>
-                    <li class="nav-item {{if eq .page "about"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/about" class="nav-link">スキルスタック</a>
                     </li>
-                    <li class="nav-item {{if eq .page "faq"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/faq" class="nav-link">FAQ</a>
                     </li>
-                    <li class="nav-item {{if eq .page "contact"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/contact" class="nav-link">お問い合わせ</a>
                     </li>
                 </ul>
@@ -93,60 +115,138 @@
 
         <div class="main-wrapper">
             <main class="site-main">
-                <div class="container">
-                    <div class="content-header">
-                        <h1>実績</h1>
-                        <p class="content-description">infoHirokiの開発実績・導入事例・お客様の声をご紹介します。</p>
+                <div class="hero-sub">
+                    <div class="container">
+                        <h1 class="page-title">生成AI導入実績</h1>
                     </div>
+                </div>
 
-                    <div class="content-body">
-                        <!-- サービス内容はここに動的に挿入されます -->
-                        {{if .data.Content}}
-                        {{.data.Content}}
-                        {{else}}
-                        <!-- デフォルトのサービス内容 -->
-                        <section class="service-overview">
-                            <h2>サービス概要</h2>
-                            <p>生成AIを活用した業務効率化支援を行います。</p>
-                        </section>
-
-                        <section class="service-plans">
-                            <h2>サービスプラン</h2>
-                            <div class="plan-grid">
-                                <div class="plan-card featured">
-                                    <div class="plan-badge">おすすめ</div>
-                                    <h3>技術顧問サービス</h3>
-                                    <div class="plan-price">月額 5万円</div>
-                                    <ul class="plan-features">
-                                        <li>月次定例ミーティング</li>
-                                        <li>AI活用コンサルティング</li>
-                                        <li>技術的サポート</li>
-                                        <li>チーム研修</li>
-                                    </ul>
+                <div class="page-content">
+                    <div class="container">
+                        <section class="section">
+                            <div class="card-grid">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">桜十字福岡病院様</h3>
+                                        <p class="card-subtitle">医療業界 - Whisper活用議事録自動化システム導入</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>課題：</strong> 会議・打ち合わせの議事録作成に月40時間費やしていた</p>
+                                        <p><strong>解決策：</strong> OpenAI Whisper + <a href="/products#koemoji" style="color: #E73E8F; text-decoration: none;">Koemoji</a>システムによる音声認識自動化</p>
+                                        <p><strong>成果：</strong> 議事録作成80%時短・月15万円コスト削減・転記ミス0件達成</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">地域密着型歯科医院様</h3>
+                                        <p class="card-subtitle">医療業界 - Notion導入支援＋業務自動化</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>課題：</strong> 患者管理とメール対応業務の効率化</p>
+                                        <p><strong>解決策：</strong> Notion導入支援＋GAS活用でメール自動下書き機能</p>
+                                        <p><strong>成果：</strong> 継続案件として機能追加、業務フロー改善</p>
+                                    </div>
                                 </div>
 
-                                <div class="plan-card">
-                                    <h3>生成AI導入プロジェクト</h3>
-                                    <div class="plan-price">20〜500万円</div>
-                                    <ul class="plan-features">
-                                        <li>要件定義・設計</li>
-                                        <li>システム構築</li>
-                                        <li>導入支援</li>
-                                        <li>運用サポート</li>
-                                    </ul>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">訪問看護事業所様</h3>
+                                        <p class="card-subtitle">医療業界 - ITコンサル・デジタル化支援</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>課題：</strong> WebマーケティングとNotion活用</p>
+                                        <p><strong>解決策：</strong> WebマーケティングへのAI技術導入・Notion運用支援</p>
+                                        <p><strong>成果：</strong> ITコンサルによる業務デジタル化推進</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">建築事務所様</h3>
+                                        <p class="card-subtitle">建築業界 - 報告書業務効率化</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>課題：</strong> 点検調査データ管理と報告書作成</p>
+                                        <p><strong>解決策：</strong> マクロ自動化・ドローン解析結果効率化</p>
+                                        <p><strong>成果：</strong> 報告書作成時間短縮、データ管理システム構築</p>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">建設コンサル様</h3>
+                                        <p class="card-subtitle">建設業界 - 現場記録自動化</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>課題：</strong> 現場会議の記録業務効率化</p>
+                                        <p><strong>解決策：</strong> AI音声文字起こしシステム導入</p>
+                                        <p><strong>成果：</strong> 現場会議の記録業務を効率化</p>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">MEO対策企業様</h3>
+                                        <p class="card-subtitle">IT業界 - 大規模言語モデル活用支援</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>課題：</strong> コンテンツ制作の効率化とクオリティ向上</p>
+                                        <p><strong>解決策：</strong> ChatGPT・Claude活用フロー構築</p>
+                                        <p><strong>成果：</strong> 制作スピード3倍向上、品質の標準化</p>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">個人飲食店様</h3>
+                                        <p class="card-subtitle">飲食業界 - 業務管理システム統合</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>課題：</strong> 在庫管理・日報・売上管理の一元化</p>
+                                        <p><strong>解決策：</strong> 統合管理システム構築</p>
+                                        <p><strong>成果：</strong> 業務管理の効率化、データ一元化</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">制作会社様</h3>
+                                        <p class="card-subtitle">エンタメ業界 - Notion導入支援</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>課題：</strong> プロジェクト管理の統一とチーム連携</p>
+                                        <p><strong>解決策：</strong> Notionデータベース設計・運用支援</p>
+                                        <p><strong>成果：</strong> 情報共有効率化、プロジェクト進行の可視化</p>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">AI研修受講企業様</h3>
+                                        <p class="card-subtitle">企業研修 - AI活用スキル習得支援</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>課題：</strong> 実務に直結するAI活用スキル習得</p>
+                                        <p><strong>解決策：</strong> 4時間×4回の企業向けAI研修プログラム</p>
+                                        <p><strong>成果：</strong> 各業界でのAIツール導入・活用指導</p>
+                                    </div>
                                 </div>
                             </div>
                         </section>
 
-                        <section class="service-contact">
-                            <h2>お問い合わせ</h2>
-                            <p>サービスに関するご質問やご相談は、お気軽にお問い合わせください。</p>
-                            <div class="contact-buttons">
-                                <a href="/contact" class="button primary">お問い合わせフォーム</a>
-                                <a href="https://lin.ee/8ymv2Nw" target="_blank" rel="noopener noreferrer" class="button secondary">LINEで相談</a>
+
+                        
+                        <!-- LINE連絡セクション -->
+                        <section class="line-contact-footer">
+                            <div class="container">
+                                <h3>💬 導入についてご相談ください</h3>
+                                <p>同様の成果を実現するソリューションについて、LINEでお気軽にご相談ください</p>
+                                <a href="https://lin.ee/8ymv2Nw" target="_blank" rel="noopener noreferrer" class="line-button-footer">
+                                    LINEで相談する
+                                </a>
                             </div>
                         </section>
-                        {{end}}
                     </div>
                 </div>
             </main>
@@ -158,7 +258,7 @@
             </footer>
         </div>
     </div>
-
+    
     <script src="/js/main.js"></script>
 </body>
 </html>

@@ -3,30 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="infoHirokiが開発した製品・ツール・アプリケーション一覧">
+    <meta name="description" content="infohirokiが開発した業務効率化ツールをご紹介します">
     <title>{{.title}}</title>
-
+    
     <!-- OGPタグ -->
-    <meta property="og:title" content="開発製品 | infoHiroki">
-    <meta property="og:description" content="infoHirokiが開発した製品・ツール・アプリケーション一覧">
+    <meta property="og:title" content="開発製品紹介 | infohiroki">
+    <meta property="og:description" content="infohirokiが開発した業務効率化ツールをご紹介します">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="infoHiroki">
+    <meta property="og:site_name" content="infohiroki">
     <meta property="og:locale" content="ja_JP">
-
+    
     <!-- Twitterカード -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="サービス | infoHiroki">
-    <meta name="twitter:description" content="良い業務習慣をIT技術で定着させ、継続的な成果を実現します">
-
+    <meta name="twitter:title" content="開発製品紹介 | infohiroki">
+    <meta name="twitter:description" content="infohirokiが開発した業務効率化ツールをご紹介します">
+    
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
-
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
-
+    
     <link rel="stylesheet" href="/css/style.css">
+    
+    <style>
+        .card-links {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .link-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #E73E8F;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .link-button:hover {
+            background: #d12975;
+            color: white;
+        }
+    </style>
+    
+    <!-- 構造化データ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "開発製品紹介",
+      "description": "infohirokiが開発した業務効率化ツールをご紹介します",
+      "author": {
+        "@type": "Organization",
+        "name": "infohiroki"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "infohiroki",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "/images/logo.svg"
+        }
+      }
+    }
+    </script>
 </head>
 <body>
     <div class="site-layout">
@@ -57,31 +103,31 @@
                     </div>
                 </a>
             </div>
-
+            
             <nav class="sidebar-nav">
                 <ul class="nav-menu">
-                    <li class="nav-item {{if eq .page "home"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/" class="nav-link">ホーム</a>
                     </li>
-                    <li class="nav-item {{if eq .page "blog"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/blog" class="nav-link">ブログ</a>
                     </li>
-                    <li class="nav-item {{if eq .page "services"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/services" class="nav-link">サービス</a>
                     </li>
-                    <li class="nav-item {{if eq .page "products"}}active{{end}}">
+                    <li class="nav-item{{if eq .page "products"}} active{{end}}">
                         <a href="/products" class="nav-link">開発製品</a>
                     </li>
-                    <li class="nav-item {{if eq .page "results"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/results" class="nav-link">実績</a>
                     </li>
-                    <li class="nav-item {{if eq .page "about"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/about" class="nav-link">スキルスタック</a>
                     </li>
-                    <li class="nav-item {{if eq .page "faq"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/faq" class="nav-link">FAQ</a>
                     </li>
-                    <li class="nav-item {{if eq .page "contact"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/contact" class="nav-link">お問い合わせ</a>
                     </li>
                 </ul>
@@ -93,60 +139,114 @@
 
         <div class="main-wrapper">
             <main class="site-main">
-                <div class="container">
-                    <div class="content-header">
-                        <h1>開発製品</h1>
-                        <p class="content-description">infoHirokiが開発した製品・ツール・アプリケーション一覧です。</p>
+                <div class="hero-sub">
+                    <div class="container">
+                        <h1 class="page-title">開発製品紹介</h1>
                     </div>
+                </div>
 
-                    <div class="content-body">
-                        <!-- サービス内容はここに動的に挿入されます -->
-                        {{if .data.Content}}
-                        {{.data.Content}}
-                        {{else}}
-                        <!-- デフォルトのサービス内容 -->
-                        <section class="service-overview">
-                            <h2>サービス概要</h2>
-                            <p>生成AIを活用した業務効率化支援を行います。</p>
+                <div class="page-content">
+                    <div class="container">
+                        <section class="section">
+                            <p>infohirokiでは、実際の業務で使える効率化ツールを開発・提供しています。すべて実際の導入実績があり、現場で使われている製品です。</p>
                         </section>
 
-                        <section class="service-plans">
-                            <h2>サービスプラン</h2>
-                            <div class="plan-grid">
-                                <div class="plan-card featured">
-                                    <div class="plan-badge">おすすめ</div>
-                                    <h3>技術顧問サービス</h3>
-                                    <div class="plan-price">月額 5万円</div>
-                                    <ul class="plan-features">
-                                        <li>月次定例ミーティング</li>
-                                        <li>AI活用コンサルティング</li>
-                                        <li>技術的サポート</li>
-                                        <li>チーム研修</li>
-                                    </ul>
+                        <section class="section">
+                            <div class="card-grid">
+                                <div class="card" id="koemoji">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Koemoji-Go</h3>
+                                        <p class="card-subtitle">オールインワン音声処理システム</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>機能：</strong> 録音→文字起こし→AI要約の完全自動化</p>
+                                        <p><strong>特徴：</strong> GUI/TUI対応、フォルダ監視、シングルバイナリ配布</p>
+                                        <p><strong>技術：</strong> Go、Fyne、FasterWhisper、OpenAI API</p>
+                                        <p><strong>対応：</strong> Windows、macOS（Apple Silicon対応）</p>
+                                        <div class="card-links">
+                                            <a href="https://github.com/infoHiroki/KoeMoji-Go" target="_blank" class="link-button">GitHub (Go版)</a>
+                                            <a href="https://github.com/infoHiroki/KoeMojiAuto-cli" target="_blank" class="link-button">GitHub (Python版)</a>
+                                            <a href="https://koemoji.hmtc.jp/index.html" target="_blank" class="link-button">紹介ページ</a>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <div class="plan-card">
-                                    <h3>生成AI導入プロジェクト</h3>
-                                    <div class="plan-price">20〜500万円</div>
-                                    <ul class="plan-features">
-                                        <li>要件定義・設計</li>
-                                        <li>システム構築</li>
-                                        <li>導入支援</li>
-                                        <li>運用サポート</li>
-                                    </ul>
+                                
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">YouTube MojiCopy</h3>
+                                        <p class="card-subtitle">Chrome拡張機能</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>機能：</strong> プロンプト保存機能付きYouTube文字起こしコピー</p>
+                                        <p><strong>特徴：</strong> 「要約して」等のプロンプト＋文字起こしでLLMに直接ペースト可能</p>
+                                        <p><strong>技術：</strong> JavaScript、Chrome Extension API</p>
+                                        <p><strong>対応：</strong> ChatGPT、Claude等のLLMとの連携</p>
+                                        <div class="card-links">
+                                            <a href="https://chromewebstore.google.com/detail/youtubemojicopy/ejeafnfdgeipigfackgkhcgfbjiijbgf" target="_blank" class="link-button">Chrome Store</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">NotionTasker</h3>
+                                        <p class="card-subtitle">Notion連携Chrome拡張</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>機能：</strong> WebページからNotionへ直接タスク・メモ追加</p>
+                                        <p><strong>技術：</strong> JavaScript、Notion API、Chrome Extension</p>
+                                        <p><strong>対応：</strong> Notion データベースと連携</p>
+                                        <div class="card-links">
+                                            <a href="https://chromewebstore.google.com/detail/notiontasker/pkbibgfhgicoahenebmkhbklkffjdfea" target="_blank" class="link-button">Chrome Store</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Webサイト制作</h3>
+                                        <p class="card-subtitle">コーポレートサイト・LP制作</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>機能：</strong> 企業サイト、ランディングページ、ブログサイト</p>
+                                        <p><strong>特徴：</strong> レスポンシブ対応、SEO最適化、高速表示</p>
+                                        <p><strong>技術：</strong> HTML/CSS、JavaScript、静的サイトジェネレーター</p>
+                                        <p><strong>対応：</strong> お問い合わせフォーム、アナリティクス連携</p>
+                                        <div class="card-links">
+                                            <a href="/contact" class="link-button">お問い合わせ</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Webアプリケーション</h3>
+                                        <p class="card-subtitle">カスタム業務システム開発</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>機能：</strong> 顧客管理、在庫管理、予約システム等</p>
+                                        <p><strong>特徴：</strong> 完全カスタマイズ、データベース連携</p>
+                                        <p><strong>技術：</strong> JavaScript、React、Node.js、PostgreSQL</p>
+                                        <p><strong>対応：</strong> Vercel、Firebase等のクラウドデプロイ</p>
+                                        <div class="card-links">
+                                            <a href="/contact" class="link-button">お問い合わせ</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </section>
 
-                        <section class="service-contact">
-                            <h2>お問い合わせ</h2>
-                            <p>サービスに関するご質問やご相談は、お気軽にお問い合わせください。</p>
-                            <div class="contact-buttons">
-                                <a href="/contact" class="button primary">お問い合わせフォーム</a>
-                                <a href="https://lin.ee/8ymv2Nw" target="_blank" rel="noopener noreferrer" class="button secondary">LINEで相談</a>
+                        
+                        <!-- LINE連絡セクション -->
+                        <section class="line-contact-footer">
+                            <div class="container">
+                                <h3>💬 製品についてご相談ください</h3>
+                                <p>開発製品の導入や詳細について、LINEでお気軽にご相談ください</p>
+                                <a href="https://lin.ee/8ymv2Nw" target="_blank" rel="noopener noreferrer" class="line-button-footer">
+                                    LINEで相談する
+                                </a>
                             </div>
                         </section>
-                        {{end}}
                     </div>
                 </div>
             </main>
@@ -158,7 +258,7 @@
             </footer>
         </div>
     </div>
-
+    
     <script src="/js/main.js"></script>
 </body>
 </html>

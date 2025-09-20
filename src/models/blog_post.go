@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/json"
 	"time"
 	"gorm.io/gorm"
 )
@@ -28,5 +29,35 @@ func (BlogPost) TableName() string {
 
 // ToMarkdown converts the blog post to markdown format
 func (b *BlogPost) ToMarkdown() string {
-	return "# " + b.Title + "\n\n" + b.Content
+	result := "# " + b.Title + "\n\n"
+
+	if b.Description != "" {
+		result += b.Description + "\n\n"
+	}
+
+	result += "**作成日:** " + b.CreatedDate.Format("2006年01月02日") + "\n\n"
+
+	if b.Tags != "" {
+		result += "**タグ:** " + b.Tags + "\n\n"
+	}
+
+	result += "---\n\n" + b.Content
+
+	return result
+}
+
+// GetTagsSlice parses the JSON tags string and returns a slice of strings
+func (b *BlogPost) GetTagsSlice() []string {
+	if b.Tags == "" {
+		return []string{}
+	}
+
+	var tags []string
+	err := json.Unmarshal([]byte(b.Tags), &tags)
+	if err != nil {
+		// If JSON parsing fails, treat as a single tag
+		return []string{b.Tags}
+	}
+
+	return tags
 }

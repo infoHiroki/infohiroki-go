@@ -3,30 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="福岡・九州企業向け生成AI導入支援サービス - ChatGPT・Claude・Whisper活用で業務効率化">
+    <meta name="description" content="infohirokiへのお問い合わせはこちらから">
     <title>{{.title}}</title>
-
+    
     <!-- OGPタグ -->
-    <meta property="og:title" content="生成AI導入支援サービス | infoHiroki">
-    <meta property="og:description" content="福岡・九州企業向け生成AI導入支援サービス - ChatGPT・Claude・Whisper活用で業務効率化">
+    <meta property="og:title" content="お問い合わせ | infohiroki">
+    <meta property="og:description" content="infohirokiへのお問い合わせはこちらから">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="infoHiroki">
+    <meta property="og:site_name" content="infohiroki">
     <meta property="og:locale" content="ja_JP">
-
+    
     <!-- Twitterカード -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="サービス | infoHiroki">
-    <meta name="twitter:description" content="良い業務習慣をIT技術で定着させ、継続的な成果を実現します">
-
+    <meta name="twitter:title" content="お問い合わせ | infohiroki">
+    <meta name="twitter:description" content="infohirokiへのお問い合わせはこちらから">
+    
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
-
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
-
+    
     <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- 構造化データ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "お問い合わせ",
+      "description": "infohirokiへのお問い合わせはこちらから",
+      "author": {
+        "@type": "Organization",
+        "name": "infohiroki"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "infohiroki",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "/images/logo.svg"
+        }
+      }
+    }
+    </script>
 </head>
 <body>
     <div class="site-layout">
@@ -57,31 +79,31 @@
                     </div>
                 </a>
             </div>
-
+            
             <nav class="sidebar-nav">
                 <ul class="nav-menu">
-                    <li class="nav-item {{if eq .page "home"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/" class="nav-link">ホーム</a>
                     </li>
-                    <li class="nav-item {{if eq .page "blog"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/blog" class="nav-link">ブログ</a>
                     </li>
-                    <li class="nav-item {{if eq .page "services"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/services" class="nav-link">サービス</a>
                     </li>
-                    <li class="nav-item {{if eq .page "products"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/products" class="nav-link">開発製品</a>
                     </li>
-                    <li class="nav-item {{if eq .page "results"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/results" class="nav-link">実績</a>
                     </li>
-                    <li class="nav-item {{if eq .page "about"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/about" class="nav-link">スキルスタック</a>
                     </li>
-                    <li class="nav-item {{if eq .page "faq"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/faq" class="nav-link">FAQ</a>
                     </li>
-                    <li class="nav-item {{if eq .page "contact"}}active{{end}}">
+                    <li class="nav-item{{if eq .page "contact"}} active{{end}}">
                         <a href="/contact" class="nav-link">お問い合わせ</a>
                     </li>
                 </ul>
@@ -93,60 +115,75 @@
 
         <div class="main-wrapper">
             <main class="site-main">
-                <div class="container">
-                    <div class="content-header">
-                        <h1>生成AI導入支援サービス</h1>
-                        <p class="content-description">福岡・九州企業向けの生成AI導入支援サービスです。ChatGPT・Claude・Whisperを活用して業務効率化を実現します。</p>
+                <div class="hero-sub">
+                    <div class="container">
+                        <h1 class="page-title">お問い合わせ</h1>
                     </div>
+                </div>
 
-                    <div class="content-body">
-                        <!-- サービス内容はここに動的に挿入されます -->
-                        {{if .data.Content}}
-                        {{.data.Content}}
-                        {{else}}
-                        <!-- デフォルトのサービス内容 -->
-                        <section class="service-overview">
-                            <h2>サービス概要</h2>
-                            <p>生成AIを活用した業務効率化支援を行います。</p>
+                <div class="page-content">
+                    <div class="container">
+                        <section class="section">
+                            <p>infohirokiへのお問い合わせ方法をご案内いたします。お客様のご都合に合わせてお選びください。</p>
                         </section>
 
-                        <section class="service-plans">
-                            <h2>サービスプラン</h2>
-                            <div class="plan-grid">
-                                <div class="plan-card featured">
-                                    <div class="plan-badge">おすすめ</div>
-                                    <h3>技術顧問サービス</h3>
-                                    <div class="plan-price">月額 5万円</div>
-                                    <ul class="plan-features">
-                                        <li>月次定例ミーティング</li>
-                                        <li>AI活用コンサルティング</li>
-                                        <li>技術的サポート</li>
-                                        <li>チーム研修</li>
+                        <section class="section">
+                            <div class="line-contact">
+                                <h2>🔥 推奨：LINEでお問い合わせ</h2>
+                                <p><strong>最も迅速で確実</strong>にご対応できます。以下のボタンからLINE公式アカウントを友だち追加して、お気軽にメッセージをお送りください。</p>
+                                
+                                <div class="contact-benefits">
+                                    <h3>LINEでお問い合わせのメリット</h3>
+                                    <ul>
+                                        <li>✅ <strong>即座に対応</strong> - リアルタイムでやり取り可能</li>
+                                        <li>✅ <strong>気軽に相談</strong> - チャット感覚で質問できます</li>
+                                        <li>✅ <strong>ファイル共有</strong> - 画像や資料も簡単に送信</li>
+                                        <li>✅ <strong>無料相談</strong> - 初回は完全無料でご相談承ります</li>
                                     </ul>
                                 </div>
+                                
+                                <div class="line-button-container">
+                                    <a href="https://lin.ee/8ymv2Nw" target="_blank" rel="noopener noreferrer">
+                                        <img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0">
+                                    </a>
+                                </div>
+                                <div class="line-qr-container">
+                                    <p>または、こちらのQRコードをLINEアプリで読み取ってください：</p>
+                                    <img src="/images/LineQR.png" alt="LINE QRコード" class="line-qr">
+                                </div>
+                            </div>
+                        </section>
 
-                                <div class="plan-card">
-                                    <h3>生成AI導入プロジェクト</h3>
-                                    <div class="plan-price">20〜500万円</div>
-                                    <ul class="plan-features">
-                                        <li>要件定義・設計</li>
-                                        <li>システム構築</li>
-                                        <li>導入支援</li>
-                                        <li>運用サポート</li>
+                        <section class="section">
+                            <h2>📧 メールでのお問い合わせ</h2>
+                            <div class="contact-info">
+                                <p>LINEをご利用でない場合は、メールでもお問い合わせいただけます。</p>
+                                <p><strong>Email:</strong> <a href="mailto:info.hirokitakamura@gmail.com">info.hirokitakamura@gmail.com</a></p>
+                                <p><strong>営業時間:</strong> 平日 9:00-18:00（土日祝休み）</p>
+                                
+                                <div class="email-tips">
+                                    <h3>メールでお問い合わせの際は</h3>
+                                    <ul>
+                                        <li>📝 ご相談内容を具体的にお書きください</li>
+                                        <li>🏢 会社名・お名前をご記載ください</li>
+                                        <li>📱 お急ぎの場合はLINEをご利用ください</li>
                                     </ul>
                                 </div>
                             </div>
                         </section>
 
-                        <section class="service-contact">
-                            <h2>お問い合わせ</h2>
-                            <p>サービスに関するご質問やご相談は、お気軽にお問い合わせください。</p>
-                            <div class="contact-buttons">
-                                <a href="/contact" class="button primary">お問い合わせフォーム</a>
-                                <a href="https://lin.ee/8ymv2Nw" target="_blank" rel="noopener noreferrer" class="button secondary">LINEで相談</a>
+                        <section class="section">
+                            <h2>❓ お問い合わせ前のお役立ち情報</h2>
+                            <div class="helpful-links">
+                                <p>お問い合わせの前に、以下もご確認ください：</p>
+                                <ul>
+                                    <li>🔍 <a href="/faq">よくある質問（FAQ）</a> - 一般的な疑問にお答えしています</li>
+                                    <li>💼 <a href="/services">サービス詳細</a> - 技術顧問サービスの詳細情報</li>
+                                    <li>📊 <a href="/results">導入実績</a> - 他社様での成功事例</li>
+                                    <li>🛠️ <a href="/products">開発製品</a> - 既存の開発ツール一覧</li>
+                                </ul>
                             </div>
                         </section>
-                        {{end}}
                     </div>
                 </div>
             </main>
@@ -158,7 +195,7 @@
             </footer>
         </div>
     </div>
-
+    
     <script src="/js/main.js"></script>
 </body>
 </html>

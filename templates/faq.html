@@ -3,30 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="福岡・九州企業向け生成AI導入支援サービス - ChatGPT・Claude・Whisper活用で業務効率化">
+    <meta name="description" content="infohirokiに関するよくある質問と回答">
     <title>{{.title}}</title>
-
+    
     <!-- OGPタグ -->
-    <meta property="og:title" content="生成AI導入支援サービス | infoHiroki">
-    <meta property="og:description" content="福岡・九州企業向け生成AI導入支援サービス - ChatGPT・Claude・Whisper活用で業務効率化">
+    <meta property="og:title" content="よくある質問 | infohiroki">
+    <meta property="og:description" content="infohirokiに関するよくある質問と回答">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="infoHiroki">
+    <meta property="og:site_name" content="infohiroki">
     <meta property="og:locale" content="ja_JP">
-
+    
     <!-- Twitterカード -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="サービス | infoHiroki">
-    <meta name="twitter:description" content="良い業務習慣をIT技術で定着させ、継続的な成果を実現します">
-
+    <meta name="twitter:title" content="よくある質問 | infohiroki">
+    <meta name="twitter:description" content="infohirokiに関するよくある質問と回答">
+    
     <!-- ファビコン -->
     <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
-
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
-
+    
     <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- 構造化データ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "よくある質問",
+      "description": "infohirokiに関するよくある質問と回答",
+      "author": {
+        "@type": "Organization",
+        "name": "infohiroki"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "infohiroki",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "/images/logo.svg"
+        }
+      }
+    }
+    </script>
 </head>
 <body>
     <div class="site-layout">
@@ -57,31 +79,31 @@
                     </div>
                 </a>
             </div>
-
+            
             <nav class="sidebar-nav">
                 <ul class="nav-menu">
-                    <li class="nav-item {{if eq .page "home"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/" class="nav-link">ホーム</a>
                     </li>
-                    <li class="nav-item {{if eq .page "blog"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/blog" class="nav-link">ブログ</a>
                     </li>
-                    <li class="nav-item {{if eq .page "services"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/services" class="nav-link">サービス</a>
                     </li>
-                    <li class="nav-item {{if eq .page "products"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/products" class="nav-link">開発製品</a>
                     </li>
-                    <li class="nav-item {{if eq .page "results"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/results" class="nav-link">実績</a>
                     </li>
-                    <li class="nav-item {{if eq .page "about"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/about" class="nav-link">スキルスタック</a>
                     </li>
-                    <li class="nav-item {{if eq .page "faq"}}active{{end}}">
+                    <li class="nav-item{{if eq .page "faq"}} active{{end}}">
                         <a href="/faq" class="nav-link">FAQ</a>
                     </li>
-                    <li class="nav-item {{if eq .page "contact"}}active{{end}}">
+                    <li class="nav-item">
                         <a href="/contact" class="nav-link">お問い合わせ</a>
                     </li>
                 </ul>
@@ -93,60 +115,69 @@
 
         <div class="main-wrapper">
             <main class="site-main">
-                <div class="container">
-                    <div class="content-header">
-                        <h1>生成AI導入支援サービス</h1>
-                        <p class="content-description">福岡・九州企業向けの生成AI導入支援サービスです。ChatGPT・Claude・Whisperを活用して業務効率化を実現します。</p>
+                <div class="hero-sub">
+                    <div class="container">
+                        <h1 class="page-title">よくある質問</h1>
                     </div>
+                </div>
 
-                    <div class="content-body">
-                        <!-- サービス内容はここに動的に挿入されます -->
-                        {{if .data.Content}}
-                        {{.data.Content}}
-                        {{else}}
-                        <!-- デフォルトのサービス内容 -->
-                        <section class="service-overview">
-                            <h2>サービス概要</h2>
-                            <p>生成AIを活用した業務効率化支援を行います。</p>
-                        </section>
-
-                        <section class="service-plans">
-                            <h2>サービスプラン</h2>
-                            <div class="plan-grid">
-                                <div class="plan-card featured">
-                                    <div class="plan-badge">おすすめ</div>
-                                    <h3>技術顧問サービス</h3>
-                                    <div class="plan-price">月額 5万円</div>
-                                    <ul class="plan-features">
-                                        <li>月次定例ミーティング</li>
-                                        <li>AI活用コンサルティング</li>
-                                        <li>技術的サポート</li>
-                                        <li>チーム研修</li>
-                                    </ul>
+                <div class="page-content">
+                    <div class="container">
+                        <section class="section">
+                            <div class="faq-simple">
+                                <div class="faq-item">
+                                    <div class="faq-q">Q. 🏢 どのような業界・規模の企業が対象ですか？</div>
+                                    <div class="faq-a">A. 業界問わず、小規模事業者から大企業まで幅広く対応しています。特に<strong>医療・建設・IT・製造・サービス業</strong>での生成AI導入実績が豊富です。桜十字病院でのWhisper活用から中小企業のChatGPT導入まで、多種多様な業界での生成AI導入を支援しています。</div>
                                 </div>
 
-                                <div class="plan-card">
-                                    <h3>生成AI導入プロジェクト</h3>
-                                    <div class="plan-price">20〜500万円</div>
-                                    <ul class="plan-features">
-                                        <li>要件定義・設計</li>
-                                        <li>システム構築</li>
-                                        <li>導入支援</li>
-                                        <li>運用サポート</li>
-                                    </ul>
+                                <div class="faq-item">
+                                    <div class="faq-q">Q. 📋 サービス開始までの流れを教えてください</div>
+                                    <div class="faq-a">A. ①<strong>LINEでお問い合わせ</strong> → ②<strong>AI導入相談（2万円・1.5時間）</strong> → ③<strong>現状分析レポート＋導入提案書の提出</strong> → ④<strong>契約（プロジェクトまたは顧問）</strong> → ⑤<strong>サービス開始</strong>の流れです。まずはAI導入相談で具体的な効果と費用をご確認ください。</div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-q">Q. 💰 料金プランと追加費用について教えてください</div>
+                                    <div class="faq-a">A. <strong>技術顧問サービス：月額5万円</strong>（6-12ヶ月契約）、<strong>生成AI導入プロジェクト：20-500万円</strong>（企業規模に応じて）、<strong>AI導入相談：1回2万円</strong>（1.5時間）です。基本的に追加費用はかかりませんが、特別なソフトウェアライセンスが必要な場合は事前にご相談いたします。</div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-q">Q. ⏰ 契約期間の縛りはありますか？</div>
+                                    <div class="faq-a">A. <strong>生成AI導入プロジェクトは2-6ヶ月</strong>（規模により）、<strong>技術顧問サービスは6ヶ月または12ヶ月の契約期間</strong>があります。<strong>AI導入相談は単発のため契約期間の縛りはありません。</strong></div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-q">Q. 💻 オンラインでの対応は可能ですか？</div>
+                                    <div class="faq-a">A. はい、全国どこでもオンラインで対応可能です。Zoom、Teams、Google Meet等のツールを使用し、画面共有やリモート操作でサポートします。</div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-q">Q. 🔒 データの安全性は保障されますか？</div>
+                                    <div class="faq-a">A. お客様のデータは厳重に管理し、機密保持契約（NDA）の締結も可能です。作業終了後はお客様のデータを完全削除いたします。</div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-q">Q. 🤖 どのようなAIツールに対応していますか？</div>
+                                    <div class="faq-a">A. <strong>ChatGPT、Claude、Gemini</strong>等の大規模言語モデル、<strong>音声認識AI（Whisper等）</strong>、<strong>Google Apps Script、Excel VBA</strong>、<strong>Notion、音声文字起こしシステム</strong>等、幅広いツールに対応しています。実際の導入実績に基づいて最適なツールをご提案します。</div>
+                                </div>
+
+                                <div class="faq-item">
+                                    <div class="faq-q">Q. ❓ 技術的な知識がなくても大丈夫ですか？</div>
+                                    <div class="faq-a">A. はい、技術的な知識は不要です。業務の課題や改善したい点をお聞かせいただければ、技術的な部分は全てお任せください。操作方法も丁寧にレクチャーいたします。</div>
                                 </div>
                             </div>
                         </section>
 
-                        <section class="service-contact">
-                            <h2>お問い合わせ</h2>
-                            <p>サービスに関するご質問やご相談は、お気軽にお問い合わせください。</p>
-                            <div class="contact-buttons">
-                                <a href="/contact" class="button primary">お問い合わせフォーム</a>
-                                <a href="https://lin.ee/8ymv2Nw" target="_blank" rel="noopener noreferrer" class="button secondary">LINEで相談</a>
+                        
+                        <!-- LINE連絡セクション -->
+                        <section class="line-contact-footer">
+                            <div class="container">
+                                <h3>💬 他にご質問はありませんか？</h3>
+                                <p>FAQで解決しないご質問があれば、LINEでお気軽にお問い合わせください</p>
+                                <a href="https://lin.ee/8ymv2Nw" target="_blank" rel="noopener noreferrer" class="line-button-footer">
+                                    LINEで質問する
+                                </a>
                             </div>
                         </section>
-                        {{end}}
                     </div>
                 </div>
             </main>
@@ -158,7 +189,7 @@
             </footer>
         </div>
     </div>
-
+    
     <script src="/js/main.js"></script>
 </body>
 </html>
