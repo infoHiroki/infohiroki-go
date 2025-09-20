@@ -388,9 +388,8 @@ func loadMarkdownFile(filePath string) error {
 		createdDate = time.Now()
 	}
 
-	// 暫定的にタイトルをファイル名から生成
-	title := strings.ReplaceAll(slug, "-", " ")
-	title = strings.Title(title)
+	// ファイル名に基づいてメタデータを設定
+	title, description, tags, icon := generateMetadataFromSlug(slug)
 
 	blogPost := models.BlogPost{
 		Slug:         slug,
@@ -400,9 +399,9 @@ func loadMarkdownFile(filePath string) error {
 		MarkdownPath: filePath,
 		CreatedDate:  createdDate,
 		Published:    true,
-		Description:  "Markdownで作成された記事",
-		Tags:         `["Markdown","Test"]`,
-		Icon:         "📝",
+		Description:  description,
+		Tags:         tags,
+		Icon:         icon,
 	}
 
 	if err := db.Create(&blogPost).Error; err != nil {
@@ -411,4 +410,33 @@ func loadMarkdownFile(filePath string) error {
 
 	fmt.Printf("✅ Markdown記事を追加: %s\n", slug)
 	return nil
+}
+
+// ファイル名（スラッグ）からメタデータを生成
+func generateMetadataFromSlug(slug string) (title, description, tags, icon string) {
+	switch {
+	case strings.Contains(slug, "go-complete-history"):
+		return "Go言語完全史：クラウドネイティブ時代を切り開いた革新言語の18年間",
+			"2007年から2025年まで：Google三巨頭が創造した言語が、いかにしてDocker・Kubernetesの基盤となり、現代インフラを支配するに至ったか",
+			`["Go","プログラミング言語","歴史","Docker","Kubernetes","Google","クラウドネイティブ","技術史","コンテナ","DevOps"]`,
+			"🏛️"
+	case strings.Contains(slug, "golang"):
+		return "Go言語の歴史と技術革新",
+			"Go言語（Golang）の開発歴史と現代への影響を詳しく解説",
+			`["Go","Golang","プログラミング言語","歴史","Google"]`,
+			"🏛️"
+	case strings.Contains(slug, "markdown-test"):
+		return "Markdownテスト記事",
+			"Markdownシステムのテスト記事です",
+			`["Markdown","テスト","ブログシステム"]`,
+			"📝"
+	default:
+		// デフォルトの場合はファイル名から生成
+		title = strings.ReplaceAll(slug, "-", " ")
+		title = strings.Title(title)
+		return title,
+			"Markdownで作成された記事",
+			`["Markdown","ブログ"]`,
+			"📝"
+	}
 }
