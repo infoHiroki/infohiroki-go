@@ -9,6 +9,7 @@ import (
 	"html/template"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -166,7 +167,6 @@ func showBlogPost(c *gin.Context, slug string) {
 		"title":           post.Title + " | infoHiroki",
 		"page":            "blog",
 		"post":            post,
-		"html":            template.HTML(post.Content), // HTMLエスケープを回避
 		"metaDescription": metaDescription,
 		"ogTitle":         post.Title + " | infoHiroki",
 		"ogDescription":   metaDescription,
@@ -282,6 +282,9 @@ func initializeData() {
 	if count == 0 {
 		loadFromFilesJSON()
 	}
+
+	// Markdownファイルの読み込み
+	loadMarkdownFiles()
 }
 
 // files.jsonからブログ記事を読み込み
@@ -322,4 +325,90 @@ func loadFromFilesJSON() {
 	}
 
 	fmt.Printf("✅ %d件のブログ記事を処理完了\n", len(filesJSON.Files))
+}
+
+// postsディレクトリからMarkdownファイルを読み込み
+func loadMarkdownFiles() {
+	fmt.Println("📝 Markdownファイルを読み込み中...")
+
+	postsDir := "posts"
+	if _, err := os.Stat(postsDir); os.IsNotExist(err) {
+		fmt.Println("postsディレクトリが存在しません")
+		return
+	}
+
+	err := filepath.Walk(postsDir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
+		if !strings.HasSuffix(path, ".md") {
+			return nil
+		}
+
+		fmt.Printf("処理中: %s\n", path)
+		return loadMarkdownFile(path)
+	})
+
+	if err != nil {
+		fmt.Printf("Markdownファイル読み込みエラー: %v\n", err)
+	}
+}
+
+// 個別のMarkdownファイルを読み込み
+func loadMarkdownFile(filePath string) error {
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		return err
+	}
+
+	// ファイル名からスラッグを生成 (例: 2025-01-20-markdown-test.md -> 2025-01-20-markdown-test)
+	fileName := filepath.Base(filePath)
+	slug := strings.TrimSuffix(fileName, ".md")
+
+	// 既存記事の確認
+	var existingPost models.BlogPost
+	result := db.Where("slug = ?", slug).First(&existingPost)
+	if result.Error == nil {
+		// 既に存在する場合はスキップ
+		return nil
+	}
+
+	// ファイル名から日付を抽出
+	var createdDate time.Time
+	if len(slug) >= 10 && slug[4] == '-' && slug[7] == '-' {
+		dateStr := slug[:10]
+		parsedDate, err := time.Parse("2006-01-02", dateStr)
+		if err == nil {
+			createdDate = parsedDate
+		}
+	}
+
+	if createdDate.IsZero() {
+		createdDate = time.Now()
+	}
+
+	// 暫定的にタイトルをファイル名から生成
+	title := strings.ReplaceAll(slug, "-", " ")
+	title = strings.Title(title)
+
+	blogPost := models.BlogPost{
+		Slug:         slug,
+		Title:        title,
+		Content:      string(content),
+		ContentType:  "markdown",
+		MarkdownPath: filePath,
+		CreatedDate:  createdDate,
+		Published:    true,
+		Description:  "Markdownで作成された記事",
+		Tags:         `["Markdown","Test"]`,
+		Icon:         "📝",
+	}
+
+	if err := db.Create(&blogPost).Error; err != nil {
+		return fmt.Errorf("データベース保存エラー: %v", err)
+	}
+
+	fmt.Printf("✅ Markdown記事を追加: %s\n", slug)
+	return nil
 }

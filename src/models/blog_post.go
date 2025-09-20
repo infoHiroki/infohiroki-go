@@ -2,7 +2,9 @@ package models
 
 import (
 	"encoding/json"
+	"html/template"
 	"time"
+	"github.com/russross/blackfriday/v2"
 	"gorm.io/gorm"
 )
 
@@ -15,6 +17,8 @@ type BlogPost struct {
 	Description string         `json:"description"`
 	Tags        string         `json:"tags"` // JSON array as string
 	Icon        string         `json:"icon"`
+	ContentType string         `json:"content_type" gorm:"default:'html'"` // "html" or "markdown"
+	MarkdownPath string        `json:"markdown_path"` // .mdファイルパス
 	CreatedDate time.Time      `json:"created_date"`
 	CreatedAt   time.Time      `json:"created_at"`
 	UpdatedAt   time.Time      `json:"updated_at"`
@@ -60,4 +64,22 @@ func (b *BlogPost) GetTagsSlice() []string {
 	}
 
 	return tags
+}
+
+// RenderContent renders the content based on ContentType
+func (b *BlogPost) RenderContent() template.HTML {
+	if b.ContentType == "markdown" {
+		// MarkdownをHTMLに変換
+		renderer := blackfriday.NewHTMLRenderer(blackfriday.HTMLRendererParameters{
+			Flags: blackfriday.CommonHTMLFlags,
+		})
+
+		extensions := blackfriday.CommonExtensions | blackfriday.AutoHeadingIDs
+		html := blackfriday.Run([]byte(b.Content), blackfriday.WithRenderer(renderer), blackfriday.WithExtensions(extensions))
+
+		return template.HTML(html)
+	}
+
+	// デフォルトはHTMLコンテンツ
+	return template.HTML(b.Content)
 }
