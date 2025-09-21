@@ -287,13 +287,13 @@ func initializeData() {
 	loadMarkdownFiles()
 }
 
-// files.jsonからブログ記事を読み込み
+// content/metadata.jsonからブログ記事を読み込み
 func loadFromFilesJSON() {
 	fmt.Println("📚 ブログ記事を読み込み中...")
 
-	jsonData, err := os.ReadFile("files.json")
+	jsonData, err := os.ReadFile("content/metadata.json")
 	if err != nil {
-		fmt.Printf("files.json読み込みエラー: %v\n", err)
+		fmt.Printf("content/metadata.json読み込みエラー: %v\n", err)
 		return
 	}
 
@@ -327,11 +327,11 @@ func loadFromFilesJSON() {
 	fmt.Printf("✅ %d件のブログ記事を処理完了\n", len(filesJSON.Files))
 }
 
-// postsディレクトリからMarkdownファイルを読み込み
+// content/articlesディレクトリから記事ファイルを読み込み（HTML/Markdown両対応）
 func loadMarkdownFiles() {
-	fmt.Println("📝 Markdownファイルを読み込み中...")
+	fmt.Println("📝 記事ファイルを読み込み中...")
 
-	postsDir := "posts"
+	postsDir := "content/articles"
 	if _, err := os.Stat(postsDir); os.IsNotExist(err) {
 		fmt.Println("postsディレクトリが存在しません")
 		return
@@ -342,7 +342,13 @@ func loadMarkdownFiles() {
 			return err
 		}
 
-		if !strings.HasSuffix(path, ".md") {
+		ext := filepath.Ext(path)
+		if ext != ".md" && ext != ".html" {
+			return nil
+		}
+
+		// HTMLファイルはmetadata.jsonで既に処理済みなのでスキップ
+		if ext == ".html" {
 			return nil
 		}
 
@@ -362,9 +368,10 @@ func loadMarkdownFile(filePath string) error {
 		return err
 	}
 
-	// ファイル名からスラッグを生成 (例: 2025-01-20-markdown-test.md -> 2025-01-20-markdown-test)
+	// ファイル名からスラッグを生成
 	fileName := filepath.Base(filePath)
-	slug := strings.TrimSuffix(fileName, ".md")
+	ext := filepath.Ext(fileName)
+	slug := strings.TrimSuffix(fileName, ext)
 
 	// 既存記事の確認
 	var existingPost models.BlogPost
