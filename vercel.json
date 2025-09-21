@@ -1,0 +1,76 @@
+{
+  "functions": {
+    "api/blog.go": {
+      "runtime": "@vercel/go"
+    },
+    "api/post.go": {
+      "runtime": "@vercel/go"
+    },
+    "api/search.go": {
+      "runtime": "@vercel/go"
+    },
+    "api/index.go": {
+      "runtime": "@vercel/go"
+    },
+    "api/pages.go": {
+      "runtime": "@vercel/go"
+    }
+  },
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/api/index.go"
+    },
+    {
+      "src": "/blog$",
+      "dest": "/api/blog.go"
+    },
+    {
+      "src": "/blog/(.*)",
+      "dest": "/api/post.go"
+    },
+    {
+      "src": "/services",
+      "dest": "/api/pages.go?page=services"
+    },
+    {
+      "src": "/products",
+      "dest": "/api/pages.go?page=products"
+    },
+    {
+      "src": "/results",
+      "dest": "/api/pages.go?page=results"
+    },
+    {
+      "src": "/about",
+      "dest": "/api/pages.go?page=about"
+    },
+    {
+      "src": "/faq",
+      "dest": "/api/pages.go?page=faq"
+    },
+    {
+      "src": "/contact",
+      "dest": "/api/pages.go?page=contact"
+    },
+    {
+      "src": "/api/search",
+      "dest": "/api/search.go"
+    },
+    {
+      "src": "/css/(.*)",
+      "dest": "/public/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/public/js/$1"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/public/images/$1"
+    }
+  ],
+  "github": {
+    "silent": true
+  }
+}

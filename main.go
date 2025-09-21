@@ -15,12 +15,12 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
 	"infohiroki-go/src/models"
 )
 
-var db *gorm.DB
+// データはファイルベースで管理
+var allPosts []models.BlogPost
+var allPages []models.Page
 
 type FileMetadata struct {
 	ID          string   `json:"id"`
@@ -37,17 +37,7 @@ type FilesJSON struct {
 }
 
 func main() {
-	// データベース接続
-	var err error
-	db, err = gorm.Open(sqlite.Open("database/infohiroki.db"), &gorm.Config{})
-	if err != nil {
-		panic("データベース接続に失敗しました: " + err.Error())
-	}
-
-	// テーブル自動マイグレーション
-	db.AutoMigrate(&models.Page{}, &models.BlogPost{})
-
-	// データ初期化
+	// データ初期化（ファイルベース）
 	initializeData()
 
 	// Gin ルーター設定
@@ -99,23 +89,11 @@ func homePage(c *gin.Context) {
 
 // ブログ一覧
 func blogList(c *gin.Context) {
-	var posts []models.BlogPost
 	query := c.Query("q")
 	tag := c.Query("tag")
 
-	dbQuery := db.Where("published = ?", true)
-
-	// 検索機能
-	if query != "" {
-		dbQuery = dbQuery.Where("title LIKE ? OR description LIKE ?", "%"+query+"%", "%"+query+"%")
-	}
-
-	// タグフィルタ
-	if tag != "" {
-		dbQuery = dbQuery.Where("tags LIKE ?", "%"+tag+"%")
-	}
-
-	dbQuery.Order("created_date DESC").Find(&posts)
+	// ファイルベースでのフィルタリング
+	posts := filterPosts(allPosts, query, tag)
 
 	c.HTML(http.StatusOK, "blog.html", gin.H{
 		"title":           "ブログ | infoHiroki",
@@ -198,12 +176,13 @@ func showBlogPostJSON(c *gin.Context, slug string) {
 
 // 共通処理：スラッグでブログ記事を取得
 func getBlogPostBySlug(c *gin.Context, slug string) *models.BlogPost {
-	var post models.BlogPost
-	if err := db.Where("slug = ? AND published = ?", slug, true).First(&post).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "記事が見つかりません"})
-		return nil
+	for _, post := range allPosts {
+		if post.Slug == slug && post.Published {
+			return &post
+		}
 	}
-	return &post
+	c.JSON(http.StatusNotFound, gin.H{"error": "記事が見つかりません"})
+	return nil
 }
 
 // 固定ページ処理（サービス、製品、実績、等）
@@ -233,18 +212,10 @@ func contactPage(c *gin.Context) {
 
 // 固定ページ共通処理（メタデータ付き）
 func renderPageWithMeta(c *gin.Context, slug string, title string, description string) {
-	var page models.Page
-	if err := db.Where("slug = ?", slug).First(&page).Error; err != nil {
-		c.HTML(http.StatusNotFound, "404.html", gin.H{
-			"title": "ページが見つかりません | infoHiroki",
-		})
-		return
-	}
-
+	// 固定ページはテンプレートのみで処理
 	c.HTML(http.StatusOK, slug+".html", gin.H{
 		"title":           title,
 		"page":            slug,
-		"data":            page,
 		"metaDescription": description,
 		"ogTitle":         title,
 		"ogDescription":   description,
@@ -258,14 +229,11 @@ func searchBlogPosts(c *gin.Context) {
 	query := c.Query("q")
 	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "10"))
 
-	var posts []models.BlogPost
-	dbQuery := db.Where("published = ?", true)
-
-	if query != "" {
-		dbQuery = dbQuery.Where("title LIKE ? OR description LIKE ?", "%"+query+"%", "%"+query+"%")
+	// ファイルベースでの検索
+	posts := filterPosts(allPosts, query, "")
+	if len(posts) > limit {
+		posts = posts[:limit]
 	}
-
-	dbQuery.Order("created_date DESC").Limit(limit).Find(&posts)
 
 	c.JSON(http.StatusOK, gin.H{
 		"posts": posts,
@@ -274,17 +242,58 @@ func searchBlogPosts(c *gin.Context) {
 	})
 }
 
-// データ初期化
-func initializeData() {
-	// ブログ記事が空の場合のみデータを読み込み
-	var count int64
-	db.Model(&models.BlogPost{}).Count(&count)
-	if count == 0 {
-		loadFromFilesJSON()
+// ファイルベースでのフィルタリング関数
+func filterPosts(posts []models.BlogPost, query, tag string) []models.BlogPost {
+	var result []models.BlogPost
+
+	for _, post := range posts {
+		if !post.Published {
+			continue
+		}
+
+		// 検索クエリフィルタ
+		if query != "" {
+			if !strings.Contains(strings.ToLower(post.Title), strings.ToLower(query)) &&
+			   !strings.Contains(strings.ToLower(post.Description), strings.ToLower(query)) {
+				continue
+			}
+		}
+
+		// タグフィルタ
+		if tag != "" {
+			if !strings.Contains(strings.ToLower(post.Tags), strings.ToLower(tag)) {
+				continue
+			}
+		}
+
+		result = append(result, post)
 	}
+
+	// 作成日の降順でソート
+	for i := 0; i < len(result)-1; i++ {
+		for j := i + 1; j < len(result); j++ {
+			if result[i].CreatedDate.Before(result[j].CreatedDate) {
+				result[i], result[j] = result[j], result[i]
+			}
+		}
+	}
+
+	return result
+}
+
+// データ初期化（ファイルベース）
+func initializeData() {
+	// メモリを初期化
+	allPosts = []models.BlogPost{}
+	allPages = []models.Page{}
+
+	// metadata.jsonからブログ記事を読み込み
+	loadFromFilesJSON()
 
 	// Markdownファイルの読み込み
 	loadMarkdownFiles()
+
+	fmt.Printf("✅ データ初期化完了: %d件の記事を読み込み\n", len(allPosts))
 }
 
 // content/metadata.jsonからブログ記事を読み込み
@@ -317,10 +326,16 @@ func loadFromFilesJSON() {
 			Published:   true,
 		}
 
-		var existingPost models.BlogPost
-		result := db.Where("slug = ?", file.ID).First(&existingPost)
-		if result.Error != nil {
-			db.Create(&blogPost)
+		// 重複チェック
+		exists := false
+		for _, existing := range allPosts {
+			if existing.Slug == file.ID {
+				exists = true
+				break
+			}
+		}
+		if !exists {
+			allPosts = append(allPosts, blogPost)
 		}
 	}
 
@@ -374,11 +389,11 @@ func loadMarkdownFile(filePath string) error {
 	slug := strings.TrimSuffix(fileName, ext)
 
 	// 既存記事の確認
-	var existingPost models.BlogPost
-	result := db.Where("slug = ?", slug).First(&existingPost)
-	if result.Error == nil {
-		// 既に存在する場合はスキップ
-		return nil
+	for _, existing := range allPosts {
+		if existing.Slug == slug {
+			// 既に存在する場合はスキップ
+			return nil
+		}
 	}
 
 	// ファイル名から日付を抽出
@@ -411,9 +426,7 @@ func loadMarkdownFile(filePath string) error {
 		Icon:         icon,
 	}
 
-	if err := db.Create(&blogPost).Error; err != nil {
-		return fmt.Errorf("データベース保存エラー: %v", err)
-	}
+	allPosts = append(allPosts, blogPost)
 
 	fmt.Printf("✅ Markdown記事を追加: %s\n", slug)
 	return nil
