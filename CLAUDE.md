@@ -87,10 +87,14 @@ infohiroki-go/
 │       ├── logo.svg
 │       ├── hero.svg
 │       └── icons/             # 技術アイコン群
-├── markdown/                  # Markdownブログ記事
-│   ├── 2024-03-27-notion-save-to-notion-extension.md
-│   ├── 2024-03-29-chatgpt-reskilling-guide.md
-│   └── ... (94記事)
+├── content/                   # 統一コンテンツ管理
+│   ├── articles/             # HTML/Markdown記事（96記事）
+│   │   ├── 2024-03-27-notion-save-to-notion-extension.html
+│   │   ├── 2024-03-29-chatgpt-reskilling-guide.html
+│   │   ├── 2025-01-20-markdown-test.md
+│   │   ├── 2025-09-20-go-complete-history.md
+│   │   └── ... (HTML 94個 + Markdown 2個)
+│   └── metadata.json         # 統一メタデータ管理
 ├── database/                  # データベース関連
 │   ├── infohiroki.db          # SQLiteデータベース
 │   └── migrations/            # マイグレーションファイル
