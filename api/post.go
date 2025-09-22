@@ -81,7 +81,7 @@ func showBlogPost(w http.ResponseWriter, r *http.Request, slug string) {
             line-height: 1.8;
         }
         /* Markdown content styles */
-        .markdown-content h1 { margin: 2rem 0 1rem; }
+        .markdown-content h1 { margin: 2rem 0 1rem; color: white; text-align: center; }
         .markdown-content h2 { margin: 1.8rem 0 0.8rem; }
         .markdown-content h3 { margin: 1.5rem 0 0.5rem; }
         .markdown-content p { margin: 1rem 0; }
