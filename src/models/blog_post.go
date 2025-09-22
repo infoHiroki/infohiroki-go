@@ -3,6 +3,7 @@ package models
 import (
 	"encoding/json"
 	"html/template"
+	"strings"
 	"time"
 	"github.com/russross/blackfriday/v2"
 )
@@ -59,6 +60,16 @@ func (b *BlogPost) GetTagsSlice() []string {
 	}
 
 	return tags
+}
+
+// IsIconURL checks if the icon field contains a URL or path
+func (b *BlogPost) IsIconURL() bool {
+	if b.Icon == "" {
+		return false
+	}
+	return strings.HasPrefix(b.Icon, "http") ||
+	       strings.HasPrefix(b.Icon, "./") ||
+	       strings.HasPrefix(b.Icon, "/")
 }
 
 // RenderContent renders the content based on ContentType

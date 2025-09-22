@@ -119,13 +119,14 @@ func loadFromFilesJSON() {
 		tagsJSON, _ := json.Marshal(file.Tags)
 
 		blogPost := models.BlogPost{
-			Slug:        file.ID,
-			Title:       file.Title,
-			Description: file.Description,
-			Tags:        string(tagsJSON),
-			Icon:        file.Icon,
-			CreatedDate: createdDate,
-			Published:   true,
+			Slug:         file.ID,
+			Title:        file.Title,
+			Description:  file.Description,
+			Tags:         string(tagsJSON),
+			Icon:         file.Icon,
+			CreatedDate:  createdDate,
+			Published:    true,
+			MarkdownPath: file.Path, // metadata.jsonのpathを保存
 		}
 
 		// 重複チェック
@@ -164,9 +165,9 @@ func loadMarkdownFiles() {
 			return nil
 		}
 
-		// HTMLファイルはmetadata.jsonで既に処理済みなのでスキップ
+		// HTMLファイルの場合、既存記事にコンテンツを追加
 		if ext == ".html" {
-			return nil
+			return loadHTMLContent(path)
 		}
 
 		fmt.Printf("処理中: %s\n", path)
@@ -231,6 +232,70 @@ func loadMarkdownFile(filePath string) error {
 	allPosts = append(allPosts, blogPost)
 
 	fmt.Printf("✅ Markdown記事を追加: %s\n", slug)
+	return nil
+}
+
+// HTMLファイルのコンテンツを既存記事に読み込み
+func loadHTMLContent(filePath string) error {
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		return err
+	}
+
+	// ファイル名からスラッグを推定
+	fileName := filepath.Base(filePath)
+
+	// metadata.jsonのパスと一致する記事を探す
+	for i := range allPosts {
+		if allPosts[i].ContentType == "" { // まだコンテンツが読み込まれていない
+			// metadata.jsonのpathとファイル名を照合
+			if fileName == filepath.Base(allPosts[i].MarkdownPath) || strings.Contains(fileName, allPosts[i].Slug) {
+				allPosts[i].Content = string(content)
+				allPosts[i].ContentType = "html"
+				allPosts[i].MarkdownPath = filePath
+				fmt.Printf("✅ HTML記事コンテンツを読み込み: %s\n", allPosts[i].Slug)
+				return nil
+			}
+		}
+	}
+
+	// 一致する記事が見つからない場合、ファイル名から新規作成
+	ext := filepath.Ext(fileName)
+	slug := strings.TrimSuffix(fileName, ext)
+
+	// 日付プレフィックスを除去してより良いスラッグを作成
+	if len(slug) > 11 && slug[10] == '-' {
+		slug = slug[11:] // "2025-08-26-" を除去
+	}
+
+	var createdDate time.Time
+	if len(fileName) >= 10 && fileName[4] == '-' && fileName[7] == '-' {
+		dateStr := fileName[:10]
+		parsedDate, err := time.Parse("2006-01-02", dateStr)
+		if err == nil {
+			createdDate = parsedDate
+		}
+	}
+
+	if createdDate.IsZero() {
+		createdDate = time.Now()
+	}
+
+	blogPost := models.BlogPost{
+		Slug:         slug,
+		Title:        "HTML記事: " + slug,
+		Content:      string(content),
+		ContentType:  "html",
+		MarkdownPath: filePath,
+		CreatedDate:  createdDate,
+		Published:    true,
+		Description:  "HTMLで作成された記事",
+		Tags:         `["HTML","ブログ"]`,
+		Icon:         "📄",
+	}
+
+	allPosts = append(allPosts, blogPost)
+	fmt.Printf("✅ 新規HTML記事を追加: %s\n", slug)
 	return nil
 }
 

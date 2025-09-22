@@ -59,6 +59,48 @@ func showBlogPost(w http.ResponseWriter, r *http.Request, slug string) {
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{{.Title}}">
     <meta name="twitter:description" content="{{.MetaDescription}}">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .blog-post-detail {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .blog-post-detail header {
+            margin-bottom: 2rem;
+        }
+        .blog-post-detail h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .blog-post-detail .meta {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        .blog-post-detail .content {
+            line-height: 1.8;
+        }
+        /* Markdown content styles */
+        .markdown-content h1 { margin: 2rem 0 1rem; }
+        .markdown-content h2 { margin: 1.8rem 0 0.8rem; }
+        .markdown-content h3 { margin: 1.5rem 0 0.5rem; }
+        .markdown-content p { margin: 1rem 0; }
+        .markdown-content ul, .markdown-content ol { margin: 1rem 0; padding-left: 2rem; }
+        .markdown-content pre { background: #f6f8fa; padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 1rem 0; }
+        .markdown-content code { background: #f0f0f0; padding: 0.2em 0.4em; border-radius: 3px; }
+        .markdown-content blockquote { border-left: 4px solid #e73e8f; padding-left: 1rem; margin: 1.5rem 0; color: #666; }
+        .markdown-content a { color: #e73e8f; }
+        .markdown-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        .markdown-content th, .markdown-content td { border: 1px solid #ddd; padding: 0.5rem; }
+        @media (max-width: 768px) {
+            .blog-post-detail {
+                padding: 1rem;
+            }
+            .blog-post-detail h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <article class="blog-post-detail">
@@ -70,7 +112,7 @@ func showBlogPost(w http.ResponseWriter, r *http.Request, slug string) {
             </div>
             {{if .Post.Description}}<p class="description">{{.Post.Description}}</p>{{end}}
         </header>
-        <div class="content">
+        <div class="{{if eq .ContentType "markdown"}}markdown-content{{else}}content{{end}}">
             {{.Content}}
         </div>
         <footer>
@@ -91,11 +133,13 @@ func showBlogPost(w http.ResponseWriter, r *http.Request, slug string) {
 		MetaDescription string
 		Post            interface{}
 		Content         template.HTML
+		ContentType     string
 	}{
 		Title:           post.Title,
 		MetaDescription: metaDescription,
 		Post:            post,
 		Content:         post.RenderContent(),
+		ContentType:     post.ContentType,
 	}
 
 	w.Header().Set("Content-Type", "text/html")

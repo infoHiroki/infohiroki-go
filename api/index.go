@@ -6,52 +6,243 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	// HTMLテンプレートの作成
+	// HTMLテンプレートの作成（元のテンプレート構造を完全移植）
 	tmpl := `<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>infoHiroki - 福岡の生成AI導入支援専門家</title>
     <meta name="description" content="福岡・九州の企業向け生成AI導入支援 - ChatGPT・Claude・Whisperで業務効率化を実現">
+    <title>infoHiroki - 福岡の生成AI導入支援専門家</title>
+
+    <!-- OGPタグ -->
     <meta property="og:title" content="infoHiroki - 福岡の生成AI導入支援専門家">
     <meta property="og:description" content="福岡・九州の企業向け生成AI導入支援 - ChatGPT・Claude・Whisperで業務効率化を実現">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="infoHiroki">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitterカード -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="infoHiroki - 福岡の生成AI導入支援専門家">
+    <meta name="twitter:description" content="福岡・九州の企業向け生成AI導入支援 - ChatGPT・Claude・Whisperで業務効率化を実現">
+
+    <!-- ファビコン -->
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- 構造化データ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "infoHiroki",
+      "alternateName": "info Hiroki",
+      "description": "福岡・九州の企業向け生成AI導入支援 - ChatGPT・Claude・Whisperで業務効率化を実現",
+      "logo": "/images/logo.svg",
+      "sameAs": [],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "info.hirokitakamura@gmail.com",
+        "contactType": "customer service",
+        "availableLanguage": "Japanese"
+      }
+    }
+    </script>
 </head>
 <body>
-    <header>
-        <h1>infoHiroki</h1>
-        <p>福岡の生成AI導入支援専門家</p>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="/blog">ブログ</a></li>
-            <li><a href="/services">サービス</a></li>
-            <li><a href="/products">開発製品</a></li>
-            <li><a href="/results">実績</a></li>
-            <li><a href="/about">スキルスタック</a></li>
-            <li><a href="/faq">FAQ</a></li>
-            <li><a href="/contact">お問い合わせ</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section class="hero">
-            <h2>福岡・九州の企業向け生成AI導入支援</h2>
-            <p>ChatGPT・Claude・Whisperで業務効率化を実現</p>
-        </section>
-        <section class="services">
-            <h3>主なサービス</h3>
-            <ul>
-                <li>生成AI導入コンサルティング</li>
-                <li>カスタムAIソリューション開発</li>
-                <li>AI活用トレーニング</li>
-                <li>業務プロセス最適化</li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 infoHiroki. All rights reserved.</p>
-    </footer>
+    <div class="site-layout">
+        <!-- モバイル用ヘッダー -->
+        <header class="mobile-header">
+            <div class="mobile-header-content">
+                <a href="/" class="mobile-logo">
+                    <img src="/images/logo.svg" alt="infoHiroki Logo" width="36" height="36">
+                    <span class="mobile-title">infoHiroki</span>
+                </a>
+                <button class="hamburger-button" aria-label="メニューを開く">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- デスクトップ用サイドバー / モバイル用オーバーレイメニュー -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="site-title">
+                    <div class="logo">
+                        <img src="/images/logo.svg" alt="infoHiroki Logo" width="36" height="36">
+                    </div>
+                    <div class="title-text">
+                        <span class="company-name">infoHiroki</span>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item active">
+                        <a href="/" class="nav-link">ホーム</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/blog" class="nav-link">ブログ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/services" class="nav-link">サービス</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/products" class="nav-link">開発製品</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/results" class="nav-link">実績</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/about" class="nav-link">スキルスタック</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/faq" class="nav-link">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/contact" class="nav-link">お問い合わせ</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- モバイル用オーバーレイ -->
+        <div class="mobile-overlay"></div>
+
+        <div class="main-wrapper">
+            <main class="site-main">
+                <section class="hero hero-with-bg">
+                    <!-- ヒーロー画像のみ表示 -->
+                </section>
+
+                <section class="home-intro">
+                    <div class="container">
+                        <div class="philosophy-content">
+                            <p class="call-to-action"><strong>変革せよ。</strong></p>
+
+                            <div class="philosophy-text">
+                                <p>AIは既に現実です。<br>
+                                    今、生成AIを活用しない企業に未来はない。</p>
+                                <p>業務変革とは、人間の創造性を解放し、<br>
+                                    企業競争力を飛躍的に向上させる革新です。</p>
+                                <p>私たちは、ChatGPT・Claude・Geminiを駆使して、<br>
+                                    あなたの企業を変革します。</p>
+                                <p>議事録自動化から、文書作成、顧客対応まで。</p>
+                                <p class="final-statement">生成AIで、企業を変革します。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="home-services">
+                    <div class="container">
+                        <h2>生成AI導入支援サービス</h2>
+                        <div class="service-plans">
+                            <div class="plan-card recommended">
+                                <div class="plan-badge">人気</div>
+                                <h3>技術顧問サービス</h3>
+                                <div class="plan-price">月額 5万円</div>
+                                <p>継続的な生成AI活用技術支援</p>
+                            </div>
+                            <div class="plan-card">
+                                <h3>生成AI導入プロジェクト</h3>
+                                <div class="plan-price">20〜500万円</div>
+                                <p>企業規模に応じた生成AI導入を完了</p>
+                            </div>
+                        </div>
+                        <p class="cta">
+                            <a href="/services" class="button">サービス詳細を見る</a>
+                        </p>
+                    </div>
+                </section>
+
+                <section class="home-results">
+                    <div class="container">
+                        <h2>生成AI導入実績</h2>
+                        <div class="card-grid">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">桜十字福岡病院様</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>Whisper活用で議事録作成80%時短・月15万円コスト削減を実現</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">MEO対策企業様</h3>
+                                </div>
+                                <div class="card-body">
+                                    <p>ChatGPT・Claude活用で記事制作効率50%向上</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="cta">
+                            <a href="/results" class="button">実績詳細を見る</a>
+                        </p>
+                    </div>
+                </section>
+
+                <section class="home-about">
+                    <div class="container">
+                        <h2>About</h2>
+                        <div class="about-content">
+                            <h3>Hiroki Takamura</h3>
+                            <p>10歳でコンピューターに出会い、<br>
+                            インターネット黎明期の衝撃を体験。</p>
+
+                            <p>16歳でカポエラを始め、<br>
+                            ダンサー・振付師として東京ドーム公演やMV出演を経験。</p>
+
+                            <p>大学ではインド哲学を専攻し、東洋思想の深い理解を得る。<br>
+                            ヨガ講師（Sivananda Yoga TTC）として<br>
+                            10年以上の指導とDVD監修を手がける。</p>
+
+                            <p>ロープアクセス事業やWebディレクターなど、<br>
+                            身体と技術の両面から仕事を探求。</p>
+
+                            <p>ChatGPT登場から毎日AI/LLMを追いかけ続け、<br>
+                            これまでの多様な経験すべてが<br>
+                            「技術で人の習慣を変える」という現在の仕事に<br>
+                            つながっていることを実感している。</p>
+
+                            <p class="about-tagline"><strong>技術と人間、両方を深く理解する<br>
+                            専門家として活動中。</strong></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- LINE連絡セクション -->
+                <section class="line-contact-footer">
+                    <div class="container">
+                        <h3>💬 お気軽にご相談ください</h3>
+                        <p>サービスに関するご質問やご相談は、LINEからお気軽にお問い合わせください</p>
+                        <a href="https://lin.ee/8ymv2Nw" target="_blank" rel="noopener noreferrer" class="line-button-footer">
+                            LINEで相談する
+                        </a>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="minimal-footer">
+                <div class="container">
+                    <p>© 2022 infoHiroki. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
 </body>
 </html>`
 
