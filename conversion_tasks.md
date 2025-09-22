@@ -4,95 +4,95 @@
 
 - [x] 2024-03-27-notion-save-to-notion-extension
 - [x] 2024-03-29-chatgpt-reskilling-guide
-- [x] 2024-04-08-book-output-reading-technique-memo
-- [x] 2024-05-17-book-reflection-technique-memo
-- [x] 2024-05-17-book-world-class-engineer-thinking-memo
-- [x] 2024-05-19-ai-prompt-design-guide
-- [x] 2024-05-20-gas-terminology-collection
-- [x] 2024-05-20-programming-terminology-collection
-- [x] 2024-06-03-ai-notion-workflow
-- [x] 2024-06-03-note-chatgpt-notion-series-0
-- [x] 2024-06-04-notion-explanation-basic
-- [x] 2024-06-05-notion-shortcuts-guide
-- [x] 2024-06-06-notion-database-creation-guide
-- [x] 2024-06-13-chatgpt-notion-history-extension
-- [x] 2024-06-15-book-manana-principle-memo
-- [x] 2024-06-25-ai-notion-casual-talk
-- [x] 2024-07-08-note-language-context-theory
-- [x] 2024-07-11-note-ai-reflection-experience
-- [x] 2024-07-30-note-youtube-summary-tools
-- [x] 2024-09-01-note-mac-text-input-shortcuts
-- [x] 2024-10-14-ai-notion-tasker-chrome-extension
-- [x] 2024-11-20-chatgpt-ai-tools-4selection
-- [x] 2024-12-09-ai-driven-development-summary
-- [x] 2025-01-09-cody-ai-chrome-extension-development
-- [x] 2025-01-21-youtube-transcript-copier-ai-development
-- [x] 2025-01-26-chrome-extensions-practical-3-selections
-- [x] 2025-02-20-chatgpt-survived-ai-tools-4-selections-2025
-- [x] 2025-02-20-prompt-storage-problem
-- [x] 2025-03-29-habit-environment-design-essence
-- [x] 2025-03-30-habit-bj-fogg-behavior-model
-- [x] 2025-03-30-habit-environment-design
-- [x] 2025-03-30-habit-four-laws-james-clear
-- [x] 2025-03-30-habit-identity-based
-- [x] 2025-03-30-habit-loop-structure
-- [x] 2025-03-30-habit-small-is-key
-- [x] 2025-03-30-habit-small-start-principle
-- [x] 2025-03-30-habit-systems-thinking
-- [x] 2025-04-19-tech-react
-- [x] 2025-04-22-tech-fastapibasicexplanation
-- [x] 2025-04-23-tech-python
-- [x] 2025-05-06-tech-obsidian
-- [x] 2025-05-13-tech-whisper-ai-guide
-- [x] 2025-05-14-design-figma-to-framer-guide
-- [x] 2025-05-14-design-framer-html-extension-guide
-- [x] 2025-05-14-design-framer-practical-manual
-- [x] 2025-05-15-design-aseprite-basic-manual
-- [x] 2025-05-15-design-aseprite-pixel-art-guide
-- [x] 2025-05-15-design-aseprite-reference-image-guide
-- [x] 2025-05-15-tech-lazygit-cheatsheet
-- [x] 2025-05-16-design-figma-to-responsive-web-guide
-- [x] 2025-05-16-tech-apscheduler
-- [x] 2025-05-19-edu-ai
-- [x] 2025-05-24-tech-claude-code-30min-masterclass
-- [x] 2025-05-24-tech-firebase-explanation
-- [x] 2025-05-24-tech-serverside-programming-languages-guide
-- [x] 2025-06-05-ollama-cline-local-llm
-- [x] 2025-06-05-tech-claude-code-comprehensive-guide
-- [x] 2025-06-06-cursor-1-0-new-features
-- [x] 2025-06-07-git-github-complete-cheatsheet
-- [x] 2025-06-09-tech-docker-virtualization-complete-guide
-- [x] 2025-06-09-tech-uv-python-package-manager-comp
-- [x] 2025-06-10-tech-devops-mastering-roadmap-2025
-- [x] 2025-06-18-edu-ai-practical7
-- [x] 2025-06-21-tech-github-actions-cicd-guide
-- [x] 2025-06-21-tech-software-design-patterns-guide
-- [x] 2025-06-22-tech-claude-code-features-summary
-- [x] 2025-06-26-edu-ai-summary
-- [x] 2025-06-26-gemini-cli-vs-claude-code-review
-- [x] 2025-06-26-system-education-training
-- [x] 2025-06-26-tech-claude-code
-- [x] 2025-06-26-tech-go-tutorial
-- [x] 2025-06-26-tech-llmo-checklist
-- [x] 2025-06-27-edu-genspark-ai
-- [x] 2025-06-27-tech-vscode-github-copilot
-- [x] 2025-06-28-tech-ai-seo-strategy
-- [x] 2025-07-01-gemini-cli-report
-- [x] 2025-07-01-google-gemini-cli-report
-- [x] 2025-07-03-team-development-guide
-- [x] 2025-07-05-openai-podcast-comprehensive-summary
-- [x] 2025-07-05-quantum-grover-algorithm-infographic
-- [x] 2025-07-06-plotly-dash-dashboard-guide
-- [x] 2025-07-07-ai-agent-tools-infographic
-- [x] 2025-07-07-ai-dev-infographic
-- [x] 2025-07-19-chatgpt-agent-mode-guide
-- [x] 2025-07-19-gemini-cli-guide
-- [x] 2025-07-19-nextjs-hosting-comparison
-- [x] 2025-07-19-tech-stack-comparison
-- [x] 2025-08-04-claude-agents-guide
-- [x] 2025-08-04-vibe-coding-guide
-- [x] 2025-08-09-gpt-oss-local-guide
-- [x] 2025-08-11-python-uv-package-manager
-- [x] 2025-08-15-davinci-resolve-install-guide
-- [x] 2025-08-25-google-deep-research-diffusion
-- [x] 2025-08-26-vim-cheat-sheet
+- [ ] 2024-04-08-book-output-reading-technique-memo
+- [ ] 2024-05-17-book-reflection-technique-memo
+- [ ] 2024-05-17-book-world-class-engineer-thinking-memo
+- [ ] 2024-05-19-ai-prompt-design-guide
+- [ ] 2024-05-20-gas-terminology-collection
+- [ ] 2024-05-20-programming-terminology-collection
+- [ ] 2024-06-03-ai-notion-workflow
+- [ ] 2024-06-03-note-chatgpt-notion-series-0
+- [ ] 2024-06-04-notion-explanation-basic
+- [ ] 2024-06-05-notion-shortcuts-guide
+- [ ] 2024-06-06-notion-database-creation-guide
+- [ ] 2024-06-13-chatgpt-notion-history-extension
+- [ ] 2024-06-15-book-manana-principle-memo
+- [ ] 2024-06-25-ai-notion-casual-talk
+- [ ] 2024-07-08-note-language-context-theory
+- [ ] 2024-07-11-note-ai-reflection-experience
+- [ ] 2024-07-30-note-youtube-summary-tools
+- [ ] 2024-09-01-note-mac-text-input-shortcuts
+- [ ] 2024-10-14-ai-notion-tasker-chrome-extension
+- [ ] 2024-11-20-chatgpt-ai-tools-4selection
+- [ ] 2024-12-09-ai-driven-development-summary
+- [ ] 2025-01-09-cody-ai-chrome-extension-development
+- [ ] 2025-01-21-youtube-transcript-copier-ai-development
+- [ ] 2025-01-26-chrome-extensions-practical-3-selections
+- [ ] 2025-02-20-chatgpt-survived-ai-tools-4-selections-2025
+- [ ] 2025-02-20-prompt-storage-problem
+- [ ] 2025-03-29-habit-environment-design-essence
+- [ ] 2025-03-30-habit-bj-fogg-behavior-model
+- [ ] 2025-03-30-habit-environment-design
+- [ ] 2025-03-30-habit-four-laws-james-clear
+- [ ] 2025-03-30-habit-identity-based
+- [ ] 2025-03-30-habit-loop-structure
+- [ ] 2025-03-30-habit-small-is-key
+- [ ] 2025-03-30-habit-small-start-principle
+- [ ] 2025-03-30-habit-systems-thinking
+- [ ] 2025-04-19-tech-react
+- [ ] 2025-04-22-tech-fastapibasicexplanation
+- [ ] 2025-04-23-tech-python
+- [ ] 2025-05-06-tech-obsidian
+- [ ] 2025-05-13-tech-whisper-ai-guide
+- [ ] 2025-05-14-design-figma-to-framer-guide
+- [ ] 2025-05-14-design-framer-html-extension-guide
+- [ ] 2025-05-14-design-framer-practical-manual
+- [ ] 2025-05-15-design-aseprite-basic-manual
+- [ ] 2025-05-15-design-aseprite-pixel-art-guide
+- [ ] 2025-05-15-design-aseprite-reference-image-guide
+- [ ] 2025-05-15-tech-lazygit-cheatsheet
+- [ ] 2025-05-16-design-figma-to-responsive-web-guide
+- [ ] 2025-05-16-tech-apscheduler
+- [ ] 2025-05-19-edu-ai
+- [ ] 2025-05-24-tech-claude-code-30min-masterclass
+- [ ] 2025-05-24-tech-firebase-explanation
+- [ ] 2025-05-24-tech-serverside-programming-languages-guide
+- [ ] 2025-06-05-ollama-cline-local-llm
+- [ ] 2025-06-05-tech-claude-code-comprehensive-guide
+- [ ] 2025-06-06-cursor-1-0-new-features
+- [ ] 2025-06-07-git-github-complete-cheatsheet
+- [ ] 2025-06-09-tech-docker-virtualization-complete-guide
+- [ ] 2025-06-09-tech-uv-python-package-manager-comp
+- [ ] 2025-06-10-tech-devops-mastering-roadmap-2025
+- [ ] 2025-06-18-edu-ai-practical7
+- [ ] 2025-06-21-tech-github-actions-cicd-guide
+- [ ] 2025-06-21-tech-software-design-patterns-guide
+- [ ] 2025-06-22-tech-claude-code-features-summary
+- [ ] 2025-06-26-edu-ai-summary
+- [ ] 2025-06-26-gemini-cli-vs-claude-code-review
+- [ ] 2025-06-26-system-education-training
+- [ ] 2025-06-26-tech-claude-code
+- [ ] 2025-06-26-tech-go-tutorial
+- [ ] 2025-06-26-tech-llmo-checklist
+- [ ] 2025-06-27-edu-genspark-ai
+- [ ] 2025-06-27-tech-vscode-github-copilot
+- [ ] 2025-06-28-tech-ai-seo-strategy
+- [ ] 2025-07-01-gemini-cli-report
+- [ ] 2025-07-01-google-gemini-cli-report
+- [ ] 2025-07-03-team-development-guide
+- [ ] 2025-07-05-openai-podcast-comprehensive-summary
+- [ ] 2025-07-05-quantum-grover-algorithm-infographic
+- [ ] 2025-07-06-plotly-dash-dashboard-guide
+- [ ] 2025-07-07-ai-agent-tools-infographic
+- [ ] 2025-07-07-ai-dev-infographic
+- [ ] 2025-07-19-chatgpt-agent-mode-guide
+- [ ] 2025-07-19-gemini-cli-guide
+- [ ] 2025-07-19-nextjs-hosting-comparison
+- [ ] 2025-07-19-tech-stack-comparison
+- [ ] 2025-08-04-claude-agents-guide
+- [ ] 2025-08-04-vibe-coding-guide
+- [ ] 2025-08-09-gpt-oss-local-guide
+- [ ] 2025-08-11-python-uv-package-manager
+- [ ] 2025-08-15-davinci-resolve-install-guide
+- [ ] 2025-08-25-google-deep-research-diffusion
+- [ ] 2025-08-26-vim-cheat-sheet

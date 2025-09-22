@@ -307,6 +307,16 @@ func generateMetadataFromSlug(slug string) (title, description, tags, icon strin
 			"2007年から2025年まで：Google三巨頭が創造した言語が、いかにしてDocker・Kubernetesの基盤となり、現代インフラを支配するに至ったか",
 			`["Go","プログラミング言語","歴史","Docker","Kubernetes","Google","クラウドネイティブ","技術史","コンテナ","DevOps"]`,
 			"🏛️"
+	case strings.Contains(slug, "notion-save-to-notion-extension"):
+		return "Notion Web ClipperよりSave to Notionの方がおすすめだよ〜",
+			"Chrome拡張機能「Save to Notion」の紹介記事です。",
+			`["note","Notion","ツール","Chrome拡張"]`,
+			"/images/Notion icon.png"
+	case strings.Contains(slug, "chatgpt-reskilling-guide"):
+		return "ChatGPTでリスキリング",
+			"現代はリスキリングが必須なので、ChatGPTでリスキリングしよう。ChatGPTでキャリア形成や戦略を立てられるようにする。",
+			`["ChatGPT","リスキリング","キャリア","AI活用","スキルアップ"]`,
+			"/images/ChatGPT icon.webp"
 	case strings.Contains(slug, "golang"):
 		return "Go言語の歴史と技術革新",
 			"Go言語（Golang）の開発歴史と現代への影響を詳しく解説",
