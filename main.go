@@ -4,7 +4,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -22,19 +21,6 @@ import (
 var allPosts []models.BlogPost
 var allPages []models.Page
 
-type FileMetadata struct {
-	ID          string   `json:"id"`
-	Path        string   `json:"path"`
-	Title       string   `json:"title"`
-	Description string   `json:"description"`
-	Icon        string   `json:"icon"`
-	Tags        []string `json:"tags"`
-	Created     string   `json:"created"`
-}
-
-type FilesJSON struct {
-	Files []FileMetadata `json:"files"`
-}
 
 func main() {
 	// データ初期化（ファイルベース）
@@ -72,7 +58,11 @@ func main() {
 	r.GET("/api/search", searchBlogPosts)
 
 	// サーバー起動
-	r.Run(":8080")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	r.Run(":" + port)
 }
 
 // ホームページ
@@ -90,17 +80,15 @@ func homePage(c *gin.Context) {
 // ブログ一覧
 func blogList(c *gin.Context) {
 	query := c.Query("q")
-	tag := c.Query("tag")
 
 	// ファイルベースでのフィルタリング
-	posts := filterPosts(allPosts, query, tag)
+	posts := filterPosts(allPosts, query)
 
 	c.HTML(http.StatusOK, "blog.html", gin.H{
 		"title":           "ブログ | infoHiroki",
 		"page":            "blog",
 		"posts":           posts,
 		"query":           query,
-		"tag":             tag,
 		"metaDescription": "infoHirokiのブログ - 生成AI・技術・開発に関する記事を配信中",
 		"ogTitle":         "ブログ | infoHiroki",
 		"ogDescription":   "福岡・九州の生成AI導入支援専門家による技術ブログ",
@@ -230,7 +218,7 @@ func searchBlogPosts(c *gin.Context) {
 	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "10"))
 
 	// ファイルベースでの検索
-	posts := filterPosts(allPosts, query, "")
+	posts := filterPosts(allPosts, query)
 	if len(posts) > limit {
 		posts = posts[:limit]
 	}
@@ -243,7 +231,7 @@ func searchBlogPosts(c *gin.Context) {
 }
 
 // ファイルベースでのフィルタリング関数
-func filterPosts(posts []models.BlogPost, query, tag string) []models.BlogPost {
+func filterPosts(posts []models.BlogPost, query string) []models.BlogPost {
 	var result []models.BlogPost
 
 	for _, post := range posts {
@@ -259,17 +247,11 @@ func filterPosts(posts []models.BlogPost, query, tag string) []models.BlogPost {
 			}
 		}
 
-		// タグフィルタ
-		if tag != "" {
-			if !strings.Contains(strings.ToLower(post.Tags), strings.ToLower(tag)) {
-				continue
-			}
-		}
 
 		result = append(result, post)
 	}
 
-	// 作成日の降順でソート
+	// 新しい記事が上に来るように作成日の降順でソート
 	for i := 0; i < len(result)-1; i++ {
 		for j := i + 1; j < len(result); j++ {
 			if result[i].CreatedDate.Before(result[j].CreatedDate) {
@@ -287,9 +269,6 @@ func initializeData() {
 	allPosts = []models.BlogPost{}
 	allPages = []models.Page{}
 
-	// metadata.jsonからブログ記事を読み込み
-	loadFromFilesJSON()
-
 	// Markdownファイルの読み込み
 	loadMarkdownFiles()
 
@@ -297,50 +276,6 @@ func initializeData() {
 }
 
 // content/metadata.jsonからブログ記事を読み込み
-func loadFromFilesJSON() {
-	fmt.Println("📚 ブログ記事を読み込み中...")
-
-	jsonData, err := os.ReadFile("content/metadata.json")
-	if err != nil {
-		fmt.Printf("content/metadata.json読み込みエラー: %v\n", err)
-		return
-	}
-
-	var filesJSON FilesJSON
-	if err := json.Unmarshal(jsonData, &filesJSON); err != nil {
-		fmt.Printf("JSON解析エラー: %v\n", err)
-		return
-	}
-
-	for _, file := range filesJSON.Files {
-		createdDate, _ := time.Parse("2006-01-02", file.Created)
-		tagsJSON, _ := json.Marshal(file.Tags)
-
-		blogPost := models.BlogPost{
-			Slug:        file.ID,
-			Title:       file.Title,
-			Description: file.Description,
-			Tags:        string(tagsJSON),
-			Icon:        file.Icon,
-			CreatedDate: createdDate,
-			Published:   true,
-		}
-
-		// 重複チェック
-		exists := false
-		for _, existing := range allPosts {
-			if existing.Slug == file.ID {
-				exists = true
-				break
-			}
-		}
-		if !exists {
-			allPosts = append(allPosts, blogPost)
-		}
-	}
-
-	fmt.Printf("✅ %d件のブログ記事を処理完了\n", len(filesJSON.Files))
-}
 
 // content/articlesディレクトリから記事ファイルを読み込み（HTML/Markdown両対応）
 func loadMarkdownFiles() {
@@ -410,8 +345,10 @@ func loadMarkdownFile(filePath string) error {
 		createdDate = time.Now()
 	}
 
-	// ファイル名に基づいてメタデータを設定
-	title, description, tags, icon := generateMetadataFromSlug(slug)
+	// Markdownファイルからメタデータを動的に抽出
+	title := extractTitleFromMarkdown(string(content))
+	description := extractDescriptionFromMarkdown(string(content))
+	icon := extractIconFromTitle(title)
 
 	blogPost := models.BlogPost{
 		Slug:         slug,
@@ -422,7 +359,6 @@ func loadMarkdownFile(filePath string) error {
 		CreatedDate:  createdDate,
 		Published:    true,
 		Description:  description,
-		Tags:         tags,
 		Icon:         icon,
 	}
 
@@ -432,31 +368,60 @@ func loadMarkdownFile(filePath string) error {
 	return nil
 }
 
-// ファイル名（スラッグ）からメタデータを生成
-func generateMetadataFromSlug(slug string) (title, description, tags, icon string) {
-	switch {
-	case strings.Contains(slug, "go-complete-history"):
-		return "Go言語完全史：クラウドネイティブ時代を切り開いた革新言語の18年間",
-			"2007年から2025年まで：Google三巨頭が創造した言語が、いかにしてDocker・Kubernetesの基盤となり、現代インフラを支配するに至ったか",
-			`["Go","プログラミング言語","歴史","Docker","Kubernetes","Google","クラウドネイティブ","技術史","コンテナ","DevOps"]`,
-			"🏛️"
-	case strings.Contains(slug, "golang"):
-		return "Go言語の歴史と技術革新",
-			"Go言語（Golang）の開発歴史と現代への影響を詳しく解説",
-			`["Go","Golang","プログラミング言語","歴史","Google"]`,
-			"🏛️"
-	case strings.Contains(slug, "markdown-test"):
-		return "Markdownテスト記事",
-			"Markdownシステムのテスト記事です",
-			`["Markdown","テスト","ブログシステム"]`,
-			"📝"
-	default:
-		// デフォルトの場合はファイル名から生成
-		title = strings.ReplaceAll(slug, "-", " ")
-		title = strings.Title(title)
-		return title,
-			"Markdownで作成された記事",
-			`["Markdown","ブログ"]`,
-			"📝"
+// Markdownファイルからタイトルを抽出
+func extractTitleFromMarkdown(content string) string {
+	lines := strings.Split(content, "\n")
+	for _, line := range lines {
+		line = strings.TrimSpace(line)
+		if strings.HasPrefix(line, "# ") {
+			title := strings.TrimSpace(strings.TrimPrefix(line, "# "))
+			if title != "" {
+				return title
+			}
+		}
 	}
+	return "タイトル未設定"
 }
+
+// Markdownファイルから説明文を抽出
+func extractDescriptionFromMarkdown(content string) string {
+	lines := strings.Split(content, "\n")
+
+	for _, line := range lines {
+		line = strings.TrimSpace(line)
+
+		// 空行や見出し、画像はスキップ
+		if line == "" || strings.HasPrefix(line, "#") || strings.HasPrefix(line, "![") || strings.HasPrefix(line, "---") {
+			continue
+		}
+
+		// 最初の有効な段落を説明文として使用
+		if len(line) > 20 { // 短すぎる行は除外
+			return line
+		}
+	}
+	return "Markdownで作成された記事"
+}
+
+// タイトルからアイコンを抽出
+func extractIconFromTitle(title string) string {
+	if title == "" {
+		return "📝"
+	}
+
+	runes := []rune(title)
+	if len(runes) > 0 {
+		firstChar := runes[0]
+		// 絵文字の範囲をチェック（簡易版）
+		if firstChar >= 0x1F300 && firstChar <= 0x1F9FF {
+			return string(firstChar)
+		}
+		// 基本的な絵文字もチェック
+		switch firstChar {
+		case '🐹', '📖', '🔖', '📝', '🚀', '💡', '🎯', '⚡', '🌟':
+			return string(firstChar)
+		}
+	}
+	return "📝" // デフォルト
+}
+

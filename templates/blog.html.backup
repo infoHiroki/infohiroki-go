@@ -36,7 +36,7 @@
         }
         
         .search-container {
-            max-width: 1400px; /* Updated for wider search bar v2 */
+            max-width: 800px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -46,14 +46,14 @@
         
         .search-input-wrapper {
             width: 100%;
-            max-width: 800px;
+            max-width: 400px;
             display: flex;
             justify-content: center;
             gap: var(--spacing-xs);
         }
         
         .search-input {
-            width: 400px;
+            width: 100%;
             padding: var(--spacing-md);
             border: 2px solid var(--color-border);
             border-radius: 8px;
@@ -139,9 +139,9 @@
 
         .search-button {
             padding: var(--spacing-md);
-            background-color: transparent;
-            color: var(--color-text-light);
-            border: 2px solid var(--color-border);
+            background-color: var(--color-accent);
+            color: white;
+            border: none;
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
@@ -150,9 +150,7 @@
         }
 
         .search-button:hover {
-            background-color: var(--color-accent);
-            color: white;
-            border-color: var(--color-accent);
+            background-color: var(--color-primary);
         }
         
         
@@ -459,13 +457,172 @@
     
     <script src="/js/main.js"></script>
     <script>
-        // シンプルな検索機能 (サーバーサイドレンダリング対応)
+        // HTMLVault機能を統合 - infohirokiデザイン対応
+        let allFiles = [];
+        let filteredFiles = [];
+        let searchQuery = '';
+        let autoManager = null;
+        
+        // blog-loader.jsを使用したファイル読み込み
+        async function loadFiles() {
+            try {
+                // blog-loader.js の AutoFileManager を使用
+                if (!autoManager) {
+                    autoManager = new AutoFileManager();
+                }
+                
+                allFiles = await autoManager.refreshFileList();
+                console.log('自動検出されたファイル:', allFiles);
+                console.log(`🔍 読み込み結果: ${allFiles.length}件のファイルが検出されました`);
+                
+                // 問題のある記事を特別にチェック
+                const notionArticle = allFiles.find(f => f.id === 'notion-database-creation-guide');
+                const chromeArticle = allFiles.find(f => f.id === 'chrome-extensions-practical-3-selections');
+                console.log('Notion記事:', notionArticle);
+                console.log('Chrome拡張記事:', chromeArticle);
+                
+                // フォールバック: 直接files.jsonを読み込み
+                if (allFiles.length === 0) {
+                    const response = await fetch('files.json');
+                    const data = await response.json();
+                    allFiles = data.files || [];
+                }
+                
+                filteredFiles = [...allFiles];
+                applyFilters();
+                renderArticles();
+                
+            } catch (error) {
+                console.error('ファイルの読み込みに失敗しました:', error);
+                // 最終フォールバック
+                try {
+                    const response = await fetch('files.json');
+                    const data = await response.json();
+                    allFiles = data.files || [];
+                    filteredFiles = [...allFiles];
+                    renderArticles();
+                } catch (fallbackError) {
+                    console.error('フォールバック読み込みも失敗しました:', fallbackError);
+                }
+            }
+        }
+        
+        // 記事カードを生成（infohirokiスタイル）
+        function createArticleCard(file) {
+            
+            // アイコン表示ロジック
+            function renderIcon(icon) {
+                if (!icon) {
+                    return '<span class="article-icon">📝</span>'; // デフォルトアイコン
+                }
+                
+                // Skill Icons URL形式の場合
+                if (icon.startsWith('https://skillicons.dev/icons')) {
+                    return `<img src="${icon}" class="article-icon" alt="icon">`;
+                }
+                
+                // ローカル画像ファイルの場合
+                if (icon.includes('.png') || icon.includes('.jpg') || icon.includes('.svg') || icon.includes('.webp')) {
+                    return `<img src="${icon}" class="article-icon" alt="icon">`;
+                }
+                
+                // 絵文字の場合
+                return `<span class="article-icon">${icon}</span>`;
+            }
+            
+            const iconHtml = renderIcon(file.icon);
+            
+            return `
+                <article class="article-card" onclick="openFile('${file.path}')">
+                    <div class="article-header">
+                        ${iconHtml}
+                        <time class="article-date">${file.created}</time>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="article-title">
+                            <a href="#" onclick="event.preventDefault(); openFile('${file.path}');">${file.title}</a>
+                        </h3>
+                        <p class="article-description">${file.description}</p>
+                    </div>
+                </article>
+            `;
+        }
+        
+        // ファイルを開く関数
+        function openFile(path) {
+            // pathが既にhtml-files/で始まっている場合はそのまま、そうでなければ追加
+            const fullPath = path.startsWith('html-files/') ? path : `html-files/${path}`;
+            window.location.href = fullPath;
+        }
+        
+        // 記事を表示
+        function renderArticles() {
+            const container = document.getElementById('articlesContainer');
+            const noResults = document.getElementById('noResults');
+            
+            if (filteredFiles.length === 0) {
+                container.innerHTML = '';
+                noResults.style.display = 'block';
+            } else {
+                container.innerHTML = filteredFiles.map(createArticleCard).join('');
+                noResults.style.display = 'none';
+            }
+        }
+        
+        
+        // フィルター適用（検索とソート）
+        function applyFilters() {
+            let result = [...allFiles];
+            
+            // 検索フィルター
+            if (searchQuery) {
+                result = result.filter(file => {
+                    const searchFields = [
+                        file.title,
+                        file.description
+                    ].join(' ').toLowerCase();
+                    return searchFields.includes(searchQuery);
+                });
+            }
+            
+            
+            
+            filteredFiles = result;
+            renderArticles();
+        }
+        
+        // 検索機能
+        function search(query) {
+            searchQuery = query.toLowerCase().trim();
+            applyFilters();
+        }
+        
+        // イベントリスナー
         document.addEventListener('DOMContentLoaded', function() {
-            // Ctrl+K または Cmd+K で検索フィールドをフォーカス
+            loadFiles();
+            
+            // 検索入力（デバウンス機能付き）
+            const searchInput = document.getElementById('searchInput');
+            let searchTimeout;
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(() => {
+                        search(e.target.value);
+                    }, 300);
+                });
+            }
+            
+            
+            
+            
+            // キーボードショートカット
             document.addEventListener('keydown', (e) => {
-                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                if (e.key === 'Escape') {
+                    searchInput?.blur();
+                }
+                if (e.key === '/' && !e.target.matches('input')) {
                     e.preventDefault();
-                    const searchInput = document.querySelector('input[name="q"]');
                     searchInput?.focus();
                 }
             });

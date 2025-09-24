@@ -1,7 +1,6 @@
 package models
 
 import (
-	"encoding/json"
 	"html/template"
 	"strings"
 	"time"
@@ -15,7 +14,6 @@ type BlogPost struct {
 	Title       string    `json:"title"`
 	Content     string    `json:"content"`
 	Description string    `json:"description"`
-	Tags        string    `json:"tags"` // JSON array as string
 	Icon        string    `json:"icon"`
 	ContentType string    `json:"content_type"` // "html" or "markdown"
 	MarkdownPath string   `json:"markdown_path"` // .mdファイルパス
@@ -37,30 +35,11 @@ func (b *BlogPost) ToMarkdown() string {
 
 	result += "**作成日:** " + b.CreatedDate.Format("2006年01月02日") + "\n\n"
 
-	if b.Tags != "" {
-		result += "**タグ:** " + b.Tags + "\n\n"
-	}
-
 	result += "---\n\n" + b.Content
 
 	return result
 }
 
-// GetTagsSlice parses the JSON tags string and returns a slice of strings
-func (b *BlogPost) GetTagsSlice() []string {
-	if b.Tags == "" {
-		return []string{}
-	}
-
-	var tags []string
-	err := json.Unmarshal([]byte(b.Tags), &tags)
-	if err != nil {
-		// If JSON parsing fails, treat as a single tag
-		return []string{b.Tags}
-	}
-
-	return tags
-}
 
 // IsIconURL checks if the icon field contains a URL or path
 func (b *BlogPost) IsIconURL() bool {

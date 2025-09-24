@@ -4,7 +4,7 @@
 
 - [x] 2024-03-27-notion-save-to-notion-extension
 - [x] 2024-03-29-chatgpt-reskilling-guide
-- [ ] 2024-04-08-book-output-reading-technique-memo
+- [x] 2024-04-08-book-output-reading-technique-memo
 - [ ] 2024-05-17-book-reflection-technique-memo
 - [ ] 2024-05-17-book-world-class-engineer-thinking-memo
 - [ ] 2024-05-19-ai-prompt-design-guide
