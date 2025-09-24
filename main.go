@@ -409,6 +409,20 @@ func extractIconFromTitle(title string) string {
 		return "📝"
 	}
 
+	titleLower := strings.ToLower(title)
+
+	// 特定のキーワードベースでアイコンを決定
+	if strings.Contains(titleLower, "chatgpt") || strings.Contains(titleLower, "ai") || strings.Contains(titleLower, "リスキリング") {
+		return "🤖"
+	}
+	if strings.Contains(titleLower, "notion") {
+		return "📝"
+	}
+	if strings.Contains(titleLower, "go") || strings.Contains(titleLower, "golang") {
+		return "🐹"
+	}
+
+	// タイトルの最初の文字が絵文字の場合はそれを使用
 	runes := []rune(title)
 	if len(runes) > 0 {
 		firstChar := runes[0]
@@ -418,7 +432,7 @@ func extractIconFromTitle(title string) string {
 		}
 		// 基本的な絵文字もチェック
 		switch firstChar {
-		case '🐹', '📖', '🔖', '📝', '🚀', '💡', '🎯', '⚡', '🌟':
+		case '🐹', '📖', '🔖', '📝', '🚀', '💡', '🎯', '⚡', '🌟', '🤖':
 			return string(firstChar)
 		}
 	}

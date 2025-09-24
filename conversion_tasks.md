@@ -2,8 +2,8 @@
 
 ## 変換対象記事（94件）
 
-- [x] 2024-03-27-notion-save-to-notion-extension
-- [x] 2024-03-29-chatgpt-reskilling-guide
+- [x] 2024-03-27-notion-save-to-notion-extension ✅ 完成 (絵文字: 🔖, Notion関連)
+- [x] 2024-03-29-chatgpt-reskilling-guide ✅ 完成 (絵文字: 🤖, ChatGPT/AI関連)
 - [x] 2024-04-08-book-output-reading-technique-memo
 - [ ] 2024-05-17-book-reflection-technique-memo
 - [ ] 2024-05-17-book-world-class-engineer-thinking-memo
