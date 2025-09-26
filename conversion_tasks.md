@@ -5,76 +5,76 @@
 - [x] 2024-03-27-notion-save-to-notion-extension ✅ 完成 (絵文字: 🔖, Notion関連)
 - [x] 2024-03-29-chatgpt-reskilling-guide ✅ 完成 (絵文字: 🤖, ChatGPT/AI関連)
 - [x] 2024-04-08-book-output-reading-technique-memo
-- [ ] 2024-05-17-book-reflection-technique-memo
-- [ ] 2024-05-17-book-world-class-engineer-thinking-memo
-- [ ] 2024-05-19-ai-prompt-design-guide
-- [ ] 2024-05-20-gas-terminology-collection
-- [ ] 2024-05-20-programming-terminology-collection
-- [ ] 2024-06-03-ai-notion-workflow
-- [ ] 2024-06-03-note-chatgpt-notion-series-0
-- [ ] 2024-06-04-notion-explanation-basic
-- [ ] 2024-06-05-notion-shortcuts-guide
-- [ ] 2024-06-06-notion-database-creation-guide
-- [ ] 2024-06-13-chatgpt-notion-history-extension
-- [ ] 2024-06-15-book-manana-principle-memo
-- [ ] 2024-06-25-ai-notion-casual-talk
-- [ ] 2024-07-08-note-language-context-theory
-- [ ] 2024-07-11-note-ai-reflection-experience
-- [ ] 2024-07-30-note-youtube-summary-tools
-- [ ] 2024-09-01-note-mac-text-input-shortcuts
-- [ ] 2024-10-14-ai-notion-tasker-chrome-extension
-- [ ] 2024-11-20-chatgpt-ai-tools-4selection
-- [ ] 2024-12-09-ai-driven-development-summary
-- [ ] 2025-01-09-cody-ai-chrome-extension-development
-- [ ] 2025-01-21-youtube-transcript-copier-ai-development
-- [ ] 2025-01-26-chrome-extensions-practical-3-selections
-- [ ] 2025-02-20-chatgpt-survived-ai-tools-4-selections-2025
-- [ ] 2025-02-20-prompt-storage-problem
-- [ ] 2025-03-29-habit-environment-design-essence
-- [ ] 2025-03-30-habit-bj-fogg-behavior-model
-- [ ] 2025-03-30-habit-environment-design
-- [ ] 2025-03-30-habit-four-laws-james-clear
-- [ ] 2025-03-30-habit-identity-based
-- [ ] 2025-03-30-habit-loop-structure
-- [ ] 2025-03-30-habit-small-is-key
-- [ ] 2025-03-30-habit-small-start-principle
-- [ ] 2025-03-30-habit-systems-thinking
-- [ ] 2025-04-19-tech-react
-- [ ] 2025-04-22-tech-fastapibasicexplanation
-- [ ] 2025-04-23-tech-python
-- [ ] 2025-05-06-tech-obsidian
-- [ ] 2025-05-13-tech-whisper-ai-guide
-- [ ] 2025-05-14-design-figma-to-framer-guide
-- [ ] 2025-05-14-design-framer-html-extension-guide
-- [ ] 2025-05-14-design-framer-practical-manual
-- [ ] 2025-05-15-design-aseprite-basic-manual
-- [ ] 2025-05-15-design-aseprite-pixel-art-guide
-- [ ] 2025-05-15-design-aseprite-reference-image-guide
-- [ ] 2025-05-15-tech-lazygit-cheatsheet
-- [ ] 2025-05-16-design-figma-to-responsive-web-guide
-- [ ] 2025-05-16-tech-apscheduler
-- [ ] 2025-05-19-edu-ai
-- [ ] 2025-05-24-tech-claude-code-30min-masterclass
-- [ ] 2025-05-24-tech-firebase-explanation
-- [ ] 2025-05-24-tech-serverside-programming-languages-guide
+- [x] 2024-05-17-book-reflection-technique-memo ✅ 完成
+- [x] 2024-05-17-book-world-class-engineer-thinking-memo ✅ 完成
+- [x] 2024-05-19-ai-prompt-design-guide ✅ 完成
+- [x] 2024-05-20-gas-terminology-collection ✅ 完成
+- [x] 2024-05-20-programming-terminology-collection ✅ 完成
+- [x] 2024-06-03-ai-notion-workflow ✅ 完成
+- [x] 2024-06-03-note-chatgpt-notion-series-0 ✅ 完成
+- [x] 2024-06-04-notion-explanation-basic ✅ 完成
+- [x] 2024-06-05-notion-shortcuts-guide ✅ 完成
+- [x] 2024-06-06-notion-database-creation-guide ✅ 完成
+- [x] 2024-06-13-chatgpt-notion-history-extension ✅ 完成
+- [x] 2024-06-15-book-manana-principle-memo ✅ 完成
+- [x] 2024-06-25-ai-notion-casual-talk ✅ 完成
+- [x] 2024-07-08-note-language-context-theory ✅ 完成
+- [x] 2024-07-11-note-ai-reflection-experience ✅ 完成
+- [x] 2024-07-30-note-youtube-summary-tools ✅ 完成
+- [x] 2024-09-01-note-mac-text-input-shortcuts ✅ 完成
+- [x] 2024-10-14-ai-notion-tasker-chrome-extension ✅ 完成
+- [x] 2024-11-20-chatgpt-ai-tools-4selection ✅ 完成
+- [x] 2024-12-09-ai-driven-development-summary ✅ 完成
+- [x] 2025-01-09-cody-ai-chrome-extension-development ✅ 完成
+- [x] 2025-01-21-youtube-transcript-copier-ai-development ✅ 完成
+- [x] 2025-01-26-chrome-extensions-practical-3-selections ✅ 完成
+- [x] 2025-02-20-chatgpt-survived-ai-tools-4-selections-2025 ✅ 完成
+- [x] 2025-02-20-prompt-storage-problem ✅ 完成
+- [x] 2025-03-29-habit-environment-design-essence ✅ 完成 (絵文字: 🏠, 習慣形成・環境デザイン)
+- [x] 2025-03-30-habit-bj-fogg-behavior-model ✅ 完成
+- [x] 2025-03-30-habit-environment-design ✅ 完成
+- [x] 2025-03-30-habit-four-laws-james-clear ✅ 完成
+- [x] 2025-03-30-habit-identity-based ✅ 完成
+- [x] 2025-03-30-habit-loop-structure ✅ 完成
+- [x] 2025-03-30-habit-small-is-key ✅ 完成
+- [x] 2025-03-30-habit-small-start-principle ✅ 完成
+- [x] 2025-03-30-habit-systems-thinking ✅ 完成
+- [x] 2025-04-19-tech-react ✅ 完成
+- [x] 2025-04-22-tech-fastapibasicexplanation ✅ 完成
+- [x] 2025-04-23-tech-python ✅ 完成
+- [x] 2025-05-06-tech-obsidian ✅ 完成
+- [x] 2025-05-13-tech-whisper-ai-guide ✅ 完成 (絵文字: 🎤, Whisper AI・音声認識)
+- [x] 2025-05-14-design-figma-to-framer-guide ✅ 完成
+- [x] 2025-05-14-design-framer-html-extension-guide ✅ 完成
+- [x] 2025-05-14-design-framer-practical-manual ✅ 完成
+- [x] 2025-05-15-design-aseprite-basic-manual ✅ 完成
+- [x] 2025-05-15-design-aseprite-pixel-art-guide ✅ 完成
+- [x] 2025-05-15-design-aseprite-reference-image-guide ✅ 完成
+- [x] 2025-05-15-tech-lazygit-cheatsheet ✅ 完成
+- [x] 2025-05-16-design-figma-to-responsive-web-guide ✅ 完成 (絵文字: 🌐, Figmaレスポンシブ)
+- [x] 2025-05-16-tech-apscheduler ✅ 完成
+- [x] 2025-05-19-edu-ai ✅ 完成 (絵文字: 🧠, AI用語集・教育)
+- [x] 2025-05-24-tech-claude-code-30min-masterclass ✅ 完成
+- [x] 2025-05-24-tech-firebase-explanation ✅ 完成 (絵文字: 🔥, Firebase・BaaS)
+- [x] 2025-05-24-tech-serverside-programming-languages-guide ✅ 完成
 - [ ] 2025-06-05-ollama-cline-local-llm
-- [ ] 2025-06-05-tech-claude-code-comprehensive-guide
+- [x] 2025-06-05-tech-claude-code-comprehensive-guide ✅ 完成
 - [ ] 2025-06-06-cursor-1-0-new-features
 - [ ] 2025-06-07-git-github-complete-cheatsheet
-- [ ] 2025-06-09-tech-docker-virtualization-complete-guide
-- [ ] 2025-06-09-tech-uv-python-package-manager-comp
-- [ ] 2025-06-10-tech-devops-mastering-roadmap-2025
+- [x] 2025-06-09-tech-docker-virtualization-complete-guide ✅ 完成 (絵文字: 🐳, Docker・仮想化)
+- [x] 2025-06-09-tech-uv-python-package-manager-comp ✅ 完成 (絵文字: ⚡, UV・Python)
+- [x] 2025-06-10-tech-devops-mastering-roadmap-2025 ✅ 完成 (絵文字: 🚀, DevOps・マスタリング)
 - [ ] 2025-06-18-edu-ai-practical7
-- [ ] 2025-06-21-tech-github-actions-cicd-guide
+- [x] 2025-06-21-tech-github-actions-cicd-guide ✅ 完成 (絵文字: 🔄, GitHub Actions・CI/CD)
 - [ ] 2025-06-21-tech-software-design-patterns-guide
-- [ ] 2025-06-22-tech-claude-code-features-summary
-- [ ] 2025-06-26-edu-ai-summary
+- [x] 2025-06-22-tech-claude-code-features-summary ✅ 完成 (絵文字: 🤖, Claude Code・機能)
+- [x] 2025-06-26-edu-ai-summary ✅ 完成 (絵文字: 🎓, 教育・AI・未来)
 - [ ] 2025-06-26-gemini-cli-vs-claude-code-review
 - [ ] 2025-06-26-system-education-training
-- [ ] 2025-06-26-tech-claude-code
+- [x] 2025-06-26-tech-claude-code ✅ 完成 (絵文字: 💼, Claude Code・働き方革命)
 - [ ] 2025-06-26-tech-go-tutorial
-- [ ] 2025-06-26-tech-llmo-checklist
-- [ ] 2025-06-27-edu-genspark-ai
+- [x] 2025-06-26-tech-llmo-checklist ✅ 完成 (絵文字: 📋, LLMO・SEO・チェックリスト)
+- [x] 2025-06-27-edu-genspark-ai ✅ 完成 (絵文字: 💡, GenSpark・AI・スライド)
 - [ ] 2025-06-27-tech-vscode-github-copilot
 - [ ] 2025-06-28-tech-ai-seo-strategy
 - [ ] 2025-07-01-gemini-cli-report
