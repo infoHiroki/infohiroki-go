@@ -387,17 +387,66 @@ func extractTitleFromMarkdown(content string) string {
 func extractDescriptionFromMarkdown(content string) string {
 	lines := strings.Split(content, "\n")
 
+	// 🎯 中心的な主張セクションを探す
+	inCentralClaim := false
 	for _, line := range lines {
 		line = strings.TrimSpace(line)
 
-		// 空行や見出し、画像はスキップ
-		if line == "" || strings.HasPrefix(line, "#") || strings.HasPrefix(line, "![") || strings.HasPrefix(line, "---") {
+		// 中心的な主張セクションの開始
+		if strings.Contains(line, "🎯 中心的な主張") {
+			inCentralClaim = true
+			continue
+		}
+
+		// 次のセクションに到達したら終了
+		if inCentralClaim && strings.HasPrefix(line, "##") {
+			break
+		}
+
+		// 中心的な主張セクション内の最初の段落を使用
+		if inCentralClaim && line != "" && !strings.HasPrefix(line, "#") {
+			// Markdownの強調記号を削除してプレーンテキストに
+			cleanText := strings.ReplaceAll(line, "**", "")
+			cleanText = strings.ReplaceAll(cleanText, "*", "")
+			cleanText = strings.ReplaceAll(cleanText, "`", "")
+
+			// 最初の文章のみを取得（。で区切る）
+			sentences := strings.Split(cleanText, "。")
+			if len(sentences) > 0 && sentences[0] != "" {
+				firstSentence := sentences[0]
+				if len(firstSentence) > 150 {
+					return firstSentence[:150] + "..."
+				}
+				return firstSentence + "。"
+			}
+
+			// 句点がない場合は最初の150文字
+			if len(cleanText) > 150 {
+				return cleanText[:150] + "..."
+			}
+			return cleanText
+		}
+	}
+
+	// 中心的な主張が見つからない場合は従来の方法
+	for _, line := range lines {
+		line = strings.TrimSpace(line)
+
+		// 空行や見出し、画像、テーブル記号はスキップ
+		if line == "" || strings.HasPrefix(line, "#") || strings.HasPrefix(line, "![") ||
+		   strings.HasPrefix(line, "---") || strings.HasPrefix(line, "|") ||
+		   strings.HasPrefix(line, "- ") || strings.HasPrefix(line, "* ") {
 			continue
 		}
 
 		// 最初の有効な段落を説明文として使用
 		if len(line) > 20 { // 短すぎる行は除外
-			return line
+			// **で囲まれた部分を削除
+			cleanText := strings.ReplaceAll(line, "**", "")
+			if len(cleanText) > 150 {
+				return cleanText[:150] + "..."
+			}
+			return cleanText
 		}
 	}
 	return "Markdownで作成された記事"
