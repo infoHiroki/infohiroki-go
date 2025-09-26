@@ -15,7 +15,6 @@ type BlogPost struct {
 	Content     string    `json:"content"`
 	Description string    `json:"description"`
 	Icon        string    `json:"icon"`
-	ContentType string    `json:"content_type"` // "html" or "markdown"
 	MarkdownPath string   `json:"markdown_path"` // .mdファイルパス
 	CreatedDate time.Time `json:"created_date"`
 	CreatedAt   time.Time `json:"created_at"`
@@ -51,20 +50,15 @@ func (b *BlogPost) IsIconURL() bool {
 	       strings.HasPrefix(b.Icon, "/")
 }
 
-// RenderContent renders the content based on ContentType
+// RenderContent renders the markdown content as HTML
 func (b *BlogPost) RenderContent() template.HTML {
-	if b.ContentType == "markdown" {
-		// MarkdownをHTMLに変換
-		renderer := blackfriday.NewHTMLRenderer(blackfriday.HTMLRendererParameters{
-			Flags: blackfriday.CommonHTMLFlags,
-		})
+	// MarkdownをHTMLに変換
+	renderer := blackfriday.NewHTMLRenderer(blackfriday.HTMLRendererParameters{
+		Flags: blackfriday.CommonHTMLFlags,
+	})
 
-		extensions := blackfriday.CommonExtensions | blackfriday.AutoHeadingIDs
-		html := blackfriday.Run([]byte(b.Content), blackfriday.WithRenderer(renderer), blackfriday.WithExtensions(extensions))
+	extensions := blackfriday.CommonExtensions | blackfriday.AutoHeadingIDs
+	html := blackfriday.Run([]byte(b.Content), blackfriday.WithRenderer(renderer), blackfriday.WithExtensions(extensions))
 
-		return template.HTML(html)
-	}
-
-	// デフォルトはHTMLコンテンツ
-	return template.HTML(b.Content)
+	return template.HTML(html)
 }

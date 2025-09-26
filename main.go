@@ -354,7 +354,6 @@ func loadMarkdownFile(filePath string) error {
 		Slug:         slug,
 		Title:        title,
 		Content:      string(content),
-		ContentType:  "markdown",
 		MarkdownPath: filePath,
 		CreatedDate:  createdDate,
 		Published:    true,
