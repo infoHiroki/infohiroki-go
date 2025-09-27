@@ -277,11 +277,11 @@ func initializeData() {
 
 // content/metadata.jsonからブログ記事を読み込み
 
-// content/articlesディレクトリから記事ファイルを読み込み（HTML/Markdown両対応）
+// articlesディレクトリから記事ファイルを読み込み（Markdown形式）
 func loadMarkdownFiles() {
 	fmt.Println("📝 記事ファイルを読み込み中...")
 
-	postsDir := "content/articles"
+	postsDir := "articles"
 	if _, err := os.Stat(postsDir); os.IsNotExist(err) {
 		fmt.Println("postsディレクトリが存在しません")
 		return
