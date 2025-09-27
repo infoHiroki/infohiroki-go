@@ -20,6 +20,8 @@ type BlogPost struct {
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 	Published   bool      `json:"published"`
+	PrevPost    *BlogPost `json:"prev_post,omitempty"`    // 前の記事
+	NextPost    *BlogPost `json:"next_post,omitempty"`    // 次の記事
 }
 
 // TableNameメソッドはファイルベースでは不要

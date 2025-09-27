@@ -165,22 +165,73 @@
         .blog-detail-nav {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-top: var(--spacing-xl);
             padding-top: var(--spacing-lg);
             border-top: 1px solid var(--color-border);
+            gap: var(--spacing-md);
         }
 
-        .blog-detail-nav-button {
+        .blog-nav-item {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: var(--color-text);
+            padding: var(--spacing-md);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            background-color: var(--color-background);
+            transition: var(--transition);
+            max-width: 300px;
+            min-height: 80px;
+        }
+
+        .blog-nav-item:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .blog-nav-direction {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .blog-nav-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--color-text);
+            line-height: 1.4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .blog-nav-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-nav-back {
             padding: var(--spacing-md) var(--spacing-lg);
             background-color: var(--color-accent);
             color: var(--color-background);
             text-decoration: none;
             border-radius: 6px;
             transition: var(--transition);
+            font-weight: 600;
         }
 
-        .blog-detail-nav-button:hover {
+        .blog-nav-back:hover {
             opacity: 0.9;
+            color: var(--color-background);
         }
 
         @media (max-width: 768px) {
@@ -201,6 +252,21 @@
 
             .blog-detail-actions {
                 justify-content: center;
+            }
+
+            .blog-detail-nav {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--spacing-md);
+            }
+
+            .blog-nav-item {
+                max-width: none;
+                min-height: 60px;
+            }
+
+            .blog-nav-title {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -321,9 +387,39 @@
                             {{.post.RenderContent}}
                         </article>
 
-                        <!-- ナビゲーション -->
+                        <!-- 記事ナビゲーション -->
                         <div class="blog-detail-nav">
-                            <a href="/blog" class="blog-detail-nav-button">← ブログ一覧に戻る</a>
+                            {{if .post.PrevPost}}
+                            <a href="/blog/{{.post.PrevPost.Slug}}" class="blog-nav-item">
+                                <div class="blog-nav-direction">
+                                    {{if .post.PrevPost.Icon}}
+                                    <span class="article-icon">{{.post.PrevPost.Icon}}</span>
+                                    {{end}}
+                                    ← 前の記事
+                                </div>
+                                <div class="blog-nav-title">{{.post.PrevPost.Title}}</div>
+                            </a>
+                            {{else}}
+                            <div></div>
+                            {{end}}
+
+                            <div class="blog-nav-center">
+                                <a href="/blog" class="blog-nav-back">📝 一覧に戻る</a>
+                            </div>
+
+                            {{if .post.NextPost}}
+                            <a href="/blog/{{.post.NextPost.Slug}}" class="blog-nav-item">
+                                <div class="blog-nav-direction">
+                                    次の記事 →
+                                    {{if .post.NextPost.Icon}}
+                                    <span class="article-icon">{{.post.NextPost.Icon}}</span>
+                                    {{end}}
+                                </div>
+                                <div class="blog-nav-title">{{.post.NextPost.Title}}</div>
+                            </a>
+                            {{else}}
+                            <div></div>
+                            {{end}}
                         </div>
                     </div>
                 </div>

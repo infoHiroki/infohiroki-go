@@ -132,7 +132,7 @@ func showBlogPost(c *gin.Context, slug string) {
 	c.HTML(http.StatusOK, "blog_detail.html", gin.H{
 		"title":           post.Title + " | infoHiroki",
 		"page":            "blog",
-		"post":            post,
+		"post":            post, // ポインタのまま渡す
 		"metaDescription": metaDescription,
 		"ogTitle":         post.Title + " | infoHiroki",
 		"ogDescription":   metaDescription,
@@ -162,15 +162,51 @@ func showBlogPostJSON(c *gin.Context, slug string) {
 	c.JSON(http.StatusOK, post)
 }
 
-// 共通処理：スラッグでブログ記事を取得
+// 共通処理：スラッグでブログ記事を取得（前後記事付き）
 func getBlogPostBySlug(c *gin.Context, slug string) *models.BlogPost {
-	for _, post := range allPosts {
+	var currentPost *models.BlogPost
+	var currentIndex int = -1
+
+	// 現在の記事を検索
+	for i, post := range allPosts {
 		if post.Slug == slug && post.Published {
-			return &post
+			currentPost = &post
+			currentIndex = i
+			break
 		}
 	}
-	c.JSON(http.StatusNotFound, gin.H{"error": "記事が見つかりません"})
-	return nil
+
+	if currentPost == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "記事が見つかりません"})
+		return nil
+	}
+
+	// 前後記事を設定（日付順で前後を判定）
+	if currentIndex > 0 {
+		// 次の記事（新しい記事）
+		nextPost := allPosts[currentIndex-1]
+		currentPost.NextPost = &models.BlogPost{
+			Slug:        nextPost.Slug,
+			Title:       nextPost.Title,
+			Description: nextPost.Description,
+			Icon:        nextPost.Icon,
+			CreatedDate: nextPost.CreatedDate,
+		}
+	}
+
+	if currentIndex < len(allPosts)-1 {
+		// 前の記事（古い記事）
+		prevPost := allPosts[currentIndex+1]
+		currentPost.PrevPost = &models.BlogPost{
+			Slug:        prevPost.Slug,
+			Title:       prevPost.Title,
+			Description: prevPost.Description,
+			Icon:        prevPost.Icon,
+			CreatedDate: prevPost.CreatedDate,
+		}
+	}
+
+	return currentPost
 }
 
 // 固定ページ処理（サービス、製品、実績、等）

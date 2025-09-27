@@ -10,7 +10,7 @@ infoHiroki Website Go版（ピクセルパーフェクト移植）
 
 ### コア機能
 - **ピクセルパーフェクト移植**: 既存デザインの完全再現
-- **Markdownブログ**: HTML記事（94件）をMarkdown化
+- **Markdownブログ**: HTML記事（95件）をMarkdown化
 - **高速検索**: サーバーサイド全文検索
 - **SEO完全対応**: 構造化データ、OGP、サイトマップ
 
@@ -18,7 +18,7 @@ infoHiroki Website Go版（ピクセルパーフェクト移植）
 
 ### 基本構成
 ```
-Go + Gin + GORM + SQLite + blackfriday v2
+Go + Gin + blackfriday v2（ファイルベース・シンプル構成）
 ```
 
 ### 技術スタック
@@ -26,14 +26,14 @@ Go + Gin + GORM + SQLite + blackfriday v2
 |---|------|-----------|------|
 | **Backend** | Go | 1.21+ | 型安全性・高速性・シンプル設計 |
 | **Web Framework** | Gin | 1.9+ | 軽量・高速・豊富なミドルウェア |
-| **Database** | SQLite | 3.x | ファイルベース・管理不要・FTS対応 |
+| **Storage** | File-based | - | Markdownファイル直接読み込み・シンプル |
 | **Template** | Go標準template | - | サーバーサイドレンダリング |
 | **Markdown** | blackfriday v2 | 2.1+ | 高速・GitHub互換・カスタマイズ可能 |
 | **Frontend** | 既存CSS/JS移植 | - | ピクセルパーフェクト維持 |
 
 ### 移植元サイト分析
 - **HTMLページ**: 9ページ（index, blog, services等）
-- **ブログ記事**: 94記事（html-files/*.html）
+- **ブログ記事**: 95記事（完全Markdown化済み）
 - **CSS**: 1,958行の完全デザインシステム
 - **画像**: 49個のアイコン・画像ファイル
 - **JavaScript**: ハンバーガーメニュー、検索、クリップボード機能
@@ -41,43 +41,32 @@ Go + Gin + GORM + SQLite + blackfriday v2
 ## 📁 プロジェクト構造
 
 ```
-infohiroki-go/
+go-learning-project/
 ├── CLAUDE.md                   # このファイル
 ├── README.md                   # プロジェクト説明
 ├── go.mod                      # Go依存関係
 ├── go.sum                      # 依存関係ハッシュ
-├── main.go                     # Gin メインアプリケーション
-├── config.py                   # アプリケーション設定
-├── migrate.go                  # データベース初期化・マイグレーション
-├── convert_html_to_md.go       # HTML→Markdown変換ツール
+├── main.go                     # Gin メインアプリケーション（単一ファイル構成）
+├── archive/                    # 開発初期資料・参考ファイル
+│   ├── go_for_solo_developers.md
+│   ├── go_kiss_yagni_dry_example.go
+│   ├── info.md
+│   └── quick-start.md
 ├── src/                        # ソースコード
-│   ├── models/                 # データモデル
-│   │   ├── page.go            # 固定ページモデル
-│   │   └── blog_post.go       # ブログ記事モデル
-│   ├── handlers/              # ハンドラー（コントローラー）
-│   │   ├── home.go            # ホームページ
-│   │   ├── blog.go            # ブログ機能
-│   │   ├── pages.go           # 固定ページ
-│   │   └── api.go             # JSON API
-│   ├── services/              # ビジネスロジック
-│   │   ├── blog_service.go    # ブログ検索・フィルタリング
-│   │   └── markdown_service.go # Markdown処理
-│   └── utils/                 # ユーティリティ
-│       ├── template.go        # テンプレートヘルパー
-│       └── seo.go             # SEO対応ヘルパー
+│   └── models/                 # データモデル
+│       ├── page.go            # 固定ページモデル
+│       └── blog_post.go       # ブログ記事モデル
 ├── templates/                 # Go テンプレート
-│   ├── base.html              # ベーステンプレート
 │   ├── index.html             # ホームページ
-│   ├── blog/                  # ブログテンプレート
-│   │   ├── list.html          # 記事一覧
-│   │   └── detail.html        # 記事詳細
-│   └── pages/                 # 固定ページテンプレート
-│       ├── services.html      # サービス
-│       ├── products.html      # 開発製品
-│       ├── results.html       # 実績
-│       ├── about.html         # スキルスタック
-│       ├── faq.html           # FAQ
-│       └── contact.html       # お問い合わせ
+│   ├── blog.html              # ブログ一覧
+│   ├── blog_detail.html       # ブログ記事詳細
+│   ├── services.html          # サービス
+│   ├── products.html          # 開発製品
+│   ├── results.html           # 実績
+│   ├── about.html             # スキルスタック
+│   ├── faq.html               # FAQ
+│   ├── contact.html           # お問い合わせ
+│   └── 404.html               # エラーページ
 ├── static/                    # 静的ファイル（完全移植）
 │   ├── css/
 │   │   └── style.css          # 1,958行CSS完全コピー
@@ -86,32 +75,30 @@ infohiroki-go/
 │   └── images/                # 49個の画像ファイル
 │       ├── logo.svg
 │       ├── hero.svg
-│       └── icons/             # 技術アイコン群
-├── content/                   # 統一コンテンツ管理
-│   ├── articles/             # HTML/Markdown記事（96記事）
-│   │   ├── 2024-03-27-notion-save-to-notion-extension.html
-│   │   ├── 2024-03-29-chatgpt-reskilling-guide.html
-│   │   ├── 2025-01-20-markdown-test.md
-│   │   ├── 2025-09-20-go-complete-history.md
-│   │   └── ... (HTML 94個 + Markdown 2個)
-│   └── metadata.json         # 統一メタデータ管理
-├── database/                  # データベース関連
-│   ├── infohiroki.db          # SQLiteデータベース
-│   └── migrations/            # マイグレーションファイル
-├── tools/                     # 開発ツール
-│   └── html_to_markdown.go    # 変換スクリプト
-└── docs/                      # ドキュメント
-    ├── migration_guide.md     # 移行ガイド
-    └── deployment.md          # デプロイ手順
+│       └── note/              # ブログ画像
+└── articles/                  # Markdown記事（95記事）
+    ├── 2024-03-27-notion-save-to-notion-extension.md
+    ├── 2024-03-29-chatgpt-reskilling-guide.md
+    ├── 2025-09-20-go-complete-history.md
+    └── ... (95個のMarkdownファイル)
 ```
 
 ## 🎯 開発原則
 
 ### 設計思想
 - **Pixel Perfect**: 既存デザインの完全再現
-- **KISS**: Keep It Simple, Stupid - シンプル設計
-- **YAGNI**: You Aren't Gonna Need It - 必要な機能のみ
-- **DRY**: Don't Repeat Yourself - コード重複排除
+- **KISS (Keep It Simple, Stupid)**:
+  - 複雑なデータベース設計を避け、ファイルベースで実装
+  - 必要最小限の機能のみ実装
+  - 理解しやすく保守しやすいコード
+- **YAGNI (You Aren't Gonna Need It)**:
+  - 将来的に必要になるかもしれない機能は実装しない
+  - 現在必要な機能のみに集中
+  - 過度な汎用化を避ける
+- **DRY (Don't Repeat Yourself)**:
+  - 同一の処理を複数箇所に書かない
+  - 共通処理の関数化・モジュール化
+  - テンプレートの再利用
 
 ### コーディング規約
 - **Go**: Go標準スタイル準拠
@@ -158,77 +145,54 @@ export STATIC_DIR="static"
 
 ### go.mod
 ```go
-module infohiroki-go
+module go-learning-project
 
 go 1.21
 
 require (
     github.com/gin-gonic/gin v1.9.1
     github.com/russross/blackfriday/v2 v2.1.0
-    gorm.io/driver/sqlite v1.5.4
-    gorm.io/gorm v1.25.5
-    github.com/microcosm-cc/bluemonday v1.0.25  // HTMLサニタイズ
 )
 ```
 
-## 📊 データベース設計
+## 📁 ファイルベース設計
 
-### メインテーブル
-```sql
--- 固定ページ
-CREATE TABLE pages (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    slug TEXT UNIQUE NOT NULL,
-    title TEXT NOT NULL,
-    content TEXT,
-    template TEXT,
-    meta_description TEXT,
-    meta_keywords TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+### データ管理方式
+**データベースレス設計**: データベースを使わず、ファイルシステムで直接管理
 
--- ブログ記事
-CREATE TABLE blog_posts (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    slug TEXT UNIQUE NOT NULL,
-    title TEXT NOT NULL,
-    content TEXT NOT NULL,
-    description TEXT,
-    tags TEXT,  -- JSON形式
-    icon TEXT,
-    created_at DATE,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    published BOOLEAN DEFAULT 1
-);
-
--- FTS（全文検索）テーブル
-CREATE VIRTUAL TABLE blog_posts_fts USING fts5(
-    title, content, description, tags,
-    content='blog_posts',
-    content_rowid='id'
-);
-
--- 設定管理
-CREATE TABLE settings (
-    id INTEGER PRIMARY KEY,
-    key TEXT UNIQUE NOT NULL,
-    value TEXT NOT NULL,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+```go
+// ブログ記事構造体
+type BlogPost struct {
+    ID          uint      `json:"id"`
+    Slug        string    `json:"slug"`
+    Title       string    `json:"title"`
+    Content     string    `json:"content"`
+    Description string    `json:"description"`
+    Icon        string    `json:"icon"`
+    MarkdownPath string   `json:"markdown_path"`
+    CreatedDate time.Time `json:"created_date"`
+    CreatedAt   time.Time `json:"created_at"`
+    UpdatedAt   time.Time `json:"updated_at"`
+    Published   bool      `json:"published"`
+}
 ```
+
+### ファイル管理
+- **記事**: `articles/*.md` - 95個のMarkdownファイル
+- **メタデータ**: ファイル名・内容から自動抽出
+- **検索**: メモリ内文字列検索（シンプル・高速）
 
 ## 🔄 実行フロー
 
-### HTMLからMarkdown変換フロー
-1. **HTML解析**: 94記事のHTMLを解析
-2. **メタデータ抽出**: title, description, tags, created_at
-3. **コンテンツ変換**: HTML → Markdownに自動変換
-4. **データベース投入**: 変換済みデータをSQLiteに格納
+### アプリケーション起動フロー
+1. **記事読み込み**: `articles/`ディレクトリから95個のMarkdownファイル読み込み
+2. **メタデータ抽出**: ファイル名・内容から自動抽出
+3. **メモリ格納**: 全記事をメモリ上のスライスに格納
+4. **サーバー起動**: Ginサーバー起動
 
 ### ブログ表示フロー
 1. **リクエスト受信**: `/blog` または `/blog/:slug`
-2. **データベース検索**: SQLite FTSで高速検索
+2. **メモリ検索**: スライス内検索（高速）
 3. **Markdown処理**: blackfriday でHTMLレンダリング
 4. **テンプレート適用**: Go templateで最終HTML生成
 5. **レスポンス**: ピクセルパーフェクトなHTMLを返却
@@ -243,22 +207,23 @@ CREATE TABLE settings (
 
 ### 本番環境構成
 ```
-Internet → Nginx → Go App → SQLite
+Internet → Nginx → Go App (File-based)
                     ↓
             Static Files (CSS/JS/Images)
+                    ↓
+            Markdown Articles (articles/)
 ```
 
 ## 🔒 セキュリティ対策
 
 ### 基本セキュリティ
 - **HTTPS**: SSL/TLS証明書
-- **CSRF**: Gin CSRFミドルウェア
-- **XSS**: HTMLサニタイズ（bluemonday）
-- **SQLインジェクション**: GORM ORM使用
+- **XSS**: HTMLエスケープ（Go標準template）
+- **ファイルアクセス**: 静的ファイルのみ公開
 
 ### パフォーマンス対策
 - **静的ファイルキャッシュ**: Nginx設定
-- **データベースインデックス**: 検索性能最適化
+- **メモリキャッシュ**: 全記事メモリ格納で高速アクセス
 - **Gzip圧縮**: レスポンス圧縮
 
 ## 📝 運用・保守
@@ -268,20 +233,23 @@ Internet → Nginx → Go App → SQLite
 # ホットリロード開発
 air  # air をインストール後
 
-# ログ出力確認
-tail -f logs/app.log
+# ログ出力確認 (Go標準出力)
+go run main.go
 
-# データベース確認
-sqlite3 database/infohiroki.db
+# 記事確認
+ls articles/
 ```
 
 ### 新記事追加
 ```bash
 # Markdownファイル作成
-touch markdown/2025-01-01-new-article.md
+touch articles/2025-01-01-new-article.md
 
-# データベース再読み込み
-go run migrate.go --reload-posts
+# メタデータ設定（main.goのgenerateMetadataFromSlug関数に追加）
+# アイコン画像確認（/images/内）
+
+# サーバー再起動（記事再読み込み）
+PORT=8081 go run main.go
 ```
 
 ## 🐛 トラブルシューティング
@@ -299,9 +267,26 @@ go run migrate.go --reload-posts
    - blackfriday設定確認
    - HTMLエスケープ設定確認
 
+## 📊 プロジェクト現状
+
+### ✅ 完了済み項目
+- **95記事Markdown化**: HTML記事すべてMarkdown変換完了
+- **ディレクトリ最適化**: `content/articles/` → `articles/` 移行完了
+- **コード整理**: 不要ファイル・バックアップ削除完了
+- **ピクセルパーフェクト移植**: 既存デザイン完全再現
+- **SEO完全対応**: メタデータ、構造化データ実装済み
+- **高速検索機能**: サーバーサイド全文検索実装済み
+
+### 🎯 技術実装詳細
+- **ファイルベース**: データベース不使用、シンプル構成
+- **メモリキャッシュ**: 全記事をメモリに格納、高速アクセス
+- **KISS原則**: 必要最小限の機能のみ実装
+- **YAGNI原則**: 将来不要な機能は未実装
+- **DRY原則**: コード重複なし、共通処理集約
+
 ## 📚 開発ガイドライン
 
-### HTML→Markdown記事作成ルール
+### ✅ HTML→Markdown記事変換完了
 
 #### 🎯 基本原則
 - **KISS**: Keep It Simple, Stupid - 必要最小限のシンプル作成
@@ -309,15 +294,17 @@ go run migrate.go --reload-posts
 - **手動作成**: 自動変換ツールは使わず、一件ずつ手動で丁寧に作成
 - **品質重視**: 各記事を確実に動作確認してから次へ進む
 
-#### 📝 作成手順（1記事あたり）
-1. **HTMLファイル確認**: `content/articles/YYYY-MM-DD-記事名.html`を読み込み
+#### 📝 HTML→Markdown変換完了
+**✅ 95記事すべてMarkdown化完了済み**
+
+過去の変換手順（参考）:
+1. **HTMLファイル確認**: 元HTMLファイルを読み込み
 2. **コンテンツ抽出**: `<article class="article-content">`内の純粋なコンテンツのみ抽出
-3. **Markdown作成**: `content/articles/YYYY-MM-DD-記事名.md`として手動作成
-4. **メタデータ設定**: `api/common.go`の`generateMetadataFromSlug`関数にケース追加
+3. **Markdown作成**: `articles/YYYY-MM-DD-記事名.md`として手動作成
+4. **メタデータ設定**: `main.go`内の`generateMetadataFromSlug`関数にケース追加
 5. **アイコン設定**: `/images/`内の公式ブランドアイコン画像パスを使用
 6. **サーバー再起動**: 変更を反映
 7. **ブラウザ確認**: `http://localhost:8081/blog/YYYY-MM-DD-記事名`で動作確認
-8. **タスクリスト更新**: `conversion_tasks.md`でチェック完了
 
 #### 🏷️ メタデータ設定規則
 ```go
@@ -356,6 +343,7 @@ case strings.Contains(slug, "記事キーワード"):
 4. パフォーマンステスト実行
 
 ### コミットルール
+日本語でコミット。文末は動詞が望ましい。
 ```
 ✨ 新機能追加
 🐛 バグ修正
@@ -364,13 +352,3 @@ case strings.Contains(slug, "記事キーワード"):
 🎨 デザイン調整
 🚀 パフォーマンス改善
 ```
-
-### 品質基準
-- **デザイン**: ピクセル単位での一致
-- **機能**: 既存JavaScript機能の完全再現
-- **SEO**: 検索エンジン対応維持
-- **パフォーマンス**: 既存サイト比2倍以上高速
-
----
-
-このCLAUDE.mdにより、infoHirokiウェブサイトの完全移植プロジェクトを効率的に進めることができます。
