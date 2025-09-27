@@ -1,6 +1,6 @@
-# 📝 Notionの基本説明
+# 🤔 Notionってなんだ？_02
 
-![Notionロゴ](/images/notion_top.png)
+![Notion概要図](/images/note/nde819c8c7fcd_00877863ae71b057fd846b04af82d2df.png)
 
 ## 🤔 Notionって何？
 
