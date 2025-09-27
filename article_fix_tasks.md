@@ -42,6 +42,10 @@
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-06-06-notion-database-creation-guide.html
 - [x] 2024-06-13-chatgpt-notion-history-extension.md
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-06-13-chatgpt-notion-history-extension.html
+- [x] 2024-06-15-book-manana-principle-memo.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-06-15-book-manana-principle-memo.html
+- [x] 2024-06-25-ai-notion-casual-talk.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-06-25-ai-notion-casual-talk.html
 
 ## 📊 最終チェック
 作業完了後に全95記事の整合性をチェック
