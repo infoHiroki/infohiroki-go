@@ -26,6 +26,8 @@
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-05-17-book-world-class-engineer-thinking-memo.html
 - [x] 2024-05-19-ai-prompt-design-guide.md
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-05-19-ai-prompt-design-guide.html
+- [x] 2024-05-20-gas-terminology-collection.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-05-20-gas-terminology-collection.html
 
 ## 📊 最終チェック
 作業完了後に全95記事の整合性をチェック
