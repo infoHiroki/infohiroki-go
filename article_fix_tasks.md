@@ -30,6 +30,8 @@
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-05-20-gas-terminology-collection.html
 - [x] 2024-05-20-programming-terminology-collection.md
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-05-20-programming-terminology-collection.html
+- [x] 2024-06-03-ai-notion-workflow.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-06-03-ai-notion-workflow.html
 
 ## 📊 最終チェック
 作業完了後に全95記事の整合性をチェック
