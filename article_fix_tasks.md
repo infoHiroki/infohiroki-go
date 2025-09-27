@@ -18,6 +18,8 @@
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-03-27-notion-save-to-notion-extension.html
 - [x] 2024-03-29-chatgpt-reskilling-guide.md
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-03-29-chatgpt-reskilling-guide.html
+- [x] 2024-04-08-book-output-reading-technique-memo.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-04-08-book-output-reading-technique-memo.html
 - [x] 2024-05-17-book-world-class-engineer-thinking-memo.md
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-05-17-book-world-class-engineer-thinking-memo.html
 - [x] 2024-05-19-ai-prompt-design-guide.md
