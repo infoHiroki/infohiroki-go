@@ -1,5 +1,7 @@
 # 「Gemini CLI」がきた。Claude CodeをMaxプランで毎日使ってる人の感想
 
+![Gemini CLI 記事のヘッダー画像](/images/note/n7d93c00246fd_d8835b6fc420448474d9eec26b0ab974.png)
+
 ## 🎯 中心的な主張
 **GoogleのGemini CLIとClaude Codeを実際に比較したClaude Maxプランユーザーの視点から、Gemini CLIは速度・Windows対応・マルチモーダル機能で優位性を示すものの現状はデモレベルであり、一方Claude Codeは成熟したワークフロー統合で日常業務に不可欠であり、最大の差別化要因はWindows環境でのネイティブ動作にある。**
 
@@ -60,6 +62,8 @@ Googleが提供する**コマンドラインAIワークフローツール**で�
 
 #### 実用的な使用例
 
+![Gemini CLI 使用例のスクリーンショット](/images/note/n7d93c00246fd_1750900373-vto41IGXPLc8kJ2BZY3gdpDl.png)
+
 **新規プロジェクトの開始**
 ```bash
 cd new-project/
@@ -102,6 +106,9 @@ gemini
 ```
 
 #### スラッシュコマンド一覧
+
+![Gemini CLI スラッシュコマンド一覧](/images/note/n7d93c00246fd_1750900973-d8arbSNGM4xLA7HQfDgsV9Ej.png)
+
 GeminiCLIでは特定のタスクを実行するための専用コマンドが提供：
 
 - `/glob` - ファイルパターンマッチング
