@@ -36,6 +36,8 @@
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-06-03-note-chatgpt-notion-series-0.html
 - [x] 2024-06-04-notion-explanation-basic.md
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-06-04-notion-explanation-basic.html
+- [x] 2024-06-05-notion-shortcuts-guide.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-06-05-notion-shortcuts-guide.html
 
 ## 📊 最終チェック
 作業完了後に全95記事の整合性をチェック
