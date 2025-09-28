@@ -54,6 +54,14 @@
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-07-30-note-youtube-summary-tools.html
 - [x] 2024-09-01-note-mac-text-input-shortcuts.md
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-09-01-note-mac-text-input-shortcuts.html
+- [x] 2024-10-14-ai-notion-tasker-chrome-extension.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-10-14-ai-notion-tasker-chrome-extension.html
+- [x] 2024-11-20-chatgpt-ai-tools-4selection.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-11-20-chatgpt-ai-tools-4selection.html
+- [x] 2024-12-09-ai-driven-development-summary.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-12-09-ai-driven-development-summary.html
+- [x] 2025-01-09-cody-ai-chrome-extension-development.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-01-09-cody-ai-chrome-extension-development.html
 
 ## 📊 最終チェック
 作業完了後に全95記事の整合性をチェック
