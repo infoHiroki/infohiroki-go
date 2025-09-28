@@ -70,6 +70,20 @@
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-02-20-chatgpt-survived-ai-tools-4-selections-2025.html
 - [x] 2025-02-20-prompt-storage-problem.md
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-02-20-prompt-storage-problem.html
+- [x] 2025-03-29-habit-environment-design-essence.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-03-29-habit-environment-design-essence.html
+- [x] 2025-03-30-habit-bj-fogg-behavior-model.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-03-30-habit-bj-fogg-behavior-model.html
+- [x] 2025-03-30-habit-environment-design.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-03-30-habit-environment-design.html
+- [x] 2025-03-30-habit-four-laws-james-clear.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-03-30-habit-four-laws-james-clear.html
+- [x] 2025-03-30-habit-identity-based.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-03-30-habit-identity-based.html
+- [x] 2025-03-30-habit-loop-structure.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-03-30-habit-loop-structure.html
+- [x] 2025-03-30-habit-small-is-key.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-03-30-habit-small-is-key.html
 
 ## 📊 最終チェック
 作業完了後に全95記事の整合性をチェック
