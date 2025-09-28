@@ -84,6 +84,34 @@
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-03-30-habit-loop-structure.html
 - [x] 2025-03-30-habit-small-is-key.md
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-03-30-habit-small-is-key.html
+- [x] 2025-03-30-habit-small-start-principle.md - 詳細内容確認済み
+- [x] 2025-03-30-habit-systems-thinking.md - 詳細内容確認済み
+- [x] 2025-04-19-tech-react.md - 詳細内容確認済み
+- [x] 2025-04-22-tech-fastapibasicexplanation.md - 詳細内容確認済み
+- [x] 2025-04-23-tech-python.md - 詳細内容確認済み
+- [x] 2025-05-06-tech-obsidian.md - 詳細内容確認済み
+- [x] 2025-05-13-tech-whisper-ai-guide.md - 詳細内容確認済み
+- [x] 2025-05-14-design-figma-to-framer-guide.md - 詳細内容確認済み
+- [x] 2025-05-14-design-framer-html-extension-guide.md - 詳細内容確認済み
+- [x] 2025-05-14-design-framer-practical-manual.md - 詳細内容確認済み
+- [x] 2025-05-15-design-aseprite-basic-manual.md - 詳細内容確認済み
+- [x] 2025-06-05-ollama-cline-local-llm.md - 詳細内容確認済み
+- [x] 2025-06-05-tech-claude-code-comprehensive-guide.md - 詳細内容確認済み
+- [x] 2025-06-06-cursor-1-0-new-features.md - 詳細内容確認済み
+- [x] 2025-06-07-git-github-complete-cheatsheet.md - 詳細内容確認済み
+- [x] 2025-06-09-tech-docker-virtualization-complete-guide.md - 詳細内容確認済み
+- [x] 2025-06-10-tech-devops-mastering-roadmap-2025.md - 詳細内容確認済み
+- [x] 2025-06-18-edu-ai-practical7.md - 詳細内容確認済み
+- [x] 2025-06-21-tech-github-actions-cicd-guide.md - 詳細内容確認済み
+- [x] 2025-06-22-tech-claude-code-features-summary.md - 詳細内容確認済み
+- [x] 2025-06-26-edu-ai-summary.md - 詳細内容確認済み
+- [x] 2025-06-26-tech-claude-code.md - 詳細内容確認済み（元HTMLとの照合実施）
+- [x] 2025-06-26-tech-llmo-checklist.md - 詳細内容確認済み
+- [x] 2025-06-27-edu-genspark-ai.md - 詳細内容確認済み
+- [x] 2025-07-01-gemini-cli-report.md - 詳細内容確認済み
+
+## 📊 進捗状況
+これまでに65記事以上を確認済み。すべて詳細な内容が維持されており、内容の簡易化は見られませんでした。
 
 ## 📊 最終チェック
 作業完了後に全95記事の整合性をチェック
