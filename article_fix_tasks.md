@@ -46,6 +46,14 @@
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-06-15-book-manana-principle-memo.html
 - [x] 2024-06-25-ai-notion-casual-talk.md
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-06-25-ai-notion-casual-talk.html
+- [x] 2024-07-08-note-language-context-theory.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-07-08-note-language-context-theory.html
+- [x] 2024-07-11-note-ai-reflection-experience.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-07-11-note-ai-reflection-experience.html
+- [x] 2024-07-30-note-youtube-summary-tools.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-07-30-note-youtube-summary-tools.html
+- [x] 2024-09-01-note-mac-text-input-shortcuts.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-09-01-note-mac-text-input-shortcuts.html
 
 ## 📊 最終チェック
 作業完了後に全95記事の整合性をチェック
