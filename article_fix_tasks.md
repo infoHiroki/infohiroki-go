@@ -62,6 +62,14 @@
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2024-12-09-ai-driven-development-summary.html
 - [x] 2025-01-09-cody-ai-chrome-extension-development.md
   - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-01-09-cody-ai-chrome-extension-development.html
+- [x] 2025-01-21-youtube-transcript-copier-ai-development.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-01-21-youtube-transcript-copier-ai-development.html
+- [x] 2025-01-26-chrome-extensions-practical-3-selections.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-01-26-chrome-extensions-practical-3-selections.html
+- [x] 2025-02-20-chatgpt-survived-ai-tools-4-selections-2025.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-02-20-chatgpt-survived-ai-tools-4-selections-2025.html
+- [x] 2025-02-20-prompt-storage-problem.md
+  - 元: /Users/hirokitakamura/Documents/Dev/infohirokiWebsite/html-files/2025-02-20-prompt-storage-problem.html
 
 ## 📊 最終チェック
 作業完了後に全95記事の整合性をチェック
