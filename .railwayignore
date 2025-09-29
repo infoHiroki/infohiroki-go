@@ -1,0 +1,47 @@
+# Railway デプロイ時に除外するファイル
+
+# 開発関連ファイル
+.git/
+.claude/
+.DS_Store
+*.swp
+*.swo
+
+# ログファイル
+*.log
+logs/
+
+# 設定ファイル・環境変数
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# 開発用ドキュメント・アーカイブ
+archive/
+docs/
+README.md
+CLAUDE.md
+article_fix_tasks.md
+
+# Go関連の一時ファイル
+vendor/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# IDE・エディタ関連
+.vscode/
+.idea/
+*.iml
+
+# OS関連
+Thumbs.db
+.Spotlight-V100
+.Trashes
+ehthumbs.db
