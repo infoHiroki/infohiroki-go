@@ -54,6 +54,11 @@ func main() {
 	r.GET("/faq", faqPage)
 	r.GET("/contact", contactPage)
 
+	// Health check endpoint for Railway/Cloudflare
+	r.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"status": "ok"})
+	})
+
 	// API endpoints
 	r.GET("/api/search", searchBlogPosts)
 
