@@ -199,13 +199,128 @@ type BlogPost struct {
 
 ## 🚀 デプロイ環境
 
-### 推奨VPS仕様
+### Railway + Cloudflare構成（本番環境）
+
+#### 全体構成
+```
+Internet → Cloudflare（CDN/DNS/SSL）
+              ↓
+          Railway（Go App）
+              ↓
+      Static Files + Markdown Articles
+```
+
+#### 1. お名前.comでのネームサーバー設定
+
+**手順:**
+1. お名前.comの管理画面で「**ネームサーバー/DNS**」→「**ネームサーバーの設定**」を選択
+2. 対象ドメイン（infohiroki.com）を選択
+3. 「**その他のネームサーバーを使う**」を選択
+4. Cloudflareのネームサーバーを入力：
+   - ネームサーバー1: `clyde.ns.cloudflare.com`
+   - ネームサーバー2: `nagali.ns.cloudflare.com`
+5. 既存のネームサーバー（01.dnsv.jp〜04.dnsv.jp）を削除
+6. 確認して保存
+
+**注意:**
+- **DNSレコード設定画面ではなく、ネームサーバー設定画面で変更すること**
+- 反映まで最大24時間かかる場合あり
+
+#### 2. Cloudflareでのドメイン設定
+
+**手順:**
+1. Cloudflareダッシュボードで「ドメインを追加」
+2. ネームサーバーアドレス（2つ）をメモ
+3. お名前.comで上記ネームサーバーを設定（前述）
+4. Cloudflareのステータスが「**アクティブ**」になるまで待機
+
+**DNS設定:**
+```
+タイプ: CNAME
+名前: @ （またはサブドメイン）
+ターゲット: [Railwayのドメイン].railway.app
+プロキシステータス: オレンジ（プロキシ有効）
+TTL: 自動
+```
+
+#### 3. Railwayでのデプロイ設定
+
+**railway.toml:**
+```toml
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "./main"
+healthcheckPath = "/health"
+healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+```
+
+**Dockerfile:**
+```dockerfile
+# マルチステージビルド
+FROM golang:1.21-alpine AS builder
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+COPY --from=builder /app/main .
+COPY --from=builder /app/templates ./templates
+COPY --from=builder /app/static ./static
+COPY --from=builder /app/articles ./articles
+EXPOSE 8080
+CMD ["./main"]
+```
+
+**main.goヘルスチェックエンドポイント:**
+```go
+// Health check endpoint for Railway/Cloudflare
+r.GET("/health", func(c *gin.Context) {
+    c.JSON(http.StatusOK, gin.H{"status": "ok"})
+})
+```
+
+**カスタムドメイン設定:**
+1. Railwayのプロジェクト → Settings → Domains
+2. 「Add Custom Domain」
+3. `infohiroki.com`を入力
+4. CloudflareのCNAMEレコードと連携
+
+**環境変数（Railway）:**
+```
+PORT=8080          # Railwayが自動設定
+GIN_MODE=release   # 本番モード
+```
+
+#### 4. デプロイ確認
+
+**確認URL:**
+- メインページ: `https://infohiroki.com`
+- ヘルスチェック: `https://infohiroki.com/health`
+- ブログ: `https://infohiroki.com/blog`
+
+**確認項目:**
+- [ ] HTTPSで正常アクセス可能
+- [ ] `/health`が`{"status":"ok"}`を返す
+- [ ] 静的ファイル（CSS/JS/画像）が正常に読み込まれる
+- [ ] ブログ記事一覧が表示される
+- [ ] 個別記事が正常に表示される
+
+### 推奨VPS仕様（代替案）
 - **CPU**: 1コア以上
 - **メモリ**: 512MB以上
 - **ストレージ**: 10GB以上
 - **OS**: Ubuntu 22.04 LTS
 
-### 本番環境構成
+### VPS本番環境構成（代替案）
 ```
 Internet → Nginx → Go App (File-based)
                     ↓
