@@ -314,6 +314,57 @@ GIN_MODE=release   # 本番モード
 - [ ] ブログ記事一覧が表示される
 - [ ] 個別記事が正常に表示される
 
+#### 5. デプロイ後のキャッシュパージ（重要）
+
+**🚨 問題: デプロイ直後に`ERR_QUIC_PROTOCOL_ERROR`が発生する場合**
+
+Railwayで新バージョンがデプロイされた直後、Cloudflareの古いキャッシュとの不整合で`ERR_QUIC_PROTOCOL_ERROR`が発生することがあります。
+
+**解決手順:**
+
+1. **Cloudflareダッシュボードにアクセス**
+   - https://dash.cloudflare.com/ にログイン
+   - `infohiroki.com` を選択
+
+2. **キャッシュをパージ**
+   - 左メニュー「**キャッシング**」（Caching）をクリック
+   - 「**構成**」（Configuration）タブを選択
+   - 「**すべてパージ**」（Purge Everything）ボタンをクリック
+   - 確認ダイアログで「パージ」を実行
+
+3. **2〜3分待機**
+   - キャッシュパージ完了を待つ
+   - `https://infohiroki.com` にアクセスして確認
+
+**代替策（パージで解決しない場合）:**
+
+1. **HTTP/3 (QUIC) を無効化**
+   - 左メニュー「**ネットワーク**」（Network）をクリック
+   - 「**HTTP/3 (with QUIC)**」トグルを**オフ**に切り替え
+
+2. **開発モードを有効化（一時的）**
+   - 左メニュー「**概要**」（Overview）をクリック
+   - 右側「**開発モード**」（Development Mode）を**オン**
+   - 3時間キャッシュが無効化される
+
+**推奨運用:**
+
+```bash
+# デプロイフロー
+git add .
+git commit -m "✨ 新機能追加"
+git push
+
+# → Railwayデプロイ完了を待つ（2〜5分）
+# → Railway直接URL確認: https://infohiroki-go-production.up.railway.app
+# → 大きな更新の場合: Cloudflareでキャッシュパージ実行
+# → https://infohiroki.com で最終確認
+```
+
+**頻度:**
+- 小さな記事追加: パージ不要（5〜10分で自動反映）
+- 大きな機能追加・デザイン変更: パージ推奨
+
 ### 推奨VPS仕様（代替案）
 - **CPU**: 1コア以上
 - **メモリ**: 512MB以上
