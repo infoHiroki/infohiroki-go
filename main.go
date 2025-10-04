@@ -73,11 +73,11 @@ func main() {
 // ホームページ
 func homePage(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{
-		"title":           "infoHiroki - 福岡の生成AI導入支援専門家",
+		"title":           "infoHiroki - エンジニアが直接相談対応｜中小企業DX・生成AI支援",
 		"page":            "home",
-		"metaDescription": "福岡・九州の企業向け生成AI導入支援 - ChatGPT・Claude・Whisperで業務効率化を実現",
-		"ogTitle":         "infoHiroki - 福岡の生成AI導入支援専門家",
-		"ogDescription":   "福岡・九州の企業向け生成AI導入支援 - ChatGPT・Claude・Whisperで業務効率化を実現",
+		"metaDescription": "技術者が直接ヒアリング・提案。開発からコンサルまでワンストップ。中小企業・スタートアップのDX・生成AI導入を伴走支援",
+		"ogTitle":         "infoHiroki - エンジニアが直接相談対応｜中小企業DX・生成AI支援",
+		"ogDescription":   "技術者が直接ヒアリング・提案。開発からコンサルまでワンストップ。中小企業・スタートアップのDX・生成AI導入を伴走支援",
 		"ogType":          "website",
 	})
 }
