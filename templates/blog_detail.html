@@ -6,6 +6,16 @@
     <meta name="description" content="{{if .post.Description}}{{.post.Description}}{{else}}{{.post.Title}} - infohirokiブログ{{end}}">
     <title>{{.title}}</title>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6C7H2DHNGQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6C7H2DHNGQ');
+    </script>
+
     <!-- OGPタグ -->
     <meta property="og:title" content="{{.post.Title}} | infohiroki">
     <meta property="og:description" content="{{if .post.Description}}{{.post.Description}}{{else}}{{.post.Title}} - infohirokiブログ{{end}}">
