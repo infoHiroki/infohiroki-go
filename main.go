@@ -96,7 +96,7 @@ func blogList(c *gin.Context) {
 		"query":           query,
 		"metaDescription": "infoHirokiのブログ - 生成AI・技術・開発に関する記事を配信中",
 		"ogTitle":         "ブログ | infoHiroki",
-		"ogDescription":   "福岡・九州の生成AI導入支援専門家による技術ブログ",
+		"ogDescription":   "生成AI・DX導入支援の技術ブログ",
 		"ogType":          "website",
 	})
 }
@@ -130,7 +130,7 @@ func showBlogPost(c *gin.Context, slug string) {
 	// SEOメタデータの設定
 	metaDescription := post.Description
 	if metaDescription == "" {
-		metaDescription = "infoHiroki - 福岡・九州の生成AI導入支援専門家のブログ記事"
+		metaDescription = "infoHiroki - 生成AI・DX導入支援の技術ブログ記事"
 	}
 
 	// HTMLコンテンツをそのまま表示
