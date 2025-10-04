@@ -232,7 +232,7 @@ func servicesPage(c *gin.Context) {
 }
 
 func productsPage(c *gin.Context) {
-	renderPageWithMeta(c, "products", "開発製品 | infoHiroki", "infoHirokiが開発した製品・ツール・アプリケーション一覧")
+	renderPageWithMeta(c, "products", "開発製品 | infoHiroki", "業務効率化ツール・生成AI活用システムの開発製品")
 }
 
 func resultsPage(c *gin.Context) {
@@ -240,7 +240,7 @@ func resultsPage(c *gin.Context) {
 }
 
 func aboutPage(c *gin.Context) {
-	renderPageWithMeta(c, "about", "スキルスタック | infoHiroki", "infoHirokiの技術スタック・経歴・スキル")
+	renderPageWithMeta(c, "about", "スキルスタック | infoHiroki", "エンジニアプロフィール - Go/Python/生成AI開発の技術スタック")
 }
 
 func faqPage(c *gin.Context) {
