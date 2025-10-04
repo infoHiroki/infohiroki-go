@@ -59,8 +59,20 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"status": "ok"})
 	})
 
+	// SEO endpoints
+	r.StaticFile("/robots.txt", "./static/robots.txt")
+	r.GET("/sitemap.xml", sitemapXML)
+
 	// API endpoints
 	r.GET("/api/search", searchBlogPosts)
+
+	// 404エラーハンドラー
+	r.NoRoute(func(c *gin.Context) {
+		c.HTML(http.StatusNotFound, "404.html", gin.H{
+			"title": "404 - ページが見つかりません | infoHiroki",
+			"page":  "404",
+		})
+	})
 
 	// サーバー起動
 	port := os.Getenv("PORT")
@@ -526,5 +538,59 @@ func extractIconFromTitle(title string) string {
 		}
 	}
 	return "📝" // デフォルト
+}
+
+// sitemap.xml 生成
+func sitemapXML(c *gin.Context) {
+	baseURL := "https://infohiroki.com"
+
+	// XML開始
+	xml := `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+`
+
+	// 固定ページ
+	staticPages := []struct {
+		loc        string
+		priority   string
+		changefreq string
+	}{
+		{"/", "1.0", "weekly"},
+		{"/blog", "0.9", "daily"},
+		{"/services", "0.9", "monthly"},
+		{"/products", "0.8", "monthly"},
+		{"/results", "0.8", "monthly"},
+		{"/about", "0.7", "monthly"},
+		{"/faq", "0.7", "monthly"},
+		{"/contact", "0.6", "monthly"},
+	}
+
+	for _, page := range staticPages {
+		xml += fmt.Sprintf(`  <url>
+    <loc>%s%s</loc>
+    <priority>%s</priority>
+    <changefreq>%s</changefreq>
+  </url>
+`, baseURL, page.loc, page.priority, page.changefreq)
+	}
+
+	// ブログ記事を動的追加
+	for _, post := range allPosts {
+		if post.Published {
+			xml += fmt.Sprintf(`  <url>
+    <loc>%s/blog/%s</loc>
+    <lastmod>%s</lastmod>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+`, baseURL, post.Slug, post.CreatedDate.Format("2006-01-02"))
+		}
+	}
+
+	// XML終了
+	xml += `</urlset>`
+
+	c.Header("Content-Type", "application/xml; charset=utf-8")
+	c.String(http.StatusOK, xml)
 }
 

@@ -1,21 +1,214 @@
-{{template "base" .}}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="お探しのページは見つかりませんでした">
+    <title>{{.title}}</title>
 
-{{define "content"}}
-                <div class="container">
-                    <div class="content-header">
-                        <h1>ページが見つかりません</h1>
-                        <p class="content-description">お探しのページは存在しないか、移動された可能性があります。</p>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6C7H2DHNGQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6C7H2DHNGQ');
+    </script>
+
+    <!-- OGPタグ -->
+    <meta property="og:title" content="404 - ページが見つかりません | infohiroki">
+    <meta property="og:description" content="お探しのページは見つかりませんでした">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="infoHiroki">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitterカード -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="404 - ページが見つかりません | infohiroki">
+    <meta name="twitter:description" content="お探しのページは見つかりませんでした">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://infohiroki.com/404">
+
+    <!-- ファビコン -->
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .error-container {
+            text-align: center;
+            padding: var(--spacing-xxl) var(--spacing-md);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            color: #ddd;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .error-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            margin: var(--spacing-lg) 0;
+            color: var(--color-text);
+        }
+
+        .error-description {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-xl);
+            line-height: var(--line-height-base);
+        }
+
+        .error-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .error-button {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .error-button-primary {
+            background-color: var(--color-accent);
+            color: white;
+        }
+
+        .error-button-primary:hover {
+            opacity: 0.9;
+            color: white;
+        }
+
+        .error-button-secondary {
+            background-color: transparent;
+            color: var(--color-text);
+            border: 2px solid var(--color-border);
+        }
+
+        .error-button-secondary:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+
+            .error-title {
+                font-size: var(--font-size-xl);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="site-layout">
+        <!-- モバイル用ヘッダー -->
+        <header class="mobile-header">
+            <div class="mobile-header-content">
+                <a href="/" class="mobile-logo">
+                    <img src="/images/logo.svg" alt="infoHiroki Logo" width="36" height="36">
+                    <span class="mobile-title">infoHiroki</span>
+                </a>
+                <button class="hamburger-button" aria-label="メニューを開く">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- デスクトップ用サイドバー / モバイル用オーバーレイメニュー -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="site-title">
+                    <div class="logo">
+                        <img src="/images/logo.svg" alt="infoHiroki Logo" width="36" height="36">
                     </div>
+                    <div class="title-text">
+                        <span class="company-name">infoHiroki</span>
+                    </div>
+                </a>
+            </div>
 
-                    <div class="content-body">
-                        <div style="text-align: center; padding: 2rem;">
-                            <h2 style="font-size: 6rem; margin: 0; color: #ddd;">404</h2>
-                            <p style="margin: 1rem 0;">申し訳ございませんが、お探しのページは見つかりませんでした。</p>
-                            <div style="margin-top: 2rem;">
-                                <a href="/" class="button primary">ホームに戻る</a>
-                                <a href="/blog" class="button secondary" style="margin-left: 1rem;">ブログを見る</a>
+            <nav class="sidebar-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">ホーム</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/blog" class="nav-link">ブログ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/services" class="nav-link">サービス</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/products" class="nav-link">開発製品</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/results" class="nav-link">実績</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/about" class="nav-link">スキルスタック</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/faq" class="nav-link">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/contact" class="nav-link">お問い合わせ</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- モバイル用オーバーレイ -->
+        <div class="mobile-overlay"></div>
+
+        <div class="main-wrapper">
+            <main class="site-main">
+                <div class="page-content">
+                    <div class="container">
+                        <div class="error-container">
+                            <h1 class="error-code">404</h1>
+                            <h2 class="error-title">ページが見つかりません</h2>
+                            <p class="error-description">
+                                申し訳ございませんが、お探しのページは存在しないか、移動された可能性があります。<br>
+                                URLをご確認いただくか、以下のリンクからサイトをご覧ください。
+                            </p>
+                            <div class="error-actions">
+                                <a href="/" class="error-button error-button-primary">ホームに戻る</a>
+                                <a href="/blog" class="error-button error-button-secondary">ブログを見る</a>
+                                <a href="/contact" class="error-button error-button-secondary">お問い合わせ</a>
                             </div>
                         </div>
                     </div>
                 </div>
-{{end}}
+            </main>
+
+            <footer class="minimal-footer">
+                <div class="container">
+                    <p>© 2022 infoHiroki. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://infohiroki.com/sitemap.xml
+
+# クロール不要
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /*.md$
