@@ -216,7 +216,7 @@ func getBlogPostBySlug(c *gin.Context, slug string) *models.BlogPost {
 
 // 固定ページ処理（サービス、製品、実績、等）
 func servicesPage(c *gin.Context) {
-	renderPageWithMeta(c, "services", "生成AI導入支援サービス | infoHiroki", "福岡・九州企業向け生成AI導入支援サービス - ChatGPT・Claude・Whisper活用で業務効率化")
+	renderPageWithMeta(c, "services", "中小企業DX・生成AI導入支援 | infoHiroki", "中小企業・スタートアップ向けDX・生成AI導入支援。エンジニアが直接ヒアリング・提案。開発からコンサルまでワンストップ対応")
 }
 
 func productsPage(c *gin.Context) {
@@ -224,7 +224,7 @@ func productsPage(c *gin.Context) {
 }
 
 func resultsPage(c *gin.Context) {
-	renderPageWithMeta(c, "results", "実績 | infoHiroki", "infoHirokiの開発実績・導入事例・お客様の声")
+	renderPageWithMeta(c, "results", "導入実績 | infoHiroki", "中小企業での生成AI導入実績 - 議事録80%削減、月15万円コスト削減など")
 }
 
 func aboutPage(c *gin.Context) {
