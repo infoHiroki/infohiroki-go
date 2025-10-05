@@ -513,7 +513,7 @@ func extractIconFromTitle(title string) string {
 	titleLower := strings.ToLower(title)
 
 	// 特定のキーワードベースでアイコンを決定
-	if strings.Contains(titleLower, "chatgpt") || strings.Contains(titleLower, "ai") || strings.Contains(titleLower, "リスキリング") {
+	if strings.Contains(titleLower, "chatgpt") || strings.Contains(titleLower, "ai") || strings.Contains(titleLower, "リスキリング") || strings.Contains(titleLower, "llmo") {
 		return "🤖"
 	}
 	if strings.Contains(titleLower, "notion") {
