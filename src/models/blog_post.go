@@ -19,9 +19,10 @@ type BlogPost struct {
 	CreatedDate time.Time `json:"created_date"`
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
-	Published   bool      `json:"published"`
-	PrevPost    *BlogPost `json:"prev_post,omitempty"`    // 前の記事
-	NextPost    *BlogPost `json:"next_post,omitempty"`    // 次の記事
+	Published     bool        `json:"published"`
+	PrevPost      *BlogPost   `json:"prev_post,omitempty"`      // 前の記事
+	NextPost      *BlogPost   `json:"next_post,omitempty"`      // 次の記事
+	RelatedPosts  []BlogPost  `json:"related_posts,omitempty"`  // 関連記事
 }
 
 // TableNameメソッドはファイルベースでは不要

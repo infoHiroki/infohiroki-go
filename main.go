@@ -223,7 +223,95 @@ func getBlogPostBySlug(c *gin.Context, slug string) *models.BlogPost {
 		}
 	}
 
+	// 関連記事を設定（タイトル類似度ベース）
+	currentPost.RelatedPosts = findRelatedPosts(currentPost, currentIndex, 3)
+
 	return currentPost
+}
+
+// 関連記事を検索する関数（タイトル類似度ベース）
+func findRelatedPosts(currentPost *models.BlogPost, currentIndex int, limit int) []models.BlogPost {
+	type scoredPost struct {
+		post  models.BlogPost
+		score int
+	}
+
+	var scored []scoredPost
+
+	// 現在の記事のキーワードを抽出
+	currentKeywords := extractKeywords(currentPost.Title + " " + currentPost.Description)
+
+	for i, post := range allPosts {
+		// 自分自身はスキップ
+		if i == currentIndex || !post.Published {
+			continue
+		}
+
+		// キーワード一致スコアを計算
+		postKeywords := extractKeywords(post.Title + " " + post.Description)
+		score := calculateSimilarity(currentKeywords, postKeywords)
+
+		if score > 0 {
+			scored = append(scored, scoredPost{
+				post:  models.BlogPost{
+					Slug:        post.Slug,
+					Title:       post.Title,
+					Description: post.Description,
+					Icon:        post.Icon,
+					CreatedDate: post.CreatedDate,
+				},
+				score: score,
+			})
+		}
+	}
+
+	// スコアの高い順にソート
+	for i := 0; i < len(scored)-1; i++ {
+		for j := i + 1; j < len(scored); j++ {
+			if scored[i].score < scored[j].score {
+				scored[i], scored[j] = scored[j], scored[i]
+			}
+		}
+	}
+
+	// 上位limit件を返却
+	var result []models.BlogPost
+	for i := 0; i < len(scored) && i < limit; i++ {
+		result = append(result, scored[i].post)
+	}
+
+	return result
+}
+
+// キーワードを抽出（簡易版）
+func extractKeywords(text string) []string {
+	text = strings.ToLower(text)
+	words := strings.FieldsFunc(text, func(r rune) bool {
+		return !((r >= 'a' && r <= 'z') || (r >= '0' && r <= '9') || (r >= 'ぁ' && r <= 'ん') || (r >= 'ァ' && r <= 'ヶ') || (r >= '一' && r <= '龯'))
+	})
+
+	// 重要なキーワードのみ抽出（2文字以上）
+	var keywords []string
+	for _, word := range words {
+		if len(word) >= 2 {
+			keywords = append(keywords, word)
+		}
+	}
+
+	return keywords
+}
+
+// 類似度を計算（共通キーワード数）
+func calculateSimilarity(keywords1 []string, keywords2 []string) int {
+	score := 0
+	for _, k1 := range keywords1 {
+		for _, k2 := range keywords2 {
+			if k1 == k2 {
+				score++
+			}
+		}
+	}
+	return score
 }
 
 // 固定ページ処理（サービス、製品、実績、等）
