@@ -54,6 +54,17 @@ func main() {
 	r.GET("/faq", faqPage)
 	r.GET("/contact", contactPage)
 
+	// 301リダイレクト: 旧URL構造対応
+	r.GET("/index.html", func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently, "/")
+	})
+	r.GET("/html-files/:filename", func(c *gin.Context) {
+		filename := c.Param("filename")
+		// .htmlを除去してスラッグ化
+		slug := strings.TrimSuffix(filename, ".html")
+		c.Redirect(http.StatusMovedPermanently, "/blog/"+slug)
+	})
+
 	// Health check endpoint for Railway/Cloudflare
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "ok"})
