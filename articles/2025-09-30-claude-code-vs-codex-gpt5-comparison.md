@@ -1,4 +1,4 @@
-# 🤖 Claude Code vs Codex GPT-5 徹底比較：最強のAIコーディングツールはどっち？
+# Claude Code vs Codex GPT-5比較｜5項目で徹底検証【2025年版】
 
 ## 🎯 中心的な主張
 

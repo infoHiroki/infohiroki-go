@@ -1,4 +1,4 @@
-# 「Gemini CLI」がきた。Claude CodeをMaxプランで毎日使ってる人の感想
+# Gemini CLI徹底レビュー｜Claude Code愛用者の本音比較
 
 ![Gemini CLI 記事のヘッダー画像](/images/note/n7d93c00246fd_d8835b6fc420448474d9eec26b0ab974.png)
 
